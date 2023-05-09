@@ -1,0 +1,86 @@
+.colorDiv {
+  display: flex;
+  align-items: center;
+  background-color: rgb(231, 92, 92);
+  height: 100px;
+  transition: 1s;
+  .options {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    list-style: none;
+    :hover {
+      transition: 1s;
+      //transform: scale(1.5);
+    }
+    button {
+      border-style: none;
+      background-color: transparent;
+      font-family: "Raleway", sans-serif;
+      color: whitesmoke;
+    }
+  }
+}
+.containerDiv {
+  display: flex;
+  position: fixed;
+  .lateralBar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    //background-color: rgba(0, 0, 0, 0.87);
+    background-color: white;
+    width: 50px;
+    height: 400px;
+    margin-top: 100%;
+    border: 1px solid rgb(104, 102, 102);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: width, 1s;
+    div {
+      display: flex;
+      justify-content: center;
+    }
+    img {
+      margin-top: 10px;
+    }
+  }
+  .lateralBar:hover {
+    width: 75px;
+  }
+}
+img {
+  transition: width, 0.5s;
+  //filter: invert(100%);
+}
+img:hover {
+  width: 60px;
+}
+
+//clases para cambios de color
+
+//TATE
+.tate {
+  background-color: rgb(231, 92, 92);
+}
+
+//TATE EXPRESS
+.tExpress {
+  background-color: rgb(109, 170, 165);
+}
+
+//KILROY
+.kilroy {
+  background-color: rgb(70, 68, 68);
+}
+
+//KIT
+.kit {
+  background-color: rgb(238, 177, 64);
+}
+
+//KILROY KIDS
+.kKids {
+  background-color: rgb(151, 175, 114);
+}

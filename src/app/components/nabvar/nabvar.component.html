@@ -1,0 +1,62 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap"
+  rel="stylesheet"
+/>
+<div class="containerNavbar">
+  <div class="colorDiv" [class]="button_change">
+    <ul class="options">
+      <li><button>Inicio</button></li>
+      <li><button>Lista de reclamos</button></li>
+      <li><button>Reclamos internos</button></li>
+      <li><button>Reclamos a reparación</button></li>
+      <li><button>Reclamos en reparación</button></li>
+      <li><button>Boletas de cargo</button></li>
+    </ul>
+  </div>
+  <div class="containerDiv">
+    <div class="lateralBar">
+      <div class="divImg">
+        <img
+          src="../../../assets/tate.png"
+          alt=""
+          width="40px"
+          (click)="button_change = 'tate'"
+        />
+      </div>
+      <div class="divImg">
+        <img
+          src="../../../assets/Express.png"
+          alt=""
+          width="40px"
+          (click)="button_change = 'tExpress'"
+        />
+      </div>
+      <div class="divImg">
+        <img
+          src="../../../assets/kilroy.png"
+          alt=""
+          width="40px"
+          (click)="button_change = 'kilroy'"
+        />
+      </div>
+      <div class="divImg">
+        <img
+          src="../../../assets/kit.png"
+          alt=""
+          width="40px"
+          (click)="button_change = 'kit'"
+        />
+      </div>
+      <div class="divImg">
+        <img
+          src="../../../assets/kids.png"
+          alt=""
+          width="40px"
+          (click)="button_change = 'kKids'"
+        />
+      </div>
+    </div>
+  </div>
+</div>

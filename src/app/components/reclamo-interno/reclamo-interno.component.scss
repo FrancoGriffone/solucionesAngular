@@ -1,0 +1,42 @@
+.divReclamoInt {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(238, 228, 217);
+}
+.formReclamoInt {
+  width: 700px;
+  margin-top: 8%;
+  margin-bottom: 8%;
+  div {
+    margin: 2% 0% 2% 2%;
+  }
+  .codigoBarras {
+    margin-right: 10px;
+  }
+  .reclamo1,
+  .reclamo3,
+  .reclamo5 {
+    display: flex;
+    input {
+      width: 100%;
+      border-style: none;
+      border-radius: 5px;
+      height: 50px;
+    }
+  }
+  .reclamo6 {
+    display: flex;
+    .costo {
+      border-style: none;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+  }
+  .reclamo7 {
+    display: flex;
+    justify-content: space-between;
+    button {
+      width: 150px;
+    }
+  }
+}
