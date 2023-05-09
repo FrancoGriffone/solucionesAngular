@@ -1,1 +1,90 @@
-<p>prueba works!</p>
+<!-- <form [formGroup]="profileForm" class="container" (ngSubmit)="onSubmit()">
+  <label>
+    First Name:
+    <input type="text" formControlName="firstName" />
+  </label>
+
+  <label>
+    Last Name:
+    <input type="text" formControlName="lastName" />
+  </label>
+  <button type="submit">Submit</button>
+</form> -->
+<div class="container">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="prueba">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Código de barras</mat-label>
+        <input matInput formControlName="codigoBarras" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label disabled>Sección</mat-label>
+        <mat-select formControlName="seccion">
+          <mat-option value="administracion">Administración</mat-option>
+          <mat-option value="autoservicio">Autoservicio</mat-option>
+          <mat-option value="carteras">Carteras</mat-option>
+          <mat-option value="damas">Damas</mat-option>
+          <mat-option value="deporteSneakers">Deportes/Sneakers</mat-option>
+          <mat-option value="hombres">Hombres</mat-option>
+          <mat-option value="zapatilleria">Zapatillería</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label disabled>Tipo de solución</mat-label>
+        <mat-select formControlName="estado">
+          <mat-option value="aReparacion">A reparación</mat-option>
+          <mat-option value="enReparacion">En reparación</mat-option>
+          <mat-option value="entregado">Entregado</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Motivo</mat-label>
+        <textarea matInput formControlName="motivo"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Observaciones</mat-label>
+        <textarea matInput formControlName="observaciones"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label disabled>Taller</mat-label>
+        <mat-select formControlName="taller">
+          <mat-option value="sinAsignar">Sin Asignar</mat-option>
+          <mat-option value="danteSport">Dante "Sport D"</mat-option>
+          <mat-option value="gabrielaPereyra">Gabiela Pereyra</mat-option>
+          <mat-option value="georginaReinoso">Georgina Reinoso</mat-option>
+          <mat-option value="perlaBarrio">Perla Barrio</mat-option>
+          <mat-option value="walterOrdoñez">Walter Ordoñez</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Importe</mat-label>
+        <div class="prueba1">
+          <span matTextPrefix>$&nbsp;</span>
+          <input
+            matInput
+            type="number"
+            class="example-right-align"
+            placeholder="0"
+          />
+        </div>
+      </mat-form-field>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="flexCheckDefault"
+        />
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Primary</button>
+  </form>
+</div>
