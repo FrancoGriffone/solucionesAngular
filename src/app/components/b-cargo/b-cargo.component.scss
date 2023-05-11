@@ -1,0 +1,15 @@
+.datepicker {
+  display: flex;
+  flex-direction: row;
+}
+.bCargo {
+  display: flex;
+  justify-content: center;
+  margin: 5% 0% 2% 0%;
+  .buscarBC {
+    display: flex;
+    align-self: center;
+    height: 50%;
+    margin-left: 1%;
+  }
+}
