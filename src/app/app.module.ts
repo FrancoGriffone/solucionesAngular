@@ -18,6 +18,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { LateralBarComponent } from './components/lateral-bar/lateral-bar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MatCardModule } from '@angular/material/card';
     BCargoComponent,
     ReclamoInternoComponent,
     PruebaComponent,
+    LateralBarComponent,
   ],
   imports: [
     BrowserModule,
