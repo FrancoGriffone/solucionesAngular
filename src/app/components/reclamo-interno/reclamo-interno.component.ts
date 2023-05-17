@@ -11,9 +11,9 @@ export class ReclamoInternoComponent implements OnInit {
 
   ngOnInit(): void {}
   profileForm = new FormGroup({
-    codigoBarras: new FormControl(''),
+    codigoBarras: new FormControl('', Validators.required),
     seccion: new FormControl(''),
-    estado: new FormControl(''),
+    estado: new FormControl('', Validators.required),
     motivo: new FormControl('', Validators.required),
     observaciones: new FormControl(''),
     taller: new FormControl(''),
