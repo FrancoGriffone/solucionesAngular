@@ -1,4 +1,4 @@
-<div class="container bCargo">
+<form class="container bCargo" (ngSubmit)="onSubmit()">
   <mat-form-field class="example-full-width" appearance="fill">
     <div class="datepicker">
       <input matInput [matDatepicker]="picker" [formControl]="date" />
@@ -10,9 +10,4 @@
     <mat-hint>Elije una fecha</mat-hint>
   </mat-form-field>
   <button type="submit" class="btn btn-primary buscarBC">Buscar</button>
-</div>
-
-{{ date.value | json }}
-
-<!-- https://stackblitz.com/angular/dlerqrdamjl?file=app%2Fdatepicker-value-example.ts 
-https://stackoverflow.com/questions/57526672/how-to-extract-just-the-date-from-angular-material-datepicker-->
+</form>

@@ -10,5 +10,5 @@ export class NabvarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  button_change: string = '';
+  // button_change: string = '';
 }

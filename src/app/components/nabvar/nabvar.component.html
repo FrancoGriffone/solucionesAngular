@@ -4,59 +4,111 @@
   href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap"
   rel="stylesheet"
 />
-<div class="containerNavbar">
-  <div class="colorDiv" [class]="button_change">
+<div class="containerNavbar d-none d-md-block card">
+  <div class="colorDiv">
+    <!--[class]="button_change"-->
     <ul class="options">
-      <li><button>Inicio</button></li>
-      <li><button>Lista de reclamos</button></li>
-      <li><button>Reclamos internos</button></li>
-      <li><button>Reclamos a reparación</button></li>
-      <li><button>Reclamos en reparación</button></li>
-      <li><button>Boletas de cargo</button></li>
+      <li>
+        <div class="iconDiv">
+          <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
+          <p>Inicio</p>
+        </div>
+      </li>
+      <li>
+        <div class="iconDiv">
+          <img
+            src="../../../assets/listadereclamos.png"
+            alt="lista de reclamos"
+            width="40px"
+          />
+          <p>Lista de reclamos</p>
+        </div>
+      </li>
+      <li>
+        <div class="iconDiv">
+          <img
+            src="../../../assets/reclamosinternos.png"
+            alt="reclamos internos"
+            width="40px"
+          />
+          <p>Reclamos internos</p>
+        </div>
+      </li>
+      <li>
+        <div class="iconDiv">
+          <img
+            src="../../../assets/reclamosareparacion.png"
+            alt="reclamos a reparacion"
+            width="40px"
+          />
+          <p>Reclamos a reparación</p>
+        </div>
+      </li>
+      <li>
+        <div class="iconDiv">
+          <img
+            src="../../../assets/reclamosenreparacion.png"
+            alt="reclamos a reparacion"
+            width="40px"
+          />
+          <p>Reclamos en reparación</p>
+        </div>
+      </li>
+      <li>
+        <div class="iconDiv">
+          <img
+            src="../../../assets/bcargo.png"
+            alt="boletas de cargo"
+            width="40px"
+          />
+          <p>Boletas de cargo</p>
+        </div>
+      </li>
     </ul>
   </div>
-  <div class="containerDiv">
-    <div class="lateralBar">
-      <div class="divImg">
+</div>
+<div class="containerNavbar d-block d-md-none card">
+  <div class="colorDiv">
+    <!--[class]="button_change"-->
+    <ul class="options">
+      <li>
+        <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
+      </li>
+      <li>
         <img
-          src="../../../assets/tate.png"
-          alt=""
+          src="../../../assets/listadereclamos.png"
+          alt="lista de reclamos"
           width="40px"
-          (click)="button_change = 'tate'"
         />
-      </div>
-      <div class="divImg">
+      </li>
+      <li>
         <img
-          src="../../../assets/Express.png"
-          alt=""
+          src="../../../assets/reclamosinternos.png"
+          alt="reclamos internos"
           width="40px"
-          (click)="button_change = 'tExpress'"
         />
-      </div>
-      <div class="divImg">
+      </li>
+      <li>
         <img
-          src="../../../assets/kilroy.png"
-          alt=""
+          src="../../../assets/reclamosareparacion.png"
+          alt="reclamos a reparacion"
           width="40px"
-          (click)="button_change = 'kilroy'"
         />
-      </div>
-      <div class="divImg">
+      </li>
+      <li>
         <img
-          src="../../../assets/kit.png"
-          alt=""
+          src="../../../assets/reclamosenreparacion.png"
+          alt="reclamos en reparacion"
           width="40px"
-          (click)="button_change = 'kit'"
         />
-      </div>
-      <div class="divImg">
+      </li>
+      <li>
         <img
-          src="../../../assets/kids.png"
-          alt=""
+          src="../../../assets/bcargo.png"
+          alt="boletas de cargo"
           width="40px"
-          (click)="button_change = 'kKids'"
         />
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </div>

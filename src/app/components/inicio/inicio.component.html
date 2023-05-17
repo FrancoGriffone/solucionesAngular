@@ -1,11 +1,38 @@
-<div class="divForm">
-  <form class="inicioForm">
-    <select class="form-select" aria-label="Default select example">
-      <option selected disabled>DNI/RECLAMO</option>
-      <option value="1">DNI</option>
-      <option value="2">Reclamo</option>
-    </select>
-    <input placeholder="N° de Reclamo o DNI" />
-    <button type="button" class="btn btn-secondary">Buscar</button>
+<div class="container card card-body divForm">
+  <form class="inicioForm" [formGroup]="profileForm">
+    <mat-form-field appearance="fill">
+      <mat-label disabled>DNI/RECLAMO</mat-label>
+      <mat-select formControlName="eleccion">
+        <mat-option value="DNI">DNI</mat-option>
+        <mat-option value="Reclamo">Reclamo</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- ALERT DIV NO SE ELIGIÓ OPCIÓN -->
+    <div
+      class="alert alert-danger"
+      [hidden]="profileForm.get('eleccion')?.valid"
+    >
+      Es necesario elegir una opción para la búsqueda
+    </div>
+    <mat-form-field appearance="fill" class="spacingComponents">
+      <mat-label>N° de Reclamo o DNI</mat-label>
+      <input matInput formControlName="datos" />
+    </mat-form-field>
+    <!-- ALERT DIV NO SE ESCRIBIERON DATOS -->
+    <div
+      class="alert alert-danger"
+      [hidden]="
+        profileForm.get('datos')?.valid || profileForm.get('datos')?.pristine
+      "
+    >
+      Es necesario colocar un número de reclamo o DNI para acceder a la búsqueda
+    </div>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      [disabled]="profileForm.invalid"
+    >
+      Buscar
+    </button>
   </form>
 </div>
