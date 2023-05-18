@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { LateralBarComponent } from './components/lateral-bar/lateral-bar.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LateralBarComponent } from './components/lateral-bar/lateral-bar.compon
     ReclamoInternoComponent,
     PruebaComponent,
     LateralBarComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

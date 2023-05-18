@@ -5,17 +5,17 @@
   href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap"
   rel="stylesheet"
 />
-<mat-card> </mat-card>
 
 <!-- PANTALLAS MAS GRANDES -->
 
 <div class="containerNavbar d-none d-md-block card">
+  <mat-card> </mat-card>
   <div class="colorDiv">
     <!--[class]="button_change"-->
     <ul class="options">
       <li>
         <div class="iconDiv">
-          <a routerLink="home">
+          <a routerLink="home" routerLinkActive="active">
             <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
             <p>Inicio</p>
           </a>
@@ -23,7 +23,7 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLink="home">
+          <a routerLink="listareclamos" routerLinkActive="active">
             <img
               src="../../../assets/listadereclamos.png"
               alt="lista de reclamos"
@@ -38,7 +38,7 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLink="reclamointerno">
+          <a routerLink="reclamointerno" routerLinkActive="active">
             <img
               src="../../../assets/reclamosinternos.png"
               alt="reclamos internos"
@@ -53,7 +53,7 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLink="home">
+          <a routerLink="reclamosareparacion" routerLinkActive="active">
             <img
               src="../../../assets/reclamosareparacion.png"
               alt="reclamos a reparacion"
@@ -68,10 +68,10 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLink="home">
+          <a routerLink="reclamosenreparacion" routerLinkActive="active">
             <img
               src="../../../assets/reclamosenreparacion.png"
-              alt="reclamos a reparacion"
+              alt="reclamos en reparacion"
               width="40px"
             />
             <p>
@@ -83,7 +83,7 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLink="bcargo">
+          <a routerLink="bcargo" routerLinkActive="active">
             <img
               src="../../../assets/bcargo.png"
               alt="boletas de cargo"
@@ -103,16 +103,17 @@
 <!-- PANTALLAS MAS PEQUEÑAS -->
 
 <div class="containerNavbar d-block d-md-none card">
+  <mat-card> </mat-card>
   <div class="colorDiv">
     <!--[class]="button_change"-->
     <ul class="options">
       <li>
-        <a routerLink="home">
+        <a routerLink="home" routerLinkActive="activeResponsive">
           <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
         </a>
       </li>
       <li>
-        <a routerLink="home">
+        <a routerLink="listareclamos" routerLinkActive="activeResponsive">
           <img
             src="../../../assets/listadereclamos.png"
             alt="lista de reclamos"
@@ -121,7 +122,7 @@
         </a>
       </li>
       <li>
-        <a routerLink="reclamointerno">
+        <a routerLink="reclamointerno" routerLinkActive="activeResponsive">
           <img
             src="../../../assets/reclamosinternos.png"
             alt="reclamos internos"
@@ -130,7 +131,7 @@
         </a>
       </li>
       <li>
-        <a routerLink="home">
+        <a routerLink="reclamosareparacion" routerLinkActive="activeResponsive">
           <img
             src="../../../assets/reclamosareparacion.png"
             alt="reclamos a reparacion"
@@ -139,7 +140,10 @@
         </a>
       </li>
       <li>
-        <a routerLink="home">
+        <a
+          routerLink="reclamosenreparacion"
+          routerLinkActive="activeResponsive"
+        >
           <img
             src="../../../assets/reclamosenreparacion.png"
             alt="reclamos en reparacion"
@@ -148,7 +152,7 @@
         </a>
       </li>
       <li>
-        <a routerLink="bcargo">
+        <a routerLink="bcargo" routerLinkActive="activeResponsive">
           <img
             src="../../../assets/bcargo.png"
             alt="boletas de cargo"

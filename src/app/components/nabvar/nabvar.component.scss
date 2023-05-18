@@ -1,5 +1,11 @@
-mat-card {
-  padding: 5px;
+.containerNavbar {
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  mat-card {
+    padding: 5px;
+    //background-color: ;
+  }
 }
 .colorDiv {
   display: flex;
@@ -7,6 +13,8 @@ mat-card {
   background-color: rgb(231, 92, 92);
   height: 100px;
   transition: 1s;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   .options {
     display: flex;
     justify-content: space-around;
@@ -36,6 +44,26 @@ mat-card {
 img:hover {
   filter: invert(100%);
 }
+
+.active {
+  border-radius: 10px;
+  background-color: rgba(75, 73, 73, 0.733);
+  width: 170px;
+  img {
+    filter: invert(100%);
+    margin-left: 10%;
+  }
+  p {
+    filter: brightness(2);
+  }
+}
+
+.activeResponsive {
+  img {
+    filter: invert(100%);
+  }
+}
+
 //clases para cambios de color
 
 //TATE
