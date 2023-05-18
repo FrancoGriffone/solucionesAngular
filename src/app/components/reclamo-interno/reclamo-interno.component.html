@@ -27,7 +27,8 @@
       class="alert alert-danger"
       [hidden]="profileForm.get('codigoBarras')?.valid"
     >
-      Es necesario cargar un motivo para grabar el reclamo
+      Es necesario cargar un algo en el espacio del código de barras para grabar
+      el reclamo
     </div>
     <!-- TIPO DE SOLUCION Y TALLER ++ ALERT DIV -->
     <div class="formComponent">
@@ -55,7 +56,7 @@
     </div>
     <!-- ALERT DIV TIPO DE SOLUCION -->
     <div class="alert alert-danger" [hidden]="profileForm.get('estado')?.valid">
-      Es necesario cargar un motivo para grabar el reclamo
+      Es necesario elegir un estado para grabar el reclamo
     </div>
     <!-- MOTIVO ++ ALERT DIV -->
     <div class="formComponent motivo">
