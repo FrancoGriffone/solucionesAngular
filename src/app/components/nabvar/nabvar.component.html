@@ -5,110 +5,155 @@
   rel="stylesheet"
 />
 <mat-card> </mat-card>
+
+<!-- PANTALLAS MAS GRANDES -->
+
 <div class="containerNavbar d-none d-md-block card">
   <div class="colorDiv">
     <!--[class]="button_change"-->
     <ul class="options">
       <li>
         <div class="iconDiv">
-          <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
-          <p>Inicio</p>
+          <a routerLink="home">
+            <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
+            <p>Inicio</p>
+          </a>
         </div>
       </li>
       <li>
         <div class="iconDiv">
-          <img
-            src="../../../assets/listadereclamos.png"
-            alt="lista de reclamos"
-            width="40px"
-          />
-          <p>Lista de reclamos</p>
+          <a routerLink="home">
+            <img
+              src="../../../assets/listadereclamos.png"
+              alt="lista de reclamos"
+              width="40px"
+            />
+            <p>
+              Lista de <br />
+              reclamos
+            </p>
+          </a>
         </div>
       </li>
       <li>
         <div class="iconDiv">
-          <img
-            src="../../../assets/reclamosinternos.png"
-            alt="reclamos internos"
-            width="40px"
-          />
-          <p>Reclamos internos</p>
+          <a routerLink="reclamointerno">
+            <img
+              src="../../../assets/reclamosinternos.png"
+              alt="reclamos internos"
+              width="40px"
+            />
+            <p>
+              Reclamos <br />
+              internos
+            </p>
+          </a>
         </div>
       </li>
       <li>
         <div class="iconDiv">
-          <img
-            src="../../../assets/reclamosareparacion.png"
-            alt="reclamos a reparacion"
-            width="40px"
-          />
-          <p>Reclamos a reparación</p>
+          <a routerLink="home">
+            <img
+              src="../../../assets/reclamosareparacion.png"
+              alt="reclamos a reparacion"
+              width="40px"
+            />
+            <p>
+              Reclamos a <br />
+              reparación
+            </p>
+          </a>
         </div>
       </li>
       <li>
         <div class="iconDiv">
-          <img
-            src="../../../assets/reclamosenreparacion.png"
-            alt="reclamos a reparacion"
-            width="40px"
-          />
-          <p>Reclamos en reparación</p>
+          <a routerLink="home">
+            <img
+              src="../../../assets/reclamosenreparacion.png"
+              alt="reclamos a reparacion"
+              width="40px"
+            />
+            <p>
+              Reclamos en <br />
+              reparación
+            </p>
+          </a>
         </div>
       </li>
       <li>
         <div class="iconDiv">
-          <img
-            src="../../../assets/bcargo.png"
-            alt="boletas de cargo"
-            width="40px"
-          />
-          <p>Boletas de cargo</p>
+          <a routerLink="bcargo">
+            <img
+              src="../../../assets/bcargo.png"
+              alt="boletas de cargo"
+              width="40px"
+            />
+            <p>
+              Boletas <br />
+              de cargo
+            </p>
+          </a>
         </div>
       </li>
     </ul>
   </div>
 </div>
+
+<!-- PANTALLAS MAS PEQUEÑAS -->
+
 <div class="containerNavbar d-block d-md-none card">
   <div class="colorDiv">
     <!--[class]="button_change"-->
     <ul class="options">
       <li>
-        <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
+        <a routerLink="home">
+          <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
+        </a>
       </li>
       <li>
-        <img
-          src="../../../assets/listadereclamos.png"
-          alt="lista de reclamos"
-          width="40px"
-        />
+        <a routerLink="home">
+          <img
+            src="../../../assets/listadereclamos.png"
+            alt="lista de reclamos"
+            width="40px"
+          />
+        </a>
       </li>
       <li>
-        <img
-          src="../../../assets/reclamosinternos.png"
-          alt="reclamos internos"
-          width="40px"
-        />
+        <a routerLink="reclamointerno">
+          <img
+            src="../../../assets/reclamosinternos.png"
+            alt="reclamos internos"
+            width="40px"
+          />
+        </a>
       </li>
       <li>
-        <img
-          src="../../../assets/reclamosareparacion.png"
-          alt="reclamos a reparacion"
-          width="40px"
-        />
+        <a routerLink="home">
+          <img
+            src="../../../assets/reclamosareparacion.png"
+            alt="reclamos a reparacion"
+            width="40px"
+          />
+        </a>
       </li>
       <li>
-        <img
-          src="../../../assets/reclamosenreparacion.png"
-          alt="reclamos en reparacion"
-          width="40px"
-        />
+        <a routerLink="home">
+          <img
+            src="../../../assets/reclamosenreparacion.png"
+            alt="reclamos en reparacion"
+            width="40px"
+          />
+        </a>
       </li>
       <li>
-        <img
-          src="../../../assets/bcargo.png"
-          alt="boletas de cargo"
-          width="40px"
-        />
+        <a routerLink="bcargo">
+          <img
+            src="../../../assets/bcargo.png"
+            alt="boletas de cargo"
+            width="40px"
+          />
+        </a>
       </li>
     </ul>
   </div>

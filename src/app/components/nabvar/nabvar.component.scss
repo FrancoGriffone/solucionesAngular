@@ -18,13 +18,18 @@ mat-card {
       //transform: scale(1.5);
     }
     .iconDiv {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       border-style: none;
       background-color: transparent;
       font-family: "Raleway", sans-serif;
-      color: whitesmoke;
+      a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: whitesmoke;
+        p {
+          margin: 0px 0px 0px 10px;
+        }
+      }
     }
   }
 }
