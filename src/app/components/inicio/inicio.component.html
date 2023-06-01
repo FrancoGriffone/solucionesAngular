@@ -1,5 +1,5 @@
 <div class="container card card-body divForm">
-  <form class="inicioForm" [formGroup]="profileForm">
+  <form class="inicioForm" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill">
       <mat-label disabled>DNI/RECLAMO</mat-label>
       <mat-select formControlName="eleccion">
@@ -28,7 +28,7 @@
       Es necesario colocar un número de reclamo o DNI para acceder a la búsqueda
     </div>
     <button
-      type="button"
+      type="submit"
       class="btn btn-secondary"
       [disabled]="profileForm.invalid"
     >

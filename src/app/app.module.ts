@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NabvarComponent } from './components/nabvar/nabvar.component';
 import { InicioComponent } from './components/inicio/inicio.component';
@@ -20,6 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclamos.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { MatCardModule } from '@angular/material/card';
     PruebaComponent,
     LateralBarComponent,
     PageNotFoundComponent,
+    ListaReclamosComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatNativeDateModule,
     MatCardModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

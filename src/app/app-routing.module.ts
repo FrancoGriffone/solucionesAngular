@@ -4,6 +4,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { BCargoComponent } from './components/b-cargo/b-cargo.component';
 import { ReclamoInternoComponent } from './components/reclamo-interno/reclamo-interno.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclamos.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'reclamointerno',
     component: ReclamoInternoComponent,
+  },
+  {
+    path: 'listareclamos',
+    component: ListaReclamosComponent,
   },
   {
     path: '**',

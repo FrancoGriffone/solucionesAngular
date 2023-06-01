@@ -13,3 +13,16 @@
     margin-left: 1%;
   }
 }
+
+.table-responsive {
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+//HEIGTH POST 600 ++ WIDTH POST 800
+@media screen and (min-height: 600px) and (min-width: 800px) {
+  .table-responsive {
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+}
