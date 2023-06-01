@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
 import { clienteInterface } from '../models/cliente.interface';
 import { listaReclamosClienteInterface } from '../models/listaReclamosCliente.interface';
 
@@ -18,12 +17,12 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  cargarCliente(id: string): Observable<clienteInterface> {
-    let url = this.GET_CLIENTE + id;
+  cargarCliente(id: string) {
+    const url = this.GET_CLIENTE + id;
     return this.http.get<clienteInterface>(url);
   }
 
-  listaReclamosCliente(id: string): Observable<listaReclamosClienteInterface> {
+  listaReclamosCliente(id: string) {
     const url = this.GET_RECLAMOS_CLIENTE + id;
     return this.http.get<listaReclamosClienteInterface>(url);
   }

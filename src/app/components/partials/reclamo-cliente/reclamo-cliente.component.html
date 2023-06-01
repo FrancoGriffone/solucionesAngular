@@ -1,0 +1,157 @@
+<div class="container card card-body containerForm">
+  <!-- HABRIA QUE REVISAR SI SE PUEDE AGREGAR UNA FECHA ACÁ O SOLO TOMARLA COMO PARTE DEL OBJ PARA USARLA A FUTURO -->
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <!-- CODIGO DE BARRAS ++ ALERT DIV -->
+    <div class="formComponent">
+      <!-- CODIGO DE BARRAS -->
+      <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label>Código de barras</mat-label>
+        <input matInput formControlName="codigoBarras" />
+      </mat-form-field>
+    </div>
+    <!-- ALERT DIV CODIGO DE BARRAS -->
+    <div
+      class="alert alert-danger"
+      [hidden]="profileForm.get('codigoBarras')?.valid"
+    >
+      Es necesario cargar un algo en el espacio del código de barras para grabar
+      el reclamo
+    </div>
+    <!-- MONTO + CHECKBOX TICKET + FECHA COMPRA -->
+    <div class="formComponent">
+      <!-- FECHA DE COMPRA -->
+      <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label>Fecha de compra</mat-label>
+        <input matInput formControlName="fechaCompra" />
+      </mat-form-field>
+      <!-- CHECKBOX TICKET -->
+      <div class="pagado spacingComponents">
+        <label for="">Ticket:</label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="flexCheckDefault"
+            formControlName="ticket"
+          />
+        </div>
+      </div>
+      <!-- MONTO DEL PRODUCTO -->
+      <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label>Importe abonado</mat-label>
+        <input matInput formControlName="monto" />
+      </mat-form-field>
+    </div>
+
+    <!-- TIPO DE SOLUCION Y PROMETIDO DIA ++ ALERT DIV -->
+    <div class="formComponent">
+      <!-- TIPO DE SOLUCION -->
+      <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label disabled>Tipo de solución</mat-label>
+        <mat-select formControlName="estado">
+          <mat-option value="aReparacion">A reparación</mat-option>
+          <mat-option value="enReparacion">En reparación</mat-option>
+          <mat-option value="entregado">Reparado</mat-option>
+          <mat-option value="entregado">Entregado</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- PROMETIDO DIA -->
+      <mat-form-field appearance="fill" class="spacingComponents picker">
+        <mat-label>Elije una fecha</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!-- ALERT DIV TIPO DE SOLUCION -->
+    <div class="alert alert-danger" [hidden]="profileForm.get('estado')?.valid">
+      Es necesario elegir un estado para grabar el reclamo
+    </div>
+    <!-- MOTIVO ++ ALERT DIV -->
+    <div class="formComponent motivo">
+      <!-- MOTIVO -->
+      <mat-form-field appearance="fill">
+        <mat-label>Motivo</mat-label>
+        <textarea matInput formControlName="motivo"></textarea>
+      </mat-form-field>
+      <!-- ALERT DIV MOTIVO -->
+      <div
+        class="alert alert-danger"
+        [hidden]="profileForm.get('motivo')?.valid"
+      >
+        Es necesario cargar un motivo para grabar el reclamo
+      </div>
+    </div>
+    <!-- OBSERVACIONES -->
+    <div class="formComponent">
+      <mat-form-field appearance="fill">
+        <mat-label>Observaciones</mat-label>
+        <textarea matInput formControlName="observaciones"></textarea>
+      </mat-form-field>
+    </div>
+    <!-- TALLER, IMPORTE Y CHECKBOX DE PAGADO -->
+    <div class="formComponent">
+      <!-- TALLER -->
+      <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label disabled>Taller</mat-label>
+        <mat-select formControlName="taller">
+          <mat-option value="sinAsignar">Sin Asignar</mat-option>
+          <mat-option value="danteSport">Dante "Sport D"</mat-option>
+          <mat-option value="gabrielaPereyra">Gabiela Pereyra</mat-option>
+          <mat-option value="georginaReinoso">Georgina Reinoso</mat-option>
+          <mat-option value="perlaBarrio">Perla Barrio</mat-option>
+          <mat-option value="walterOrdoñez">Walter Ordoñez</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- IMPORTE -->
+      <mat-form-field
+        appearance="fill"
+        floatLabel="always"
+        class="spacingComponents"
+      >
+        <mat-label>Importe</mat-label>
+        <div class="importe">
+          <span matTextPrefix>$&nbsp;</span>
+          <input
+            matInput
+            type="number"
+            class="example-right-align"
+            placeholder="0"
+            formControlName="importe"
+          />
+        </div>
+        <!-- CHECKBOX DE PAGADO -->
+      </mat-form-field>
+      <div class="pagado">
+        <label for="">Pagado:</label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="flexCheckDefault"
+            formControlName="pagado"
+          />
+          <!-- TRUE DE CHECKBOX ES COMO PAGADO, SI NO ESTÁ TILDADO SALE '' -->
+        </div>
+      </div>
+    </div>
+    <!-- BOTONES DE GRABAR Y BORRAR -->
+    <div class="formComponent">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="profileForm.invalid"
+      >
+        Grabar
+      </button>
+      <button type="reset" class="btn btn-danger">
+        Borrar todos los datos
+      </button>
+    </div>
+  </form>
+</div>

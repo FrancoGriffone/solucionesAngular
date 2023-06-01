@@ -10,6 +10,9 @@ import { BCargoComponent } from './components/b-cargo/b-cargo.component';
 import { ReclamoInternoComponent } from './components/reclamo-interno/reclamo-interno.component';
 import { LateralBarComponent } from './components/lateral-bar/lateral-bar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclamos.component';
+import { RegistroClienteComponent } from './components/partials/registro-cliente/registro-cliente.component';
+import { ReclamoClienteComponent } from './components/partials/reclamo-cliente/reclamo-cliente.component';
 import { PruebaComponent } from './prueba/prueba.component';
 //Para el form es necesario importar esto
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +24,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
-import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclamos.component';
+import { LegajoClienteComponent } from './components/partials/legajo-cliente/legajo-cliente.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclam
     LateralBarComponent,
     PageNotFoundComponent,
     ListaReclamosComponent,
+    RegistroClienteComponent,
+    ReclamoClienteComponent,
+    LegajoClienteComponent,
   ],
   imports: [
     BrowserModule,

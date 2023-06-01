@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { buscarInterface } from 'src/app/models/buscar.interface';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -32,6 +31,7 @@ export class InicioComponent implements OnInit {
     this.api.cargarCliente(usuarioId).subscribe((data) => {
       console.log(data);
     });
+
     this.api.listaReclamosCliente(usuarioId).subscribe((data) => {
       console.log(data);
     });
