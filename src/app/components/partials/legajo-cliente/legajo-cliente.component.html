@@ -1,1 +1,16 @@
-<p>legajo-cliente works!</p>
+<div class="container card card-body containerList">
+    <div class="cliente">
+        <h2 class="spacingComponents">{{datos.ayN}} - {{datos.docNro}}</h2> <button class="btn btn-primary spacingComponents" type="submit">Nuevo reclamo</button>
+    </div>
+    <div class="containerReclamos mt-2">
+        <ag-grid-angular
+    style="width: 500px; height: 350px;"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs">
+</ag-grid-angular>
+        <p *ngFor="let reclamo of listaReclamos">{{ reclamo | json }}</p>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+

@@ -1,5 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-registro-cliente',
@@ -7,9 +9,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./registro-cliente.component.scss'],
 })
 export class RegistroClienteComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {}
+  datos: any
+  user: any
 
   profileForm = new FormGroup({
     nombre: new FormControl('', Validators.required),
@@ -21,6 +23,29 @@ export class RegistroClienteComponent implements OnInit {
     telefono: new FormControl(''),
     observaciones: new FormControl(''),
   });
+
+  constructor(private api: ApiService, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
+    //console.log(usuarioDoc)
+    this.api.cargarCliente(usuarioDoc).subscribe((data) => {
+      this.datos = data
+      this.user = this.datos
+      this.datos = this.datos[0]
+      console.log(this.datos);
+      this.profileForm.patchValue({
+        nombre:this.datos.nombres,
+        apellido: this.datos.apellidos,
+        domicilio: this.datos.direccion,
+        pisoDpto: this.datos.pisoDpto,
+        localidad: this.datos.localidad,
+        codigoPostal: this.datos.codigoPostal,
+        telefono: this.datos.telefonos,
+        observaciones: this.datos.observaciones
+      })
+    });
+  }
 
   onSubmit() {
     // TODO: Use EventEmitter with form value

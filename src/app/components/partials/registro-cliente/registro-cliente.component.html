@@ -1,15 +1,16 @@
 <div class="container card card-body containerForm">
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <h2 *ngFor="let user of user">{{user.ayN}} - {{user.docNro}}</h2>
     <!-- NOMBRE COMPLETO ++ ALERT DIV -->
     <div class="formComponent">
       <!-- NOMBRE Y APELLIDO -->
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Nombre/s</mat-label>
-        <input matInput formControlName="nombre" />
+        <input matInput formControlName="nombre"/>
       </mat-form-field>
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Apellido/s</mat-label>
-        <input matInput formControlName="apellido" />
+        <input matInput formControlName="apellido"/>
       </mat-form-field>
     </div>
     <!-- ALERT DIV NOMBRE Y APELLIDO -->
@@ -26,12 +27,12 @@
       <!-- DOMICILIO -->
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Domicilio</mat-label>
-        <input matInput formControlName="domicilio" />
+        <input matInput formControlName="domicilio"/>
       </mat-form-field>
       <!-- PISO -->
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Piso/Dpto</mat-label>
-        <input matInput formControlName="pisoDpto" />
+        <input matInput formControlName="pisoDpto"/>
       </mat-form-field>
     </div>
     <!-- LOCALIDAD + CP DIV -->
@@ -39,18 +40,18 @@
       <!-- LOCALIDAD -->
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Localidad</mat-label>
-        <input matInput formControlName="localidad" />
+        <input matInput formControlName="localidad"/>
       </mat-form-field>
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Código Postal</mat-label>
-        <input matInput formControlName="codigoPostal" />
+        <input matInput formControlName="codigoPostal"/>
       </mat-form-field>
     </div>
     <!-- TELEFONO DIV -->
     <div class="formComponent motivo">
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Teléfono</mat-label>
-        <input matInput formControlName="telefono" />
+        <input matInput formControlName="telefono"/>
       </mat-form-field>
     </div>
     <!-- OBSERVACIONES DIV -->

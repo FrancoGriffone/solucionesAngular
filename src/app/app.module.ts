@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclamos.component';
 import { RegistroClienteComponent } from './components/partials/registro-cliente/registro-cliente.component';
 import { ReclamoClienteComponent } from './components/partials/reclamo-cliente/reclamo-cliente.component';
+import { LegajoClienteComponent } from './components/partials/legajo-cliente/legajo-cliente.component';
 import { PruebaComponent } from './prueba/prueba.component';
 //Para el form es necesario importar esto
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,7 +25,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
-import { LegajoClienteComponent } from './components/partials/legajo-cliente/legajo-cliente.component';
+import { MatTableModule } from '@angular/material/table'  
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { LegajoClienteComponent } from './components/partials/legajo-cliente/leg
     MatIconModule,
     MatNativeDateModule,
     MatCardModule,
+    MatTableModule,
     HttpClientModule,
   ],
   providers: [],
