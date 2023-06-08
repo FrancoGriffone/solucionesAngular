@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { map } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -9,7 +10,6 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class InicioComponent implements OnInit {
   constructor(private api: ApiService) {}
-
   ngOnInit(): void {}
 
   profileForm = new FormGroup({
@@ -17,22 +17,21 @@ export class InicioComponent implements OnInit {
     datos: new FormControl('', Validators.required),
   });
 
-  // buscar(form: buscarInterface) {
-  //   this.api.cargarCliente(form).subscribe((data) => {
-  //     console.log(data);
-  //   });
-  // }
+  cliente: boolean = false;
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.log(this.profileForm.value);
-    //console.log(this.profileForm.value.eleccion);
-    let usuarioId = this.profileForm.value.datos;
-    this.api.cargarCliente(usuarioId).subscribe((data) => {
-      console.log(data);
-    });
-
-    this.api.listaReclamosCliente(usuarioId).subscribe((data) => {
+    //console.log(this.profileForm.value);
+    let usuarioDoc = this.profileForm.value.datos;
+    this.api.cargarCliente(usuarioDoc).pipe(
+      map((resp) => {
+        return resp;
+      })
+    );
+    // this.api.cargarCliente(usuarioDoc).subscribe((data) => {
+    //   console.log(data);
+    //   console.log(data.docNro); //UNDEFINED
+    // });
+    this.api.listaReclamosCliente(usuarioDoc).subscribe((data) => {
       console.log(data);
     });
   }

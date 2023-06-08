@@ -1,12 +1,12 @@
 export interface clienteInterface {
-  id: string;
-  idDocTipo: string;
-  docNro: string;
   apellidos: string;
-  nombres: string;
   ayN: string;
   direccion: string;
+  docNro: string;
+  id: any;
+  idDocTipo: any;
   localidad: string;
-  telefonos: string;
+  nombres: string;
   observaciones: string;
+  telefono: string;
 }

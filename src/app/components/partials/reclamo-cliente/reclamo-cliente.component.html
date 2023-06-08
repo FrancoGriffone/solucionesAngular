@@ -47,12 +47,35 @@
     <!-- TIPO DE SOLUCION Y PROMETIDO DIA ++ ALERT DIV -->
     <div class="formComponent">
       <!-- TIPO DE SOLUCION -->
+      <!-- 
+        1)
+        <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label disabled>Tipo de solución</mat-label>
+        <mat-select formControlName="estado">
+          <mat-option value="aDeterminar">A determinar</mat-option>
+          <mat-option value="reparación">Reparación</mat-option>
+          <mat-option value="boletaDeCargo">Boleta de Cargo / NC</mat-option>
+          <mat-option value="horma">Horma</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      2)
+      <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label disabled>Tipo de solución</mat-label>
+        <mat-select formControlName="estado">
+          <mat-option value="aDeterminar">A determinar</mat-option>
+          <mat-option value="reparación">Reparación</mat-option>
+          <mat-option value="boletaDeCargo">Boleta de Cargo / NC</mat-option>
+          <mat-option value="horma">Horma</mat-option>
+        </mat-select>
+      </mat-form-field>
+     -->
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label disabled>Tipo de solución</mat-label>
         <mat-select formControlName="estado">
           <mat-option value="aReparacion">A reparación</mat-option>
           <mat-option value="enReparacion">En reparación</mat-option>
-          <mat-option value="entregado">Reparado</mat-option>
+          <mat-option value="reparado">Reparado</mat-option>
           <mat-option value="entregado">Entregado</mat-option>
         </mat-select>
       </mat-form-field>
