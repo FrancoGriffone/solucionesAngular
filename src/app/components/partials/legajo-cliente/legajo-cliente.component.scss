@@ -1,7 +1,6 @@
-@import 'ag-grid-community/styles/ag-grid.css';
-@import 'ag-grid-community/styles/ag-theme-alpine.css';
 .containerList{
     width: 70%;
+    height: 100%;
     margin-top: 5%;
     margin-bottom: 5%;
     .cliente {
@@ -16,6 +15,9 @@
         }
     }
 }
-table {
-    width: 100%;
-  }
+.ag-theme-balham {
+    --ag-header-column-separator-display: block;
+    --ag-header-column-separator-height: 100%;
+    --ag-header-column-separator-width: 2px;
+    --ag-header-column-separator-color: purple;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ColDef } from 'ag-grid-community';
 
 @Component({
   selector: 'app-prueba',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./prueba.component.scss'],
 })
 export class PruebaComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 }
+
+
+
+
+
+
+
+
+
 
 // import {AfterViewInit, Component, ViewChild} from '@angular/core';
 // import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';

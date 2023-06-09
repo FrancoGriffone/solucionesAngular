@@ -25,7 +25,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table'  
+import { MatTableModule } from '@angular/material/table'
+//AG GRID
+import { AgGridModule } from 'ag-grid-angular';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +60,7 @@ import { MatTableModule } from '@angular/material/table'
     MatCardModule,
     MatTableModule,
     HttpClientModule,
+    AgGridModule
   ],
   providers: [],
   bootstrap: [AppComponent],
