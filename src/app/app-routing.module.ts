@@ -7,6 +7,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclamos.component';
 import { RegistroClienteComponent } from './components/partials/registro-cliente/registro-cliente.component';
 import { LegajoClienteComponent } from './components/partials/legajo-cliente/legajo-cliente.component';
+import { SelecTipoReclamoComponent } from './components/partials/selec-tipo-reclamo/selec-tipo-reclamo.component';
+import { ReclamoClienteComponent } from './components/partials/reclamo-cliente/reclamo-cliente.component';
+import { ReclamosVariosComponent } from './components/partials/reclamos-varios/reclamos-varios.component';
 
 const routes: Routes = [
   {
@@ -37,6 +40,18 @@ const routes: Routes = [
   {
     path: 'legajo/:doc',
     component: LegajoClienteComponent,
+  },
+  {
+    path: 'cliente/:doc/selectorReclamo',
+    component: SelecTipoReclamoComponent,
+  },
+  {
+    path: 'cliente/:doc/nuevoReclamoMercaderia',
+    component: ReclamoClienteComponent,
+  },
+  {
+    path: 'cliente/:doc/nuevoReclamoVarios',
+    component: ReclamosVariosComponent,
   },
   {
     path: '**',

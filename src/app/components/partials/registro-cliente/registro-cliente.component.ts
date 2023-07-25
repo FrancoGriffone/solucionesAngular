@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
@@ -24,7 +24,7 @@ export class RegistroClienteComponent implements OnInit {
     observaciones: new FormControl(''),
   });
 
-  constructor(private api: ApiService, private route: ActivatedRoute) {}
+  constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
@@ -49,6 +49,7 @@ export class RegistroClienteComponent implements OnInit {
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    console.log(this.profileForm.value);
+    let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
+    this.router.navigate(["cliente/", usuarioDoc, "selectorReclamo"]);
   }
 }
