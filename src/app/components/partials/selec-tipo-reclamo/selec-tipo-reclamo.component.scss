@@ -1,0 +1,24 @@
+.containerForm {
+    width: 70%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    .titulos {
+        text-align: center;
+    }
+    .tiposReclamos {
+        display: flex;
+        flex-direction: row;
+    }
+    .reclamo {
+        display: flex;
+        flex-direction: column;
+        justify-content:flex-start;
+        width: 50%;
+    }
+    .spacingComponents {
+        margin-right: 10%;
+    }
+    .itemDiv {
+        margin-top: 5%;
+    }
+}
