@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from 'src/app/service/api.service';
 
 
 @Component({
@@ -8,13 +10,22 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./reclamos-varios.component.scss']
 })
 export class ReclamosVariosComponent implements OnInit {
-  constructor() {}
+  constructor(private api: ApiService, private route: ActivatedRoute) {}
+
+  datos: any
 
   fecha = new Date().toISOString().substring(0,10)
 
   disabled: boolean = true;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
+    //console.log(usuarioDoc)
+    this.api.cargarCliente(usuarioDoc).subscribe((data) => {
+      this.datos = data
+      this.datos = this.datos[0]
+    });
+  }
 
   profileForm = new FormGroup({
     fecha: new FormControl({value: this.fecha, disabled: this.disabled}, Validators.required),
