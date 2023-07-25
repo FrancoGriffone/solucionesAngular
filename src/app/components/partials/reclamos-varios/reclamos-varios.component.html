@@ -1,0 +1,63 @@
+<div class="container card card-body containerForm">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+        <!--FECHA Y TIPO DE SOLUCION ++ ALERT DIV -->
+      <div class="formComponent">
+        <mat-form-field appearance="fill" class="spacingComponents">
+            <mat-label>Fecha (año/mes/dia)</mat-label>
+            <input matInput formControlName="fecha" class="fecha"/>
+          </mat-form-field>
+        <!-- TIPO DE SOLUCION -->
+        <mat-form-field appearance="fill" class="spacingComponents">
+          <mat-label disabled>Tipo de solución</mat-label>
+          <mat-select formControlName="estado">
+            <mat-option value="pendiente">Pendiente</mat-option>
+            <mat-option value="resuelto">Resuelto</mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+      <!-- ALERT DIV TIPO DE SOLUCION -->
+      <div class="alert alert-danger" [hidden]="profileForm.get('estado')?.valid">
+        Es necesario elegir un estado para grabar el reclamo
+      </div>
+
+      <!-- MOTIVO ++ ALERT DIV -->
+      <div class="formComponent motivo">
+        <!-- MOTIVO -->
+        <mat-form-field appearance="fill">
+          <mat-label>Motivo</mat-label>
+          <textarea matInput formControlName="motivo"></textarea>
+        </mat-form-field>
+        <!-- ALERT DIV MOTIVO -->
+        <div
+          class="alert alert-danger"
+          [hidden]="profileForm.get('motivo')?.valid"
+        >
+          Es necesario cargar un motivo para grabar el reclamo
+        </div>
+      </div>
+
+      <!-- OBSERVACIONES -->
+      <div class="formComponent">
+        <mat-form-field appearance="fill">
+          <mat-label>Observaciones</mat-label>
+          <textarea matInput formControlName="observaciones"></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- BOTONES DE GRABAR Y BORRAR -->
+      <div class="formComponent">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="profileForm.invalid"
+        >
+          Grabar
+        </button>
+        <button type="reset" class="btn btn-danger">
+          Borrar todos los datos
+        </button>
+      </div>
+    </form>
+  </div>
+  

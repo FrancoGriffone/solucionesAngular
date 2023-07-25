@@ -1,0 +1,46 @@
+.containerForm {
+    width: 70%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    form {
+      .formComponent {
+        display: flex;
+        justify-content: space-around;
+        .fecha:disabled {
+          color: black;
+        }
+        mat-form-field {
+          width: 100%;
+        }
+        .spacingComponents {
+          margin-right: 2%;
+        }
+        .form-check {
+          display: flex;
+          align-items: center;
+        }
+        .pagado {
+          display: flex;
+          label {
+            display: flex;
+            align-items: center;
+            margin-right: 10%;
+          }
+        }
+        .importe {
+          display: flex;
+        }
+      }
+      .motivo {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 700px) {
+    .formComponent {
+      flex-wrap: wrap;
+    }
+  }
+  

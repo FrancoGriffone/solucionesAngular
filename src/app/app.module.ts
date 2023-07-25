@@ -28,6 +28,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
 //AG GRID
 import { AgGridModule } from 'ag-grid-angular';
+import { ReclamosVariosComponent } from './components/partials/reclamos-varios/reclamos-varios.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { AgGridModule } from 'ag-grid-angular';
     RegistroClienteComponent,
     ReclamoClienteComponent,
     LegajoClienteComponent,
+    ReclamosVariosComponent,
   ],
   imports: [
     BrowserModule,
