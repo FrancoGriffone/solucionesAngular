@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/service/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { ColDef } from 'ag-grid-community';
+import { ApiService } from 'src/app/service/api.service';
+
 
 @Component({
   selector: 'app-legajo-cliente',
@@ -16,12 +17,12 @@ export class LegajoClienteComponent implements OnInit {
 
   //AG GRID
   colDefs: ColDef[] = [
-    {field: 'reclamo', headerName: 'Reclamo', width: 75},
-    {field: 'prodCodBar', headerName: 'Código de barras', width: 110},
-    {field: 'prodDescripcion', headerName: 'Descripción', width: 200},
-    {field: 'motivo', headerName: 'Motivo', width: 300},
-    {field: 'estado', headerName: 'Estado', width: 100},
-    {field: 'solucion', headerName: 'Observaciones', width: 300},
+    {field: 'reclamo', headerName: 'Reclamo', width: 75, resizable: true},
+    {field: 'prodCodBar', headerName: 'Código de barras', width: 110, resizable: true},
+    {field: 'prodDescripcion', headerName: 'Descripción', width: 200, resizable: true},
+    {field: 'motivo', headerName: 'Motivo', width: 300, resizable: true},
+    {field: 'estado', headerName: 'Estado', width: 100, resizable: true},
+    {field: 'solucion', headerName: 'Observaciones', width: 300, resizable: true},
   ];
   rowData: any = [];
   

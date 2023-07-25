@@ -22,7 +22,7 @@
       <!-- FECHA DE COMPRA -->
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Fecha de compra</mat-label>
-        <input matInput formControlName="fechaCompra" />
+        <input type=date matInput formControlName="fechaCompra" />
       </mat-form-field>
       <!-- CHECKBOX TICKET -->
       <div class="pagado spacingComponents">
@@ -38,62 +38,25 @@
         </div>
       </div>
       <!-- MONTO DEL PRODUCTO -->
-      <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label>Importe abonado</mat-label>
-        <input matInput formControlName="monto" />
-      </mat-form-field>
+      <mat-form-field
+      appearance="fill"
+      floatLabel="always"
+      class="spacingComponents"
+    >
+      <mat-label>Monto del producto</mat-label>
+      <div class="importe"> <!-- OJO, TIENE LA MISMA CLASE QUE EL IMPORTE DEL TALLER -->
+        <span matTextPrefix>$&nbsp;</span>
+        <input
+          matInput
+          type="number"
+          class="example-right-align"
+          placeholder="0"
+          formControlName="monto"
+        />
+      </div>
+    </mat-form-field>
     </div>
 
-    <!-- TIPO DE SOLUCION Y PROMETIDO DIA ++ ALERT DIV -->
-    <div class="formComponent">
-      <!-- TIPO DE SOLUCION -->
-      <!-- 
-        1)
-        <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label disabled>Tipo de solución</mat-label>
-        <mat-select formControlName="estado">
-          <mat-option value="aDeterminar">A determinar</mat-option>
-          <mat-option value="reparación">Reparación</mat-option>
-          <mat-option value="boletaDeCargo">Boleta de Cargo / NC</mat-option>
-          <mat-option value="horma">Horma</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      2)
-      <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label disabled>Tipo de solución</mat-label>
-        <mat-select formControlName="estado">
-          <mat-option value="aDeterminar">A determinar</mat-option>
-          <mat-option value="reparación">Reparación</mat-option>
-          <mat-option value="boletaDeCargo">Boleta de Cargo / NC</mat-option>
-          <mat-option value="horma">Horma</mat-option>
-        </mat-select>
-      </mat-form-field>
-     -->
-      <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label disabled>Tipo de solución</mat-label>
-        <mat-select formControlName="estado">
-          <mat-option value="aReparacion">A reparación</mat-option>
-          <mat-option value="enReparacion">En reparación</mat-option>
-          <mat-option value="reparado">Reparado</mat-option>
-          <mat-option value="entregado">Entregado</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <!-- PROMETIDO DIA -->
-      <mat-form-field appearance="fill" class="spacingComponents picker">
-        <mat-label>Elije una fecha</mat-label>
-        <input matInput [matDatepicker]="picker" />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <!-- ALERT DIV TIPO DE SOLUCION -->
-    <div class="alert alert-danger" [hidden]="profileForm.get('estado')?.valid">
-      Es necesario elegir un estado para grabar el reclamo
-    </div>
     <!-- MOTIVO ++ ALERT DIV -->
     <div class="formComponent motivo">
       <!-- MOTIVO -->
@@ -108,6 +71,52 @@
       >
         Es necesario cargar un motivo para grabar el reclamo
       </div>
+    </div>
+
+    <!-- TIPO DE SOLUCION Y PROMETIDO DIA ++ ALERT DIV -->
+    <div class="formComponent">
+      <!-- TIPO DE SOLUCION -->
+      <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label disabled>Tipo de solución</mat-label>
+        <mat-select formControlName="estado">
+          <mat-option value="aDeterminar">A determinar</mat-option>
+          <mat-option value="taller">Taller</mat-option>
+          <mat-option value="cambioDirecto">Cambio directo</mat-option>
+          <mat-option value="boletaDeCargo">Boleta de Cargo</mat-option>
+          <mat-option value="fueraGarantia">Fuera de garantía</mat-option>
+          <mat-option value="horma">Horma</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- CONDICIONALES DE TALLER Y HORMA -->
+      <ng-template [ngIf]="profileForm.get('estado')?.value == 'taller'">
+        <mat-form-field appearance="fill" class="spacingComponents">
+          <mat-label disabled>Opciones de taller</mat-label>
+          <mat-select>
+            <mat-option value="aReparacion">A reparación</mat-option>
+            <mat-option value="enReparacion">En reparación</mat-option>
+            <mat-option value="reparado">Reparado</mat-option>
+            <mat-option value="entregadoTaller">Entregado</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-template>
+      <ng-template [ngIf]="profileForm.get('estado')?.value == 'horma'">
+        <mat-form-field appearance="fill" class="spacingComponents">
+          <mat-label disabled>Opciones de horma</mat-label>
+          <mat-select>
+            <mat-option value="pendiente">Pendiente</mat-option>
+            <mat-option value="entregadoHorma">Entregado</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-template>
+      <!-- PROMETIDO DIA -->
+      <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label>Prometido para el día</mat-label>
+        <input type=date matInput formControlName="prometidoDia" />
+      </mat-form-field>
+    </div>
+    <!-- ALERT DIV TIPO DE SOLUCION -->
+    <div class="alert alert-danger" [hidden]="profileForm.get('estado')?.valid">
+      Es necesario elegir un estado para grabar el reclamo
     </div>
     <!-- OBSERVACIONES -->
     <div class="formComponent">
