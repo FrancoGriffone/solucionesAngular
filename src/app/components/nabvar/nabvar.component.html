@@ -8,10 +8,17 @@
 
 <!-- PANTALLAS MAS GRANDES -->
 
-<div class="containerNavbar d-none d-md-block card">
+<div class="containerNavbar d-none d-md-block card" 
+  [ngClass]="{
+    'tate' : cambioLocal == 'tate',
+    'texpress' : cambioLocal == 'tateexpress',
+    'kilroy' : cambioLocal == 'kilroy',
+    'kids' : cambioLocal == 'kilroykids',
+    'kit' : cambioLocal == 'kitexpress'
+    }"
+    >
   <mat-card> </mat-card>
   <div class="colorDiv">
-    <!--[class]="button_change"-->
     <ul class="options">
       <li>
         <div class="iconDiv">
@@ -100,12 +107,41 @@
   </div>
 </div>
 
+<div class="containerDiv">
+  <mat-card class="lateralBar">
+    <mat-card-content class="divImg">
+      <a routerLink="home/tate" (click)="cambioTate()">
+        <img src="../../../assets/tate.png" alt="tate-logo" width="40px" />
+      </a>
+    </mat-card-content>
+    <mat-card-content class="divImg">
+      <a routerLink="home/tateexpress" (click)="cambioExpress()">
+        <img src="../../../assets/Express.png" alt="tateExpress-logo" width="40px" />
+      </a>
+    </mat-card-content>
+    <mat-card-content class="divImg">
+      <a routerLink="home/kilroy" (click)="cambioKilroy()">
+        <img src="../../../assets/kilroy.png" alt="kilroy-logo" width="40px" />
+      </a>
+    </mat-card-content>
+    <mat-card-content class="divImg">
+      <a routerLink="home/kitexpress" (click)="cambioKit()">
+        <img src="../../../assets/kit.png" alt="kitExpress-logo" width="40px" />
+      </a>
+    </mat-card-content>
+    <mat-card-content class="divImg">
+      <a routerLink="home/kilroykids" (click)="cambioKids()">
+        <img src="../../../assets/kids.png" alt="kilroyKids-logo" width="40px" />
+      </a>
+    </mat-card-content>
+  </mat-card>
+</div>
+
 <!-- PANTALLAS MAS PEQUEÑAS -->
 
 <div class="containerNavbar d-block d-md-none card">
   <mat-card> </mat-card>
   <div class="colorDiv">
-    <!--[class]="button_change"-->
     <ul class="options">
       <li>
         <a routerLink="home" routerLinkActive="activeResponsive">

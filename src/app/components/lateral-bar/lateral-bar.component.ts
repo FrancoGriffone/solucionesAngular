@@ -11,5 +11,4 @@ export class LateralBarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

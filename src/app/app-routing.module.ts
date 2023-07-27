@@ -22,6 +22,10 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'home/:local',
+    component: InicioComponent,
+  },
+  {
     path: 'bcargo',
     component: BCargoComponent,
   },

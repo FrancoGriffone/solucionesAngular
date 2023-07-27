@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./inicio.component.scss'],
 })
 export class InicioComponent implements OnInit {
+
   constructor(private api: ApiService, private router: Router) {}
   ngOnInit(): void {}
 

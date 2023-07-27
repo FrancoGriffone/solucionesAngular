@@ -11,7 +11,6 @@
 .colorDiv {
   display: flex;
   align-items: center;
-  background-color: rgb(231, 92, 92);
   height: 100px;
   transition: 1s;
   border-bottom-left-radius: 5px;
@@ -65,29 +64,143 @@ img:hover {
   }
 }
 
-//clases para cambios de color
+//CLASES PARA CAMBIO DE COLOR
 
 //TATE
 .tate {
+  transition: all 1.0s ease-out;
   background-color: rgb(231, 92, 92);
 }
-
 //TATE EXPRESS
-.tExpress {
+.texpress {
+  transition: all 1.0s ease-out;
   background-color: rgb(109, 170, 165);
 }
-
 //KILROY
 .kilroy {
+  transition: all 1.0s ease-out;
   background-color: rgb(70, 68, 68);
 }
-
-//KIT
+//KIT EXPRESS
 .kit {
-  background-color: rgb(238, 177, 64);
+  transition: all 1.0s ease-out;
+  background-color: rgb(216, 154, 40);
+}
+//KILROY KIDS
+.kids {
+  transition: all 1.0s ease-out;
+  background-color: rgb(151, 175, 114);
 }
 
-//KILROY KIDS
-.kKids {
-  background-color: rgb(151, 175, 114);
+
+// HEIGTH HASTA 600 ++ WIDTH HASTA 800
+@media screen and (max-height: 600px) and (max-width: 800px) {
+  .containerDiv {
+    display: flex;
+    justify-content: center;
+    .lateralBar {
+      display: flex;
+      padding: 10px;
+      justify-content: space-evenly;
+      width: 100%;
+      mat-card-content {
+        display: flex;
+        justify-content: center;
+        transition: filter, 0.5s;
+        margin: 0;
+        img {
+          width: 50px;
+          height: 40px;
+        }
+        img:hover {
+          filter: invert(100%);
+        }
+      }
+    }
+  }
+}
+
+// HEIGTH HASTA 600 ++ WIDTH POST 800
+@media screen and (max-height: 600px) and (min-width: 800px) {
+  .containerDiv {
+    display: flex;
+    justify-content: center;
+    .lateralBar {
+      display: flex;
+      padding: 10px;
+      justify-content: space-evenly;
+      width: 100%;
+      mat-card-content {
+        display: flex;
+        justify-content: center;
+        transition: filter, 0.5s;
+        margin: 0;
+        img {
+          width: 50px;
+          height: 40px;
+        }
+        img:hover {
+          filter: invert(100%);
+        }
+      }
+    }
+  }
+}
+
+// HEIGTH POST 600 ++ WIDTH HASTA 800
+@media screen and (min-height: 600px) and (max-width: 800px) {
+  .containerDiv {
+    display: flex;
+    justify-content: center;
+    .lateralBar {
+      display: flex;
+      padding: 10px;
+      justify-content: space-evenly;
+      width: 100%;
+      mat-card-content {
+        display: flex;
+        justify-content: center;
+        transition: filter, 0.5s;
+        margin: 0;
+        img {
+          width: 50px;
+          height: 40px;
+        }
+        img:hover {
+          filter: invert(100%);
+        }
+      }
+    }
+  }
+}
+
+//HEIGTH POST 600 ++ WIDTH POST 800
+@media screen and (min-height: 600px) and (min-width: 800px) {
+  .containerDiv {
+    position: fixed;
+    .lateralBar {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      width: 75px;
+      height: 400px;
+      margin-top: 75px;
+      transition: width, 1s;
+      div {
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .lateralBar:hover {
+      width: 90px;
+    }
+  }
+  img {
+    transition: width, 0.5s;
+    //filter: invert(100%);
+  }
+  img:hover {
+    width: 60px;
+  }
 }
