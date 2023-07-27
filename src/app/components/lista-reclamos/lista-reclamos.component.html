@@ -1,7 +1,27 @@
-<p>lista-reclamos work!</p>
+<div class="container card card-body containerForm">
+    <form class="formComponent" [formGroup]="profileForm">
+        <div class="spacingComponents">
+            <mat-form-field appearance="fill" class="spacingComponents">
+                <mat-label>Fecha inicial de búsqueda</mat-label>
+                <input type=date matInput formControlName="inicio"/>
+              </mat-form-field>
+        </div>
+        <!--BORRE EN LAS DOS EL FORMCONTROLNAME-->
+        <div class="spacingComponents">
+            <mat-form-field appearance="fill" class="spacingComponents">
+                <mat-label>Fecha final de búsqueda</mat-label>
+                <input type=date matInput formControlName="final"/>
+              </mat-form-field>
+        </div>
+    </form>
+    <div class="formComponent">
+        <button class="btn btn-primary" type="submit" (click)="onSubmit()" [disabled]="profileForm.invalid">Iniciar Búsqueda</button>
+    </div>
+    <ag-grid-angular
+      class="ag-theme-balham mt-3"
+      style="width: 100%; height: 70%"
+      [rowData]="rowData"
+      [columnDefs]="colDefs"
+      ></ag-grid-angular> 
+</div>
 
-<!-- https://material.angular.io/components/table/examples#table-overview -->
-<!-- https://material.angular.io/components/datepicker/examples#date-range-picker-overview -->
-
-<!-- LO IDEAL ES COMBINAR LA LISTA CON EL FILTRO + EL DATEPICKER
-Y VER SI SE PUEDE ORDENAR POR LO MENOS POR NUM DE RECLAMO -->

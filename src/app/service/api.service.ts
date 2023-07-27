@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { clienteInterface } from '../models/cliente.interface';
 import { listaReclamosClienteInterface } from '../models/listaReclamosCliente.interface';
+import { listaReclamosInterface } from '../models/listaReclamos.interface';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,7 @@ export class ApiService {
   private GET_RECLAMOS_CLIENTE =
     'http://192.168.0.9:100/api/reclamos/buscarreclamos/';
 
-  private GET_LISTA_RECLAMOS =
+  private POST_LISTA_RECLAMOS =
     'http://192.168.0.9:100/api/reclamos/listarreclamos';
 
   constructor(private http: HttpClient) {}
@@ -27,16 +29,8 @@ export class ApiService {
     return this.http.get<listaReclamosClienteInterface>(url);
   }
 
-  //   listarReclamos() {
-  //     const url = this.GET_LISTA_RECLAMOS;
-  //     return this.http
-  //          .get<ListaReclamosI>(url)
-  //            .pipe(
-  //              map((resp) => {
-  //                console.log(resp);
-  //                return resp;
-  //                }
-  //              )
-  //            );
-  //   }
+  listarReclamos(desde: string, hasta: string): Observable<any> {
+    const url = this.POST_LISTA_RECLAMOS + desde + hasta;
+    return this.http.post(this.url + desde + hasta)
+  }
 }

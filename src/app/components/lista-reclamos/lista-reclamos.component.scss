@@ -1,0 +1,15 @@
+.containerForm {
+    width: 70%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    .formComponent {
+        display: flex;
+        justify-content: space-around;
+        mat-form-field {
+          width: 100%;
+        }
+        .spacingComponents {
+          margin-right: 2%;
+        }
+    }
+}
