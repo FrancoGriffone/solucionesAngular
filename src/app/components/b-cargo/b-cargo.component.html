@@ -1,41 +1,44 @@
-<form class="container bCargo" (ngSubmit)="onSubmit()">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <div class="datepicker">
-      <input matInput [matDatepicker]="picker" [formControl]="date" />
-      <mat-datepicker-toggle matIconSuffix [for]="picker">
-        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-      </mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </div>
-    <mat-hint>Elije una fecha</mat-hint>
-  </mat-form-field>
-  <button type="submit" class="btn btn-primary buscarBC">Buscar</button>
-</form>
-
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Reclamo</th>
-        <th scope="col">NC</th>
-        <th scope="col">Código</th>
-        <th scope="col">Descripción</th>
-        <th scope="col">Falla</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container card card-body containerDiv">
+  <form class="container bCargo" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <div class="datepicker">
+        <input matInput [matDatepicker]="picker" [formControl]="date" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+      <mat-hint>Elije una fecha</mat-hint>
+    </mat-form-field>
+    <button type="submit" class="btn btn-primary buscarBC">Buscar</button>
+  </form>
+  
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Reclamo</th>
+          <th scope="col">NC</th>
+          <th scope="col">Código</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Falla</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
