@@ -14,7 +14,6 @@ import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclam
 import { RegistroClienteComponent } from './components/partials/registro-cliente/registro-cliente.component';
 import { ReclamoClienteComponent } from './components/partials/reclamo-cliente/reclamo-cliente.component';
 import { LegajoClienteComponent } from './components/partials/legajo-cliente/legajo-cliente.component';
-import { PruebaComponent } from './prueba/prueba.component';
 //Para el form es necesario importar esto
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Material UI
@@ -39,7 +38,6 @@ import { SelecTipoReclamoComponent } from './components/partials/selec-tipo-recl
     InicioComponent,
     BCargoComponent,
     ReclamoInternoComponent,
-    PruebaComponent,
     LateralBarComponent,
     PageNotFoundComponent,
     ListaReclamosComponent,
