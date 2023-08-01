@@ -32,8 +32,8 @@ export class ListaReclamosComponent implements OnInit {
 
   onSubmit(){
     console.log(this.profileForm.value.inicio + " " + this.profileForm.value.final)
-    this.api.listarReclamos(this.profileForm.value.inicio, this.profileForm.value.final).subscribe(data =>{
-      console.log(data)
-    })
+    // this.api.listarReclamos(this.profileForm.value.inicio, this.profileForm.value.final).subscribe(data =>{
+    //   console.log(data)
+    // })
   }
 }

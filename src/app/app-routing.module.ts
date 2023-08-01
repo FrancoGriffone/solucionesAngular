@@ -10,6 +10,7 @@ import { LegajoClienteComponent } from './components/partials/legajo-cliente/leg
 import { SelecTipoReclamoComponent } from './components/partials/selec-tipo-reclamo/selec-tipo-reclamo.component';
 import { ReclamoClienteComponent } from './components/partials/reclamo-cliente/reclamo-cliente.component';
 import { ReclamosVariosComponent } from './components/partials/reclamos-varios/reclamos-varios.component';
+import { Component } from 'ag-grid-community';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'cliente/:doc/nuevoReclamoVarios',
     component: ReclamosVariosComponent,
+  },
+  {
+    path: 'cliente/:doc/reclamo/:id',
+    component: ReclamoClienteComponent,
   },
   {
     path: '**',

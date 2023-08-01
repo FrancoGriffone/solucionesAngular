@@ -14,6 +14,8 @@ export class ApiService {
   private GET_RECLAMOS_CLIENTE =
     'http://192.168.0.9:100/api/reclamos/buscarreclamos/';
 
+  private GET_RECLAMO_INDIVIDUAL = 'http://192.168.0.9:100/api/reclamos/listarreclamos/';
+
   private POST_LISTA_RECLAMOS =
     'http://192.168.0.9:100/api/reclamos/listarreclamos';
 
@@ -29,8 +31,12 @@ export class ApiService {
     return this.http.get<listaReclamosClienteInterface>(url);
   }
 
-  listarReclamos(desde: string, hasta: string): Observable<any> {
-    const url = this.POST_LISTA_RECLAMOS + desde + hasta;
-    return this.http.post(this.url + desde + hasta)
+  listarReclamoInd(id: string) {
+    const url = this.GET_RECLAMO_INDIVIDUAL + id;
+    return this.http.get<listaReclamosClienteInterface>(url)
   }
+
+  // listarReclamos(desde: string, hasta: string): Observable<any> {
+  //   return this.http.post(this.POST_LISTA_RECLAMOS, desde + hasta)
+  // }
 }
