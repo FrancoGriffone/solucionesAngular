@@ -12,8 +12,7 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class LegajoClienteComponent implements OnInit {
 
-  datos: any
-  listaReclamos: any
+  datos: any //PARA VOLCAR LOS DATOS DEL CLIENTE
 
   //AG GRID
   colDefs: ColDef[] = [
@@ -24,23 +23,24 @@ export class LegajoClienteComponent implements OnInit {
     {field: 'estado', headerName: 'Estado', width: 100, resizable: true},
     {field: 'solucion', headerName: 'Observaciones', width: 300, resizable: true},
   ];
-  rowData: any = [];
+  rowData: any = []; //FILAS AG GRID
   
   constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
-    //console.log(usuarioDoc)
+    //SI EXISTE UN CLIENTE SE TOMAN LOS DATOS
     this.api.cargarCliente(usuarioDoc).subscribe((data) => {
       this.datos = data
       this.datos = this.datos[0]
     });
+    //SI EXISTE UN CLIENTE, SE TOMAN LOS RECLAMOS PARA AG GRID
     this.api.listaReclamosCliente(usuarioDoc).subscribe((data) => {
       this.rowData = data
     });
   }
 
-
+  //TOMAR EL NUMERO DE DOCUMENTO Y VA A LOS DATOS DEL CLIENTE, ES UN PASO POR SI HAY QUE ACTUALIZARLOS
   onSubmit() {
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
     this.router.navigate(["cliente/", usuarioDoc]);

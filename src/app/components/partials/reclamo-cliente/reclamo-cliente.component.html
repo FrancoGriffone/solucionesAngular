@@ -1,5 +1,7 @@
 <div class="container card card-body containerForm">
+  <!-- DATOS DEL CLIENTE Y DEL RECLAMO -->
   <h2 class="spacingComponents">{{datos.ayN}} - {{datos.docNro}} || Reclamo: {{datosReclamo.reclamo}} </h2>
+  <!-- RECLAMO CERRADO O ABIERTO -->
   <ng-template [ngIf]="profileForm.get('cerrado')?.value == 'Sí'">
     <h3 style="color: green;">Cerrado</h3> 
   </ng-template>
@@ -20,6 +22,7 @@
         <input matInput formControlName="fecha" class="fecha" readonly="disabled"/>
       </mat-form-field>
     </div>
+    <!-- DESCRIPCION DE CÓDIGO -->
     <div>
       <h4 style="color: grey;">Descripción: {{datosReclamo.prodDescripcion}}</h4>
     </div>
@@ -31,6 +34,7 @@
       Es necesario cargar un algo en el espacio del código de barras para grabar
       el reclamo
     </div>
+
     <!-- MONTO + CHECKBOX TICKET + FECHA COMPRA -->
     <div class="formComponent">
       <!-- FECHA DE COMPRA -->
@@ -135,6 +139,7 @@
       </mat-form-field>
     </div>
 
+    <!-- TALLER ES CONDICIONAL, SI SE ELIGE OTRA OPCION QUE NO SEA REPARACION NO APARECE -->
     <ng-template [ngIf]="profileForm.get('tipo')?.value == 'Reparación'">
       <!-- TALLER, IMPORTE Y CHECKBOX DE PAGADO -->
 <div class="formComponent">
@@ -188,6 +193,7 @@
     <div class="alert alert-danger" [hidden]="profileForm.get('tipo')?.valid">
       Es necesario elegir un estado para grabar el reclamo
     </div>
+
     <!-- OBSERVACIONES -->
     <div class="formComponent">
       <mat-form-field appearance="fill">
@@ -195,6 +201,7 @@
         <textarea matInput formControlName="observaciones"></textarea>
       </mat-form-field>
     </div>
+    
     <!-- BOTONES DE GRABAR Y BORRAR -->
     <div class="formComponent">
       <button

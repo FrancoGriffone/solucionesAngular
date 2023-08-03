@@ -13,14 +13,14 @@ export class SelecTipoReclamoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //RECLAMO DE MERCADERIA
   onSubmitMercaderia() {
-    // TODO: Use EventEmitter with form value
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
     this.router.navigate(["cliente/", usuarioDoc, "nuevoReclamoMercaderia"]);
   }
 
+  //RECLAMO VARIOS
   onSubmitVarios() {
-    // TODO: Use EventEmitter with form value
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
     this.router.navigate(["cliente/", usuarioDoc, "nuevoReclamoVarios"]);
   }

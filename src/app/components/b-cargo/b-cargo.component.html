@@ -1,5 +1,6 @@
 <div class="container card card-body containerDiv">
   <form class="container bCargo" (ngSubmit)="onSubmit()">
+    <!-- DATEPICKER PARA SELECIONAR FECHA DE BOLETAS DE CARGO -->
     <mat-form-field class="example-full-width" appearance="fill">
       <div class="datepicker">
         <input matInput [matDatepicker]="picker" [formControl]="date" />
@@ -13,6 +14,8 @@
     <button type="submit" class="btn btn-primary buscarBC">Buscar</button>
   </form>
   
+  <!-- TABLA PARA VISUALIZAR BOLETAS DE CARGO EN LA WEB, SIN NECESIDAD DEL REPORTE -->
+  <!-- TODAVIA NO FUNCIONA -->
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead>

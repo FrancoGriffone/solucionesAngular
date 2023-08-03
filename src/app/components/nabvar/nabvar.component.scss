@@ -196,11 +196,11 @@ img:hover {
       width: 90px;
     }
   }
-  img {
+  .logoLocal {
     transition: width, 0.5s;
     //filter: invert(100%);
   }
-  img:hover {
+  .logoLocal:hover {
     width: 60px;
   }
 }

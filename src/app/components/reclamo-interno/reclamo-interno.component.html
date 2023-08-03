@@ -1,14 +1,15 @@
 <div class="container card card-body containerForm">
+  <!-- DATOS RECLAMO -->
   <h2 class="spacingComponents">Reclamo: {{datosReclamo.reclamo}} </h2>
+  <!-- RECLAMO CERRADO O ABIERTO -->
   <ng-template [ngIf]="profileForm.get('cerrado')?.value == 'Sí'">
     <h3 style="color: green;">Cerrado</h3> 
   </ng-template>
   <ng-template [ngIf]="profileForm.get('cerrado')?.value == 'No'">
     <h3 style="color: red;">Pendiente</h3> 
   </ng-template>
-  <!-- HABRIA QUE REVISAR SI SE PUEDE AGREGAR UNA FECHA ACÁ O SOLO TOMARLA COMO PARTE DEL OBJ PARA USARLA A FUTURO -->
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <!-- CODIGO DE BARRAS Y SECCION ++ ALERT DIV -->
+    <!-- CODIGO DE BARRAS, SECCION Y FECHA FIJA ++ ALERT DIV -->
     <div class="formComponent">
       <!-- CODIGO DE BARRAS -->
       <mat-form-field appearance="fill" class="spacingComponents">
@@ -35,6 +36,7 @@
         <input matInput formControlName="fecha" class="fecha" readonly="disabled"/>
       </mat-form-field>
     </div>
+    <!-- DESCRIPCION DE CÓDIGO -->
     <div>
       <h4 style="color: grey;">Descripción: {{datosReclamo.prodDescripcion}}</h4>
     </div>
@@ -46,6 +48,7 @@
       Es necesario cargar un algo en el espacio del código de barras para grabar
       el reclamo
     </div>
+
     <!-- TIPO DE SOLUCION Y TALLER ++ ALERT DIV -->
     <div class="formComponent">
       <!-- TIPO DE SOLUCION -->
@@ -75,6 +78,7 @@
     <div class="alert alert-danger" [hidden]="profileForm.get('estado')?.valid">
       Es necesario elegir un estado para grabar el reclamo
     </div>
+
     <!-- MOTIVO ++ ALERT DIV -->
     <div class="formComponent motivo">
       <!-- MOTIVO -->
@@ -89,6 +93,7 @@
       >
         Es necesario cargar un motivo para grabar el reclamo
       </div>
+
     </div>
     <!-- OBSERVACIONES -->
     <div class="formComponent">
@@ -97,6 +102,7 @@
         <textarea matInput formControlName="observaciones"></textarea>
       </mat-form-field>
     </div>
+
     <!-- IMPORTE Y CHECKBOX DE PAGADO -->
     <div class="formComponent">
       <!-- IMPORTE -->
@@ -132,6 +138,7 @@
         </div>
       </div>
     </div>
+    
     <!-- BOTONES DE GRABAR Y NUEVO -->
     <div class="formComponent">
       <button

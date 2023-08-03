@@ -8,37 +8,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class NabvarComponent implements OnInit {
 
-  cambioLocal: any;
+  cambioLocal: any; //CAMBIO DE LOCAL
 
   // currentRoute: string;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-  //   let local: string = this.route.snapshot.paramMap.get('local') || ''
-  //   this.currentRoute = "";
-  //   this.router.events.subscribe((event: Event) => {
-  //     if (event instanceof NavigationStart) {
-  //         // Show loading indicator
-  //         console.log('Route change detected');
-  //         this.cambioLocal = local
-  //     }
-  
-  //     if (event instanceof NavigationEnd) {
-  //         // Hide loading indicator
-  //         this.currentRoute = event.url;          
-  //           console.log(event);
-  //           this.cambioLocal = local
-  //     }
-  
-  //     if (event instanceof NavigationError) {
-  //         // Hide loading indicator
-  
-  //         // Present error to user
-  //         console.log(event.error);
-  //     }
-  // });
-  }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
+    //OPCIONES PARA CAMBIO DE LOCAL, HOY AL INICIO VUELVE SIEMPRE A TATE PORQUE LOS RUTEOS ESTAN HECHOS ASI
     let local: string = this.route.snapshot.paramMap.get('local') || ''
     if (local == 'tate') {
       this.cambioLocal = 'tate'
@@ -54,9 +31,9 @@ export class NabvarComponent implements OnInit {
       this.router.navigate(["home/tate"])
       this.cambioLocal = 'tate'
     }
-    console.log(this.cambioLocal)
   }
 
+  //FUNCION PARA CAMBIO DE LOCAL
   cambioTate(){
   this.cambioLocal = 'tate'    
   }

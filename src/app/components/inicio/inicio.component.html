@@ -1,5 +1,7 @@
 <div class="container card card-body divForm">
   <form class="inicioForm" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+    <!-- SELECTOR DE OPCIONES PARA BUSCAR ENTRE DNI Y RECLAMOS -->
     <mat-form-field appearance="fill">
       <mat-label disabled>DNI/RECLAMO</mat-label>
       <mat-select formControlName="eleccion">
@@ -7,6 +9,7 @@
         <mat-option value="Reclamo">Reclamo</mat-option>
       </mat-select>
     </mat-form-field>
+    
     <!-- ALERT DIV NO SE ELIGIÓ OPCIÓN -->
     <div
       class="alert alert-danger"

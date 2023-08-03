@@ -12,18 +12,19 @@ import { ApiService } from 'src/app/service/api.service';
 export class ReclamosVariosComponent implements OnInit {
   constructor(private api: ApiService, private route: ActivatedRoute) {}
 
-  datos: any
-  datosReclamo: any
+  datos: any //PARA VOLCAR LOS DATOS DEL DNI
+
+  datosReclamo: any //PARA VOLCAR LOS DATOS DEL RECLAMO
   
-  fechaReclamo: any
+  fechaReclamo: string = "" //PARA VOLCAR FECHA DE RECLAMO
 
+  //LOS DOS SON PARA LA FECHA FIJA EN EL FORMCONTROL
   fecha = new Date().toISOString().substring(0,10)
-
   disabled: boolean = true;
 
   ngOnInit(): void {
+    //VERIFICA DATOS DEL DNI
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
-    //console.log(usuarioDoc)
     this.api.cargarCliente(usuarioDoc).subscribe((data) => {
       this.datos = data
       this.datos = this.datos[0]
@@ -38,6 +39,7 @@ export class ReclamosVariosComponent implements OnInit {
       //PARA TRAER EL STRING DE LA FECHA SE TOMARON INDIVIDUALMENTE PARA APLICAR UN SLICE
       this.fechaReclamo = this.datosReclamo.fecha //FECHA DE RECLAMO
 
+      //SI EXISTE EL RECLAMO SE VUELCAN LOS DATOS
       this.profileForm.patchValue({
         fecha: this.fechaReclamo.slice(0,-9),
         estado: this.datosReclamo.estado,
@@ -49,6 +51,7 @@ export class ReclamosVariosComponent implements OnInit {
     })
   }
 
+  //FORMULARIO PARA RECLAMOS VARIOS
   profileForm = new FormGroup({
     fecha: new FormControl({value: this.fecha}, Validators.required),
     motivo: new FormControl('', Validators.required),
@@ -58,6 +61,7 @@ export class ReclamosVariosComponent implements OnInit {
     solucion: new FormControl('')
   });
   
+  //BOTON PARA GRABAR RECLAMO
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.log(this.profileForm.value);

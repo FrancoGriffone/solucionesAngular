@@ -12,6 +12,7 @@ import { ReclamoClienteComponent } from './components/partials/reclamo-cliente/r
 import { ReclamosVariosComponent } from './components/partials/reclamos-varios/reclamos-varios.component';
 
 const routes: Routes = [
+  //LINK AL HOME
   {
     path: 'home',
     component: InicioComponent,
@@ -21,54 +22,67 @@ const routes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full',
   },
+  //LINK AL HOME DEPENDE EL LOCAL
   {
     path: 'home/:local',
     component: InicioComponent,
   },
+  //LINK A BOLETA DE CARGO
   {
     path: 'bcargo',
     component: BCargoComponent,
   },
+  //LINK A NUEVO RECLAMO INTERNO
   {
     path: 'reclamointerno',
     component: ReclamoInternoComponent,
   },
+  //LINK A RECLAMO INTERNO EXISTENTE (SE ENTRA DESDE EL INICIO)
   {
     path: 'reclamointerno/:id',
     component: ReclamoInternoComponent,
   },
+  //LINK A LISTA DE RECLAMOS
   {
     path: 'listareclamos',
     component: ListaReclamosComponent,
   },
+  //LINK A CLIENTES EXISTENTES EN EL SISTEMA
   {
     path: 'cliente/:doc',
     component: RegistroClienteComponent,
   },
+  //LINK A LEGAJO DE CLIENTE, PUEDE SER PARA CARGAR UNO NUEVO O ACTUALIZAR DATOS
   {
     path: 'legajo/:doc',
     component: LegajoClienteComponent,
   },
+  //LINK A SELECCION DE RECLAMO, PUEDE SER MERCADERIA O VARIOS
   {
     path: 'cliente/:doc/selectorReclamo',
     component: SelecTipoReclamoComponent,
   },
+  //LINK A RECLAMO DE MERCADERIA CLIENTES
   {
     path: 'cliente/:doc/nuevoReclamoMercaderia',
     component: ReclamoClienteComponent,
   },
+  //LINK A RECLAMO VARIOS CLIENTES
   {
     path: 'cliente/:doc/nuevoReclamoVarios',
     component: ReclamosVariosComponent,
   },
+  //LINK A RECLAMO VARIOS CLIENTES EXISTENTE (SE ENTRA DESDE INICIO)
   {
     path: 'cliente/:doc/ReclamoVarios/:id',
     component: ReclamosVariosComponent,
   },
+  //LINK A RECLAMO DE MERCADERIA CLIENTES (SE ENTRA DESDE INICIO)
   {
     path: 'cliente/:doc/reclamo/:id',
     component: ReclamoClienteComponent,
   },
+  //LINK CUANDO NO EXISTE LA URL COLOCADA
   {
     path: '**',
     component: PageNotFoundComponent,

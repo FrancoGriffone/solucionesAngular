@@ -8,7 +8,6 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BCargoComponent } from './components/b-cargo/b-cargo.component';
 import { ReclamoInternoComponent } from './components/reclamo-interno/reclamo-interno.component';
-import { LateralBarComponent } from './components/lateral-bar/lateral-bar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclamos.component';
 import { RegistroClienteComponent } from './components/partials/registro-cliente/registro-cliente.component';
@@ -38,7 +37,6 @@ import { SelecTipoReclamoComponent } from './components/partials/selec-tipo-recl
     InicioComponent,
     BCargoComponent,
     ReclamoInternoComponent,
-    LateralBarComponent,
     PageNotFoundComponent,
     ListaReclamosComponent,
     RegistroClienteComponent,

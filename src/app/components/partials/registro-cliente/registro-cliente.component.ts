@@ -10,9 +10,9 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class RegistroClienteComponent implements OnInit {
 
-  datos: any
-  user: any
+  datos: any //PARA VOLCAR LOS DATOS DEL CLIENTE
 
+  //FORMULARIO PARA CARGAR EL CLIENTE
   profileForm = new FormGroup({
     nombre: new FormControl('', Validators.required),
     apellido: new FormControl('', Validators.required),
@@ -27,13 +27,13 @@ export class RegistroClienteComponent implements OnInit {
   constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
+    //TOMAMOS EL DNI PARA CARGAR LA DATA DEL CLIENTE SI FIGURA EN EL SISTEMA
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
-    //console.log(usuarioDoc)
     this.api.cargarCliente(usuarioDoc).subscribe((data) => {
       this.datos = data
-      this.user = this.datos
       this.datos = this.datos[0]
-      console.log(this.datos);
+
+      //SI EXISTE EL CLIENTE, LO CARGAMOS EN EL FORMULARIO
       this.profileForm.patchValue({
         nombre:this.datos.nombres,
         apellido: this.datos.apellidos,
@@ -47,8 +47,8 @@ export class RegistroClienteComponent implements OnInit {
     });
   }
 
+  //CON LOS DATOS DEL DNI, SE VA A SELECCIONAR QUE TIPO DE RECLAMO VAMOS
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
     this.router.navigate(["cliente/", usuarioDoc, "selectorReclamo"]);
   }

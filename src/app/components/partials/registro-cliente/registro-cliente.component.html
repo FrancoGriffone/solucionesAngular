@@ -1,6 +1,6 @@
 <div class="container card card-body containerForm">
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <h2 *ngFor="let user of user">{{user.ayN}} - {{user.docNro}}</h2>
+    <h2>{{datos.ayN}} - {{datos.docNro}}</h2>
     <!-- NOMBRE COMPLETO ++ ALERT DIV -->
     <div class="formComponent">
       <!-- NOMBRE Y APELLIDO -->

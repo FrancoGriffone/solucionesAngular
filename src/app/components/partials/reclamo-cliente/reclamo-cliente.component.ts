@@ -11,12 +11,17 @@ import { ApiService } from 'src/app/service/api.service';
 export class ReclamoClienteComponent implements OnInit {
   constructor(private api: ApiService, private route: ActivatedRoute) {}
 
-  datos: any //PARA DNI
-  datosReclamo: any //PARA RECLAMO
+  datos: any //PARA VOLCAR LOS DATOS DEL DNI
+
+  datosReclamo: any //PARA VOLCAR LOS DATOS DEL RECLAMO
+
   pagadoTaller: number = 0 //PARA EL TILDE DE TALLER, DADO QUE LLEGA COMO STRING "Sí" O "No"
-  fechaReclamo: string = "" //PARA FECHA DE RECLAMO
-  fechaComprado: string = "" //PARA FECHA DE COMPRA DEL PRODUCTO
-  fechaPrometido: string = "" //PARA FECHA DE PROMETIDO DIA
+
+  fechaReclamo: string = "" //PARA VOLCAR FECHA DE RECLAMO
+
+  fechaComprado: string = "" //PARA VOLCAR FECHA DE COMPRA DEL PRODUCTO
+
+  fechaPrometido: string = "" //PARA VOLCAR FECHA DE PROMETIDO DIA
 
   //LOS DOS SON PARA LA FECHA FIJA EN EL FORMCONTROL
   fecha = new Date().toISOString().substring(0,10)
@@ -46,6 +51,8 @@ export class ReclamoClienteComponent implements OnInit {
       if (this.datosReclamo.pagado == 'Sí') {
         this.pagadoTaller = 1
       }
+      
+      //SI EXISTE EL RECLAMO SE VUELCAN LOS DATOS
       this.profileForm.patchValue({
         codigoBarras: this.datosReclamo.prodCodBar,
         fecha: this.fechaReclamo.slice(0,-9),
@@ -66,6 +73,8 @@ export class ReclamoClienteComponent implements OnInit {
       })
     })
   }
+
+  //FORMULARIO PARA RECLAMO INTERNO
   profileForm = new FormGroup({
     codigoBarras: new FormControl('', Validators.required),
     fecha: new FormControl({value: this.fecha}, Validators.required),
@@ -85,6 +94,7 @@ export class ReclamoClienteComponent implements OnInit {
     prodDescripcion: new FormControl('')
   });
 
+  //BOTON PARA GRABAR RECLAMO
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.log(this.profileForm.value);
