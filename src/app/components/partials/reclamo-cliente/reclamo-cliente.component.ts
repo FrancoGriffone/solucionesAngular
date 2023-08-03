@@ -25,11 +25,11 @@ export class ReclamoClienteComponent implements OnInit {
   ngOnInit(): void {
     //VERIFICA DATOS DEL DNI
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
-    //console.log(usuarioDoc)
     this.api.cargarCliente(usuarioDoc).subscribe((data) => {
       this.datos = data
       this.datos = this.datos[0]
     });
+
     //VERIFICA DATOS DEL RECLAMO
     let numReclamo: string = this.route.snapshot.paramMap.get('id') || ''
     this.api.listarReclamoInd(numReclamo).subscribe((data) => { 
@@ -66,10 +66,9 @@ export class ReclamoClienteComponent implements OnInit {
       })
     })
   }
-
   profileForm = new FormGroup({
     codigoBarras: new FormControl('', Validators.required),
-    fecha: new FormControl({value: this.fecha, disabled: this.disabled}, Validators.required),
+    fecha: new FormControl({value: this.fecha}, Validators.required),
     fechaCompra: new FormControl(''),
     ticket: new FormControl(''),
     monto: new FormControl(''),

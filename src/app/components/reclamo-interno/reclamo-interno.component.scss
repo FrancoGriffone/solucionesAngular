@@ -6,6 +6,9 @@
     .formComponent {
       display: flex;
       justify-content: space-around;
+      .fecha:disabled {
+        color: black;
+      }
       mat-form-field {
         width: 100%;
       }

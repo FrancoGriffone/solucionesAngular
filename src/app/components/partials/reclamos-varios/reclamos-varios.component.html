@@ -1,19 +1,24 @@
 <div class="container card card-body containerForm">
-  <h2 class="spacingComponents">{{datos.ayN}} - {{datos.docNro}}</h2> 
+  <h2 class="spacingComponents">{{datos.ayN}} - {{datos.docNro}} || Reclamo: {{datosReclamo.reclamo}} </h2>
+  <ng-template [ngIf]="profileForm.get('cerrado')?.value == 'Sí'">
+    <h3 style="color: green;">Cerrado</h3> 
+  </ng-template>
+  <ng-template [ngIf]="profileForm.get('cerrado')?.value == 'No'">
+    <h3 style="color: red;">Pendiente</h3> 
+  </ng-template>
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-
         <!--FECHA Y TIPO DE SOLUCION ++ ALERT DIV -->
       <div class="formComponent">
         <mat-form-field appearance="fill" class="spacingComponents">
             <mat-label>Fecha (año/mes/dia)</mat-label>
-            <input matInput formControlName="fecha" class="fecha"/>
+            <input matInput formControlName="fecha" class="fecha" readonly="disabled"/>
           </mat-form-field>
         <!-- TIPO DE SOLUCION -->
         <mat-form-field appearance="fill" class="spacingComponents">
           <mat-label disabled>Tipo de solución</mat-label>
           <mat-select formControlName="estado">
-            <mat-option value="pendiente">Pendiente</mat-option>
-            <mat-option value="resuelto">Resuelto</mat-option>
+            <mat-option value="Pendiente de Respuesta">Pendiente</mat-option>
+            <mat-option value="Solucionado">Resuelto</mat-option>
           </mat-select>
         </mat-form-field>
         </div>
@@ -43,6 +48,16 @@
         <mat-form-field appearance="fill">
           <mat-label>Observaciones</mat-label>
           <textarea matInput formControlName="observaciones"></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- ES SOLO PARA LA VISTA. LA IDEA ES QUE DEJE DE ESTAR DUPLICADO DADO QUE OBSERVACION
+      Y SOLUCION CUMPLEN EL MISMO ROL PERO HAY MUCHOS RECLAMOS VIEJOS QUE TIENEN DATA AHI -->
+      <!-- SOLUCION -->
+      <div class="formComponent">
+        <mat-form-field appearance="fill">
+          <mat-label>Solución (solo para lectura)</mat-label>
+          <input matInput formControlName="solucion" readonly="disabled">
         </mat-form-field>
       </div>
 

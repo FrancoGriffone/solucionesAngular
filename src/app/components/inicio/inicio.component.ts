@@ -35,14 +35,19 @@ export class InicioComponent implements OnInit {
       })
     } else {
       this.api.listarReclamoInd(dataUser).subscribe((data)=>{
-        //SI EL LARGO DEL OBJETO ES IGUAL A 1 VA A LEGAJO PORQUE EXISTE UN CLIENTE, SINO VA A CARGAR EL NUEVO CLIENTE
+        this.datos = data
+        //SI EL LARGO DEL OBJETO ES IGUAL A 1 VA A LEGAJO PORQUE EXISTE UN RECLAMO, SINO SALE UN ALERT AVISANDO QUE NO EXISTE
         if (Object.keys(data).length == 1){
-                this.datos = data
-                //this.datos[0].docNro SIRVE PARA SOLO VER EL DNI
-                this.router.navigate(["cliente/" + this.datos[0].docNro + "/reclamo/" + dataUser])
-              } else {
-                alert("El reclamo que está intentando ingresar no existe, por favor verifique los datos colocados")
-              }
+          if (this.datos[0].docNro == null) {
+            this.router.navigate(["reclamointerno/" + dataUser])
+          } else if (this.datos[0].tipoRec == 'Atención al Cliente') {
+            this.router.navigate(["cliente/" + this.datos[0].docNro + "/ReclamoVarios/" + dataUser])
+          } else {
+            this.router.navigate(["cliente/" + this.datos[0].docNro + "/reclamo/" + dataUser])
+          }
+        } else {
+          alert("El reclamo que está intentando ingresar no existe, por favor verifique los datos colocados")
+          }
         })
     }
   }
