@@ -18,8 +18,8 @@ export class ReclamoClienteComponent implements OnInit {
   fechaComprado: string = "" //PARA FECHA DE COMPRA DEL PRODUCTO
   fechaPrometido: string = "" //PARA FECHA DE PROMETIDO DIA
 
+  //LOS DOS SON PARA LA FECHA FIJA EN EL FORMCONTROL
   fecha = new Date().toISOString().substring(0,10)
-
   disabled: boolean = true;
 
   ngOnInit(): void {
