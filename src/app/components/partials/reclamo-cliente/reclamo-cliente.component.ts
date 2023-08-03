@@ -37,6 +37,9 @@ export class ReclamoClienteComponent implements OnInit {
 
     //VERIFICA DATOS DEL RECLAMO
     let numReclamo: string = this.route.snapshot.paramMap.get('id') || ''
+    //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA UN RECLAMO RANDOM (SIMPRE SALE EL 81026, NO SE PORQUE)
+    if (numReclamo != ''){
+      
     this.api.listarReclamoInd(numReclamo).subscribe((data) => { 
       this.datosReclamo = data
       this.datosReclamo = this.datosReclamo[0] //TOMAMOS EL ARRAY QUE TRAE Y LO VOLCAMOS
@@ -69,9 +72,11 @@ export class ReclamoClienteComponent implements OnInit {
         pagado: this.pagadoTaller,
         ncred: this.datosReclamo.ncred,
         cerrado: this.datosReclamo.cerrado,
-        descripcion: this.datosReclamo.prodDescripcion
+        descripcion: this.datosReclamo.prodDescripcion,
+        reclamo: this.datosReclamo.reclamo
       })
     })
+    }
   }
 
   //FORMULARIO PARA RECLAMO INTERNO
@@ -91,7 +96,8 @@ export class ReclamoClienteComponent implements OnInit {
     pagado: new FormControl(''),
     ncred: new FormControl(''),
     cerrado: new FormControl(''),
-    prodDescripcion: new FormControl('')
+    prodDescripcion: new FormControl(''),
+    reclamo: new FormControl('')
   });
 
   //BOTON PARA GRABAR RECLAMO

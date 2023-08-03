@@ -14,7 +14,7 @@ export class ReclamoInternoComponent implements OnInit {
 
   pagadoTaller: number = 0 //PARA EL TILDE DE TALLER, DADO QUE LLEGA COMO STRING "Sí" O "No"
 
-  fechaReclamo: string = "" //PARA VOLCAR FECHA DE RECLAMO
+  fechaReclamo: string = "" //PARA FECHA DE RECLAMO
 
    //LOS DOS SON PARA LA FECHA FIJA EN EL FORMCONTROL
    fecha = new Date().toISOString().substring(0,10)
@@ -25,6 +25,9 @@ export class ReclamoInternoComponent implements OnInit {
   ngOnInit(): void {
      //VERIFICA DATOS DEL RECLAMO
      let numReclamo: string = this.route.snapshot.paramMap.get('id') || ''
+     //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA UN RECLAMO RANDOM (SIMPRE SALE EL 81026, NO SE PORQUE)
+     if (numReclamo != ''){
+  
      this.api.listarReclamoInd(numReclamo).subscribe((data) => { 
        this.datosReclamo = data
        this.datosReclamo = this.datosReclamo[0] //TOMAMOS EL ARRAY QUE TRAE Y LO VOLCAMOS
@@ -50,9 +53,11 @@ export class ReclamoInternoComponent implements OnInit {
          importe: this.datosReclamo.costo,
          pagado: this.pagadoTaller,
          cerrado: this.datosReclamo.cerrado,
-         descripcion: this.datosReclamo.prodDescripcion
+         descripcion: this.datosReclamo.prodDescripcion,
+         reclamo: this.datosReclamo.reclamo
        })
      })
+    }
   }
 
   //FORMULARIO PARA RECLAMO INTERNO
@@ -67,11 +72,13 @@ export class ReclamoInternoComponent implements OnInit {
     importe: new FormControl(''),
     pagado: new FormControl(''),
     cerrado: new FormControl(''),
+    reclamo: new FormControl('')
   });
 
-  //BOTON PARA GRABAR RECLAMO
+  //BOTON PARA GRABAR
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.log(this.profileForm.value);
   }
 }
+
+

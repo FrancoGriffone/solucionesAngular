@@ -1,6 +1,18 @@
 <div class="container card card-body containerForm">
   <!-- DATOS DEL CLIENTE Y DEL RECLAMO -->
-  <h2 class="spacingComponents">{{datos.ayN}} - {{datos.docNro}} || Reclamo: {{datosReclamo.reclamo}} </h2>
+  <div class="dataCliente">
+    <ng-template [ngIf]="datos.ayN.value != ''">
+      <h2 class="spacingComponents">{{datos.ayN}} - {{datos.docNro}} </h2>
+    </ng-template>
+    <div class="dataReclamo">
+      <ng-template [ngIf]="profileForm.get('reclamo')?.value != ''">
+        <h2 class="spacingComponents">Reclamo: {{datosReclamo.reclamo}} </h2>
+      </ng-template>
+      <ng-template [ngIf]="profileForm.get('reclamo')?.value == ''">
+        <h2 class="spacingComponents">Nuevo reclamo</h2>
+      </ng-template>
+    </div>
+  </div>
   <!-- RECLAMO CERRADO O ABIERTO -->
   <ng-template [ngIf]="profileForm.get('cerrado')?.value == 'Sí'">
     <h3 style="color: green;">Cerrado</h3> 

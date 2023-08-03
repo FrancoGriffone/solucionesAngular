@@ -1,6 +1,18 @@
 <div class="container card card-body containerForm">
   <!-- DATOS DEL CLIENTE Y DEL RECLAMO -->
-  <h2 class="spacingComponents">{{datos.ayN}} - {{datos.docNro}} || Reclamo: {{datosReclamo.reclamo}} </h2>
+  <div class="dataCliente">
+    <ng-template [ngIf]="datos.ayN.value != ''">
+      <h2 class="spacingComponents">{{datos.ayN}} - {{datos.docNro}} </h2>
+    </ng-template>
+    <div class="dataReclamo">
+      <ng-template [ngIf]="profileForm.get('reclamo')?.value != ''">
+        <h2 class="spacingComponents">Reclamo: {{datosReclamo.reclamo}}</h2>
+      </ng-template>
+      <ng-template [ngIf]="profileForm.get('reclamo')?.value == ''">
+        <h2 class="spacingComponents">Nuevo reclamo</h2>
+      </ng-template>
+    </div>
+  </div>
   <!-- RECLAMO CERRADO O ABIERTO -->
   <ng-template [ngIf]="profileForm.get('cerrado')?.value == 'Sí'">
     <h3 style="color: green;">Cerrado</h3> 
@@ -23,9 +35,11 @@
       </mat-form-field>
     </div>
     <!-- DESCRIPCION DE CÓDIGO -->
-    <div>
+    <ng-template [ngIf]="profileForm.get('reclamo')?.value != ''">
+      <!-- ESTA PUESTO COMO CONDICIONAL QUE EXISTA EL RECLAMO, PERO LO IDEAL SERIA VINCULARLO A UNA API
+      DE PRODUCTOS PARA QUE CUANDO REGISTRE QUE EL PRODUCTO EXISTE SALGA LA DESCRIPCION -->
       <h4 style="color: grey;">Descripción: {{datosReclamo.prodDescripcion}}</h4>
-    </div>
+    </ng-template>
     <!-- ALERT DIV CODIGO DE BARRAS -->
     <div
       class="alert alert-danger"
