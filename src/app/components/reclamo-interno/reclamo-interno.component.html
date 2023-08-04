@@ -42,13 +42,11 @@
       </mat-form-field>
     </div>
     <!-- DESCRIPCION DE CÓDIGO -->
-    <div>
-      <ng-template [ngIf]="profileForm.get('reclamos')?.value != ''">
+      <ng-template [ngIf]="profileForm.get('reclamo')?.value != ''">
         <!-- ESTA PUESTO COMO CONDICIONAL QUE EXISTA EL RECLAMO, PERO LO IDEAL SERIA VINCULARLO A UNA API
         DE PRODUCTOS PARA QUE CUANDO REGISTRE QUE EL PRODUCTO EXISTE SALGA LA DESCRIPCION -->
         <h4 style="color: grey;">Descripción: {{datosReclamo.prodDescripcion}}</h4>
       </ng-template>
-    </div>
     <!-- ALERT DIV CODIGO DE BARRAS -->
     <div
       class="alert alert-danger"

@@ -1,6 +1,8 @@
 <div class="container card card-body containerForm">
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <h2>{{datos.ayN}} - {{datos.docNro}}</h2>
+    <ng-template [ngIf]="datos?.ayN.value != ''">
+      <h2 class="spacingComponents">{{datos?.ayN}} - {{datos?.docNro}}</h2>
+    </ng-template>
     <!-- NOMBRE COMPLETO ++ ALERT DIV -->
     <div class="formComponent">
       <!-- NOMBRE Y APELLIDO -->

@@ -58,7 +58,7 @@ export class ReclamosVariosComponent implements OnInit {
 
   //FORMULARIO PARA RECLAMOS VARIOS
   profileForm = new FormGroup({
-    fecha: new FormControl({value: this.fecha}, Validators.required),
+    fecha: new FormControl(this.fecha, Validators.required),
     motivo: new FormControl('', Validators.required),
     estado: new FormControl('', Validators.required),
     observaciones: new FormControl(''),

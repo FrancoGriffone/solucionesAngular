@@ -82,7 +82,7 @@ export class ReclamoClienteComponent implements OnInit {
   //FORMULARIO PARA RECLAMO INTERNO
   profileForm = new FormGroup({
     codigoBarras: new FormControl('', Validators.required),
-    fecha: new FormControl({value: this.fecha}, Validators.required),
+    fecha: new FormControl(this.fecha, Validators.required),
     fechaCompra: new FormControl(''),
     ticket: new FormControl(''),
     monto: new FormControl(''),
@@ -96,7 +96,6 @@ export class ReclamoClienteComponent implements OnInit {
     pagado: new FormControl(''),
     ncred: new FormControl(''),
     cerrado: new FormControl(''),
-    prodDescripcion: new FormControl(''),
     reclamo: new FormControl('')
   });
 

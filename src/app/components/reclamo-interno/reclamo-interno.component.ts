@@ -64,7 +64,7 @@ export class ReclamoInternoComponent implements OnInit {
   profileForm = new FormGroup({
     codigoBarras: new FormControl('', Validators.required),
     seccion: new FormControl(''),
-    fecha: new FormControl({value: this.fecha}, Validators.required),
+    fecha: new FormControl(this.fecha, Validators.required),
     estado: new FormControl('', Validators.required),
     motivo: new FormControl('', Validators.required),
     observaciones: new FormControl(''),
@@ -72,7 +72,7 @@ export class ReclamoInternoComponent implements OnInit {
     importe: new FormControl(''),
     pagado: new FormControl(''),
     cerrado: new FormControl(''),
-    reclamo: new FormControl('')
+    reclamo: new FormControl(''),
   });
 
   //BOTON PARA GRABAR
