@@ -3,23 +3,24 @@
         <div class="spacingComponents">
             <mat-form-field appearance="fill" class="spacingComponents">
                 <mat-label>Fecha inicial de búsqueda</mat-label>
-                <input type=date matInput formControlName="inicio"/>
+                <input type=date matInput formControlName="desde"/>
               </mat-form-field>
         </div>
         
         <div class="spacingComponents">
             <mat-form-field appearance="fill" class="spacingComponents">
                 <mat-label>Fecha final de búsqueda</mat-label>
-                <input type=date matInput formControlName="final"/>
+                <input type=date matInput formControlName="hasta"/>
               </mat-form-field>
         </div>
     </form>
     <div class="formComponent">
         <button class="btn btn-primary" type="submit" (click)="onSubmit()" [disabled]="profileForm.invalid">Iniciar Búsqueda</button>
     </div>
+    <!-- RECLAMOS BUSCADOS POR FECHA -->
     <ag-grid-angular
       class="ag-theme-balham mt-3"
-      style="width: 100%; height: 70%"
+      style="width: 100%; height: 500px"
       [rowData]="rowData"
       [columnDefs]="colDefs"
       ></ag-grid-angular> 

@@ -13,3 +13,11 @@
         }
     }
 }
+
+// CONFIGURACION STYLE DE AG GRID
+.ag-theme-balham {
+  --ag-header-column-separator-display: block;
+  --ag-header-column-separator-height: 100%;
+  --ag-header-column-separator-width: 2px;
+  --ag-header-column-separator-color: rgba(0, 0, 0, 0.692);
+}

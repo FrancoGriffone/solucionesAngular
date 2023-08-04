@@ -36,7 +36,8 @@ export class ApiService {
     return this.http.get<listaReclamosClienteInterface>(url)
   }
 
-  // listarReclamos(desde: string, hasta: string): Observable<any> {
-  //   return this.http.post(this.POST_LISTA_RECLAMOS, desde + hasta)
-  // }
+  listarReclamos(fecha: Object): Observable<listaReclamosInterface> {
+    const url = this.POST_LISTA_RECLAMOS;
+    return this.http.post<listaReclamosInterface>(url, fecha)
+  }
 }

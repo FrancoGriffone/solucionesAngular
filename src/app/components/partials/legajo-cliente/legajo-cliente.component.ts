@@ -16,12 +16,14 @@ export class LegajoClienteComponent implements OnInit {
 
   //AG GRID
   colDefs: ColDef[] = [
-    {field: 'reclamo', headerName: 'Reclamo', width: 75, resizable: true},
-    {field: 'prodCodBar', headerName: 'Código de barras', width: 110, resizable: true},
-    {field: 'prodDescripcion', headerName: 'Descripción', width: 200, resizable: true},
-    {field: 'motivo', headerName: 'Motivo', width: 300, resizable: true},
-    {field: 'estado', headerName: 'Estado', width: 100, resizable: true},
-    {field: 'solucion', headerName: 'Observaciones', width: 300, resizable: true},
+    {field: 'reclamo', headerName: 'Reclamo', width: 75, resizable: true, sortable: true, filter: true},
+    {field: 'fecha', headerName: 'Fecha', width: 100, resizable: true, sortable: true, filter: true, valueFormatter: params => params.data.fecha.slice(0,-9)},
+    //valueFormatter + fecha.slice SIRVE PARA ACORTAR EL STRING QUE LLEGA COMO FECHA
+    {field: 'prodCodBar', headerName: 'Código de barras', width: 110, resizable: true, sortable: true, filter: true},
+    {field: 'prodDescripcion', headerName: 'Descripción', width: 200, resizable: true, sortable: true, filter: true},
+    {field: 'motivo', headerName: 'Motivo', width: 300, resizable: true, sortable: true, filter: true},
+    {field: 'estado', headerName: 'Estado', width: 100, resizable: true, sortable: true, filter: true},
+    {field: 'solucion', headerName: 'Observaciones', width: 300, resizable: true, sortable: true, filter: true},
   ];
   rowData: any = []; //FILAS AG GRID
   
