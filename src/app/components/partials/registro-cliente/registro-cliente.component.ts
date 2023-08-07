@@ -10,6 +10,8 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class RegistroClienteComponent implements OnInit {
 
+  constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) {}
+
   datos: any //PARA VOLCAR LOS DATOS DEL CLIENTE
 
   //FORMULARIO PARA CARGAR EL CLIENTE
@@ -24,8 +26,6 @@ export class RegistroClienteComponent implements OnInit {
     observaciones: new FormControl(''),
   });
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) {}
-
   ngOnInit(): void {
     //TOMAMOS EL DNI PARA CARGAR LA DATA DEL CLIENTE SI FIGURA EN EL SISTEMA
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
@@ -35,14 +35,14 @@ export class RegistroClienteComponent implements OnInit {
 
       //SI EXISTE EL CLIENTE, LO CARGAMOS EN EL FORMULARIO
       this.profileForm.patchValue({
-        nombre:this.datos.nombres,
-        apellido: this.datos.apellidos,
-        domicilio: this.datos.direccion,
-        pisoDpto: this.datos.pisoDpto,
-        localidad: this.datos.localidad,
-        codigoPostal: this.datos.codigoPostal,
-        telefono: this.datos.telefonos,
-        observaciones: this.datos.observaciones
+        nombre:this.datos?.nombres,
+        apellido: this.datos?.apellidos,
+        domicilio: this.datos?.direccion,
+        pisoDpto: this.datos?.pisoDpto,
+        localidad: this.datos?.localidad,
+        codigoPostal: this.datos?.codigoPostal,
+        telefono: this.datos?.telefonos,
+        observaciones: this.datos?.observaciones
       })
     });
   }

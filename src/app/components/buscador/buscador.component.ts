@@ -48,8 +48,8 @@ export class BuscadorComponent implements OnInit {
     } else {
       this.api.listarReclamoInd(dataUser).subscribe((data)=>{
         this.datos = data
-        this.local = this.datos[0].empresa //PARA TOMAR LA EMPRESA
-        this.local = this.local.split(" ").join("") //PARA QUITAR LOS ESPACIOS EN BLANCO AL STRING DE LA EMPRESA
+        this.local = this.datos[0]?.empresa //PARA TOMAR LA EMPRESA
+        this.local = this.local?.split(" ").join("") //PARA QUITAR LOS ESPACIOS EN BLANCO AL STRING DE LA EMPRESA
         //SI EL LARGO DEL OBJETO ES IGUAL A 1 VA A LEGAJO PORQUE EXISTE UN RECLAMO, SINO SALE UN ALERT AVISANDO QUE NO EXISTE
         if (Object.keys(data).length == 1){
           //SI NO TIENE DNI, SIGNIFICA QUE EL RECLAMO ES INTERNO

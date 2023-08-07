@@ -11,7 +11,7 @@
               </mat-select>
             </mat-form-field>
 
-            <!-- CONDICIONALES DE TALLER, BOLETA DE CARGO Y HORMA -->
+            <!-- CONDICIONALES SEGUN EL LOCAL-->
             <ng-template [ngIf]="profileForm.get('eleccion')?.value == 'DNI'">
               <mat-form-field appearance="fill">
                 <mat-label disabled>Local donde se va a cargar el reclamo</mat-label>
