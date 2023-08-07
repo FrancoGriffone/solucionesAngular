@@ -1,15 +1,9 @@
 <div class="container card card-body containerDiv">
   <form class="container bCargo" (ngSubmit)="onSubmit()">
     <!-- DATEPICKER PARA SELECIONAR FECHA DE BOLETAS DE CARGO -->
-    <mat-form-field class="example-full-width" appearance="fill">
-      <div class="datepicker">
-        <input matInput [matDatepicker]="picker" [formControl]="date" />
-        <mat-datepicker-toggle matIconSuffix [for]="picker">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-        </mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </div>
-      <mat-hint>Elije una fecha</mat-hint>
+    <mat-form-field appearance="fill" class="spacingComponents">
+      <mat-label>Fecha inicial de búsqueda</mat-label>
+      <input type=date matInput [formControl]="date"/>
     </mat-form-field>
     <button type="submit" class="btn btn-primary buscarBC">Buscar</button>
   </form>
