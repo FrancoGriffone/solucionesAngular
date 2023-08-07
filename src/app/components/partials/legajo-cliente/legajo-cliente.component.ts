@@ -29,6 +29,7 @@ export class LegajoClienteComponent implements OnInit {
 
   //AG GRID
   colDefs: ColDef[] = [
+    {field: 'empresa', headerName: 'Empresa', width: 75, resizable: true, sortable: true, filter: true,},
     {field: 'reclamo', headerName: 'Reclamos', width: 75, resizable: true, sortable: true, filter: true,},
     {field: 'fecha', headerName: 'Fecha', width: 100, resizable: true, sortable: true, filter: true, valueFormatter: params => params.data.fecha.slice(0,-9)},
     //valueFormatter + fecha.slice SIRVE PARA ACORTAR EL STRING QUE LLEGA COMO FECHA
