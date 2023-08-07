@@ -14,9 +14,22 @@ export class LegajoClienteComponent implements OnInit {
 
   datos: any //PARA VOLCAR LOS DATOS DEL CLIENTE
 
+  //FUNCION PARA DETECTAR DE QUE TIPO ES UN RECLAMO
+  tipoReclamo(dataUser: any){
+    if (this.datos[0].docNro == null) {
+      this.router.navigate(["reclamointerno/" + dataUser])
+    } //SI TIENE DNI, PERO EL TIPO DE RECLAMO ES ATENCION AL CLIENTE EL RECLAMO ES RECLAMO VARIOS
+      else if (this.datos[0].tipoRec == 'Atención al Cliente') {
+      this.router.navigate(["cliente/" + this.datos[0].docNro + "/ReclamoVarios/" + dataUser])
+    } //SI ES UN RECLAMO DE MERCADERIA DE CLIENTE
+      else {
+      this.router.navigate(["cliente/" + this.datos[0].docNro + "/reclamo/" + dataUser])
+    }
+  }
+
   //AG GRID
   colDefs: ColDef[] = [
-    {field: 'reclamo', headerName: 'Reclamo', width: 75, resizable: true, sortable: true, filter: true},
+    {field: 'reclamo', headerName: 'Reclamos', width: 75, resizable: true, sortable: true, filter: true,},
     {field: 'fecha', headerName: 'Fecha', width: 100, resizable: true, sortable: true, filter: true, valueFormatter: params => params.data.fecha.slice(0,-9)},
     //valueFormatter + fecha.slice SIRVE PARA ACORTAR EL STRING QUE LLEGA COMO FECHA
     {field: 'prodCodBar', headerName: 'Código de barras', width: 110, resizable: true, sortable: true, filter: true},

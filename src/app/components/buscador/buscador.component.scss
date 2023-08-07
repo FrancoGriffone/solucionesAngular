@@ -1,0 +1,40 @@
+// PANTALLAS GRANDES
+@media screen and (min-width: 700px) {
+    .divForm {
+      display: flex;
+      justify-content: center;
+      width: 70%;
+    }
+    .inicioForm {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      button {
+        width: 100px;
+        height: 50px;
+      }
+      mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+  
+  // PANTALLAS PEQUEÑAS
+  @media screen and (max-width: 700px) {
+    .divForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+      }
+      .inicioForm {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        button {
+          width: 100px;
+          height: 50px;
+        }
+      }
+  }
+  

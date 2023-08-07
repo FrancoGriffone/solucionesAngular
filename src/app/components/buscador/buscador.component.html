@@ -1,0 +1,26 @@
+<div class="container card card-body divForm">
+    <div class="buscador">
+        <form class="inicioForm" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  
+            <!-- SELECTOR DE OPCIONES PARA BUSCAR ENTRE DNI Y RECLAMOS -->
+            <mat-form-field appearance="fill">
+              <mat-label disabled>DNI/RECLAMO</mat-label>
+              <mat-select formControlName="eleccion">
+                <mat-option value="DNI">DNI</mat-option>
+                <mat-option value="Reclamo">Reclamo</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="spacingComponents">
+                <mat-label>N° de Reclamo o DNI</mat-label>
+                <input matInput formControlName="datos" />
+            </mat-form-field>
+              <button
+              type="submit"
+              class="btn btn-primary spacingComponents"
+              [disabled]="profileForm.invalid"
+            >
+              Buscar
+            </button>
+        </form>
+    </div>
+  </div>

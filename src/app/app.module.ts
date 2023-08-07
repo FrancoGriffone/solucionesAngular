@@ -28,6 +28,7 @@ import { MatTableModule } from '@angular/material/table'
 import { AgGridModule } from 'ag-grid-angular';
 import { ReclamosVariosComponent } from './components/partials/reclamos-varios/reclamos-varios.component';
 import { SelecTipoReclamoComponent } from './components/partials/selec-tipo-reclamo/selec-tipo-reclamo.component';
+import { BuscadorComponent } from './components/buscador/buscador.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { SelecTipoReclamoComponent } from './components/partials/selec-tipo-recl
     LegajoClienteComponent,
     ReclamosVariosComponent,
     SelecTipoReclamoComponent,
+    BuscadorComponent,
   ],
   imports: [
     BrowserModule,
