@@ -22,7 +22,7 @@
     <ul class="options">
       <li>
         <div class="iconDiv">
-          <a routerLink="home" routerLinkActive="active">
+          <a routerLinkActive="active" (click)="home()">
             <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
             <p>Inicio</p>
           </a>
@@ -30,7 +30,7 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLink="listareclamos" routerLinkActive="active">
+          <a routerLinkActive="active" (click)="listaReclamos()">
             <img
               src="../../../assets/listadereclamos.png"
               alt="lista de reclamos"
@@ -45,7 +45,7 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLink="reclamointerno" routerLinkActive="active">
+          <a routerLinkActive="active" (click)="reclamoInterno()">
             <img
               src="../../../assets/reclamosinternos.png"
               alt="reclamos internos"
@@ -60,7 +60,7 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLink="reclamosareparacion" routerLinkActive="active">
+          <a routerLinkActive="active" (click)="reclamosAReparacion()">
             <img
               src="../../../assets/reclamosareparacion.png"
               alt="reclamos a reparacion"
@@ -75,7 +75,7 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLink="reclamosenreparacion" routerLinkActive="active">
+          <a routerLinkActive="active" (click)="reclamosEnReparacion()">
             <img
               src="../../../assets/reclamosenreparacion.png"
               alt="reclamos en reparacion"
@@ -90,7 +90,7 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLink="bcargo" routerLinkActive="active">
+          <a routerLinkActive="active" (click)="bCargo()">
             <img
               src="../../../assets/bcargo.png"
               alt="boletas de cargo"
@@ -121,12 +121,12 @@
   <div class="colorDiv">
     <ul class="options">
       <li>
-        <a routerLink="home" routerLinkActive="activeResponsive">
+        <a routerLinkActive="activeResponsive" (click)="home()">
           <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
         </a>
       </li>
       <li>
-        <a routerLink="listareclamos" routerLinkActive="activeResponsive">
+        <a routerLinkActive="activeResponsive" (click)="listaReclamos()">
           <img
             src="../../../assets/listadereclamos.png"
             alt="lista de reclamos"
@@ -135,7 +135,7 @@
         </a>
       </li>
       <li>
-        <a routerLink="reclamointerno" routerLinkActive="activeResponsive">
+        <a routerLinkActive="activeResponsive" (click)="reclamoInterno()">
           <img
             src="../../../assets/reclamosinternos.png"
             alt="reclamos internos"
@@ -144,7 +144,7 @@
         </a>
       </li>
       <li>
-        <a routerLink="reclamosareparacion" routerLinkActive="activeResponsive">
+        <a routerLinkActive="activeResponsive" (click)="reclamosAReparacion()">
           <img
             src="../../../assets/reclamosareparacion.png"
             alt="reclamos a reparacion"
@@ -154,8 +154,8 @@
       </li>
       <li>
         <a
-          routerLink="reclamosenreparacion"
           routerLinkActive="activeResponsive"
+          (click)="reclamosEnReparacion()"
         >
           <img
             src="../../../assets/reclamosenreparacion.png"
@@ -165,7 +165,7 @@
         </a>
       </li>
       <li>
-        <a routerLink="bcargo" routerLinkActive="activeResponsive">
+        <a routerLinkActive="activeResponsive" (click)="bCargo()">
           <img
             src="../../../assets/bcargo.png"
             alt="boletas de cargo"
@@ -181,27 +181,27 @@
 <div class="containerDiv">
   <mat-card class="lateralBar">
     <mat-card-content class="divImg">
-      <a routerLink="home/Tate" (click)="cambioTate()">
+      <a routerLink="Tate/home" (click)="cambioTate()">
         <img src="../../../assets/tate.png" alt="tate-logo" width="40px" class="logoLocal"/>
       </a>
     </mat-card-content>
     <mat-card-content class="divImg">
-      <a routerLink="home/TateExpress" (click)="cambioExpress()">
+      <a routerLink="TateExpress/home" (click)="cambioExpress()">
         <img src="../../../assets/Express.png" alt="tateExpress-logo" width="40px" class="logoLocal"/>
       </a>
     </mat-card-content>
     <mat-card-content class="divImg">
-      <a routerLink="home/Kilroy" (click)="cambioKilroy()">
+      <a routerLink="Kilroy/home" (click)="cambioKilroy()">
         <img src="../../../assets/kilroy.png" alt="kilroy-logo" width="40px" class="logoLocal"/>
       </a>
     </mat-card-content>
     <mat-card-content class="divImg">
-      <a routerLink="home/KitExpress" (click)="cambioKit()">
+      <a routerLink="KitExpress/home" (click)="cambioKit()">
         <img src="../../../assets/kit.png" alt="kitExpress-logo" width="40px" class="logoLocal"/>
       </a>
     </mat-card-content>
     <mat-card-content class="divImg">
-      <a routerLink="home/KilroyKids" (click)="cambioKids()">
+      <a routerLink="KilroyKids/home" (click)="cambioKids()">
         <img src="../../../assets/kids.png" alt="kilroyKids-logo" width="40px" class="logoLocal"/>
       </a>
     </mat-card-content>

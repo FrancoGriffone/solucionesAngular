@@ -49,7 +49,8 @@ export class RegistroClienteComponent implements OnInit {
 
   //CON LOS DATOS DEL DNI, SE VA A SELECCIONAR QUE TIPO DE RECLAMO VAMOS
   onSubmit() {
+    let local: string = this.route.snapshot.paramMap.get('local') || ''
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
-    this.router.navigate(["cliente/", usuarioDoc, "selectorReclamo"]);
+    this.router.navigate([local + "/cliente/", usuarioDoc, "selectorReclamo"]);
   }
 }

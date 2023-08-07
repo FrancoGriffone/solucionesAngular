@@ -57,7 +57,8 @@ export class LegajoClienteComponent implements OnInit {
 
   //TOMAR EL NUMERO DE DOCUMENTO Y VA A LOS DATOS DEL CLIENTE, ES UN PASO POR SI HAY QUE ACTUALIZARLOS
   onSubmit() {
+    let local: string = this.route.snapshot.paramMap.get('local') || ''
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
-    this.router.navigate(["cliente/", usuarioDoc]);
+    this.router.navigate([local + "/cliente/", usuarioDoc]);
   }
 }

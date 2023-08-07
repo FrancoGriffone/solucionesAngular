@@ -15,13 +15,15 @@ export class SelecTipoReclamoComponent implements OnInit {
 
   //RECLAMO DE MERCADERIA
   onSubmitMercaderia() {
+    let local: string = this.route.snapshot.paramMap.get('local') || ''
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
-    this.router.navigate(["cliente/", usuarioDoc, "nuevoReclamoMercaderia"]);
+    this.router.navigate([local + "/cliente/", usuarioDoc, "nuevoReclamoMercaderia"]);
   }
 
   //RECLAMO VARIOS
   onSubmitVarios() {
+    let local: string = this.route.snapshot.paramMap.get('local') || ''
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
-    this.router.navigate(["cliente/", usuarioDoc, "nuevoReclamoVarios"]);
+    this.router.navigate([local + "/cliente/", usuarioDoc, "nuevoReclamoVarios"]);
   }
 }

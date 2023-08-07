@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class BuscadorComponent implements OnInit {
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -28,17 +28,18 @@ export class BuscadorComponent implements OnInit {
   onSubmit(){
     let opcion = this.profileForm.value.eleccion
     let dataUser = this.profileForm.value.datos;
-    //SI EXISTE DNI, LLEVA A LAS OPCIONES DE CLIENTE, YA SEA LEGAJO SI EXISTE EL CLIENTE O EL NUEVO CLIENTE
+    let localExistente = this.route.snapshot.paramMap.get('local') || '' 
+    //SI LA OPCION ES DNI, LLEVA A LAS OPCIONES DE CLIENTE, YA SEA LEGAJO SI EXISTE EL CLIENTE O EL NUEVO CLIENTE
     if (opcion == 'DNI') {
       this.api.cargarCliente(dataUser).subscribe((data)=>{
         //SI EL LARGO DEL OBJETO ES IGUAL A 1 VA A LEGAJO PORQUE EXISTE UN CLIENTE, SINO VA A CARGAR EL NUEVO CLIENTE
         if (Object.keys(data).length == 1){
           this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['legajo/', dataUser], {skipLocationChange: true});
+            this.router.navigate([localExistente + '/legajo/', dataUser]);
           }); 
         } else {
             this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-            this.router.navigate(["cliente/", dataUser])
+            this.router.navigate([localExistente + '/cliente/', dataUser])
           });
         }
       })

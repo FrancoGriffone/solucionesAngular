@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ApiService } from 'src/app/service/api.service';
 
@@ -35,12 +35,12 @@ export class NabvarComponent implements OnInit {
     } else if (local == 'KitExpress') {
       this.cambioLocal = 'KitExpress'
     } else {
-      this.router.navigate(["home/Tate"])
+      this.router.navigate(["Tate/home"])
       this.cambioLocal = 'Tate'
     }
   }
 
-  //FUNCION PARA CAMBIO DE LOCAL
+  //FUNCIONES PARA CAMBIO DE LOCAL
   cambioTate(){
   this.cambioLocal = 'Tate'    
   }
@@ -55,5 +55,25 @@ export class NabvarComponent implements OnInit {
   }
   cambioKids(){
     this.cambioLocal = 'KilroyKids'
+  }
+
+  //FUNCIONES PARA CAMBIO DE COMPONENTE
+  home() {
+    this.router.navigate([this.cambioLocal + "/home"]);
+  }
+  listaReclamos() {
+    this.router.navigate([this.cambioLocal + "/listareclamos"]);
+  }
+  reclamoInterno() {
+    this.router.navigate([this.cambioLocal + "/reclamointerno"]);
+  }
+  reclamosAReparacion() {
+    this.router.navigate([this.cambioLocal + "/reclamosareparacion"]);
+  }
+  reclamosEnReparacion() {
+    this.router.navigate([this.cambioLocal + "/reclamosenreparacion"]);
+  }
+  bCargo() {
+    this.router.navigate([this.cambioLocal + "/bcargo"]);
   }
 }

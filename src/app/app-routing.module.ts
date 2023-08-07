@@ -14,27 +14,27 @@ import { ReclamosVariosComponent } from './components/partials/reclamos-varios/r
 const routes: Routes = [
   //LINK AL HOME
   {
-    path: 'home',
+    path: ':local/home',
     component: InicioComponent,
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: ':local/home',
     pathMatch: 'full',
   },
   //LINK AL HOME DEPENDE EL LOCAL
   {
-    path: 'home/:local',
+    path: ':local/home',
     component: InicioComponent,
   },
   //LINK A BOLETA DE CARGO
   {
-    path: 'bcargo',
+    path: ':local/bcargo',
     component: BCargoComponent,
   },
   //LINK A NUEVO RECLAMO INTERNO
   {
-    path: 'reclamointerno',
+    path: ':local/reclamointerno',
     component: ReclamoInternoComponent,
   },
   //LINK A RECLAMO INTERNO EXISTENTE
@@ -44,32 +44,32 @@ const routes: Routes = [
   },
   //LINK A LISTA DE RECLAMOS
   {
-    path: 'listareclamos',
+    path: ':local/listareclamos',
     component: ListaReclamosComponent,
   },
   //LINK A CLIENTES EXISTENTES EN EL SISTEMA
   {
-    path: 'cliente/:doc',
+    path: ':local/cliente/:doc',
     component: RegistroClienteComponent,
   },
   //LINK A LEGAJO DE CLIENTE, PUEDE SER PARA CARGAR UNO NUEVO O ACTUALIZAR DATOS
   {
-    path: 'legajo/:doc',
+    path: ':local/legajo/:doc',
     component: LegajoClienteComponent,
   },
   //LINK A SELECCION DE RECLAMO, PUEDE SER MERCADERIA O VARIOS
   {
-    path: 'cliente/:doc/selectorReclamo',
+    path: ':local/cliente/:doc/selectorReclamo',
     component: SelecTipoReclamoComponent,
   },
   //LINK A RECLAMO DE MERCADERIA CLIENTES
   {
-    path: 'cliente/:doc/nuevoReclamoMercaderia',
+    path: ':local/cliente/:doc/nuevoReclamoMercaderia',
     component: ReclamoClienteComponent,
   },
   //LINK A RECLAMO VARIOS CLIENTES
   {
-    path: 'cliente/:doc/nuevoReclamoVarios',
+    path: ':local/cliente/:doc/nuevoReclamoVarios',
     component: ReclamosVariosComponent,
   },
   //LINK A RECLAMO VARIOS CLIENTES EXISTENTE
