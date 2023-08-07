@@ -109,7 +109,14 @@
 
 <!-- PANTALLAS MAS PEQUEÑAS -->
 
-<div class="containerNavbar d-block d-md-none card">
+<div class="containerNavbar d-block d-md-none card"
+[ngClass]="{
+  'tate' : cambioLocal == 'tate',
+  'texpress' : cambioLocal == 'tateexpress',
+  'kilroy' : cambioLocal == 'kilroy',
+  'kids' : cambioLocal == 'kilroykids',
+  'kit' : cambioLocal == 'kitexpress'
+  }">
   <mat-card> </mat-card>
   <div class="colorDiv">
     <ul class="options">

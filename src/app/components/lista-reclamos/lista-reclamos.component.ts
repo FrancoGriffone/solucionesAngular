@@ -20,7 +20,8 @@ export class ListaReclamosComponent implements OnInit {
       {field: 'nombres', headerName: 'Nombres', width: 100, resizable: true, sortable: true, filter: true},
       {field: 'prodCodBar', headerName: 'Código de barras', width: 150, resizable: true, filter: true},
       {field: 'prodDescripcion', headerName: 'Descripción', width: 300, resizable: true, filter: true},
-      {field: 'tipo', headerName: 'Estado', width: 100, resizable: true, filter: true},
+      {field: 'tipo', headerName: 'Decisión', width: 100, resizable: true, filter: true},
+      {field: 'estado', headerName: 'Estado', width: 100, resizable: true, filter: true},
       {field: 'taller', headerName: 'Taller', width: 100, resizable: true, filter: true},
       {field: 'observaciones', headerName: 'Observaciones', width: 300, resizable: true, filter: true},
     ];
