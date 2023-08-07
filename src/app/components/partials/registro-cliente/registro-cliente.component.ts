@@ -14,6 +14,8 @@ export class RegistroClienteComponent implements OnInit {
 
   datos: any //PARA VOLCAR LOS DATOS DEL CLIENTE
 
+  nuevoDocNro: any //PARA EL DNI DE ALGUIEN NO REGISTRADO
+
   //FORMULARIO PARA CARGAR EL CLIENTE
   profileForm = new FormGroup({
     nombre: new FormControl('', Validators.required),
@@ -29,6 +31,7 @@ export class RegistroClienteComponent implements OnInit {
   ngOnInit(): void {
     //TOMAMOS EL DNI PARA CARGAR LA DATA DEL CLIENTE SI FIGURA EN EL SISTEMA
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
+    this.nuevoDocNro = usuarioDoc //PASAMOS EL DOCUMENTO PARA VISUALIZARLO SI NO EXISTE EN EL SISTEMA
     this.api.cargarCliente(usuarioDoc).subscribe((data) => {
       this.datos = data
       this.datos = this.datos[0]

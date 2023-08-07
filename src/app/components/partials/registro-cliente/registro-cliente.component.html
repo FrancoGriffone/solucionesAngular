@@ -1,10 +1,10 @@
 <div class="container card card-body containerForm">
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <ng-template [ngIf]="datos?.ayN.value != ''">
+    <ng-template [ngIf]="datos?.ayN.value != undefined">
       <h2 class="spacingComponents">{{datos?.ayN}} - {{datos?.docNro}}</h2>
     </ng-template>
-    <ng-template [ngIf]="profileForm.get('nombre')?.value == ''">
-      <h2 class="spacingComponents">Nuevo cliente</h2>
+    <ng-template [ngIf]="datos?.ayN.value == undefined">
+      <h2 class="spacingComponents">Nuevo cliente - {{nuevoDocNro}} </h2>
     </ng-template>
     <!-- NOMBRE COMPLETO ++ ALERT DIV -->
     <div class="formComponent">
@@ -71,7 +71,6 @@
     <div class="formComponent">
       <button
         type="submit"
-        (click)="onSubmit()"
         class="btn btn-primary"
         [disabled]="profileForm.invalid"
       >
