@@ -32,7 +32,7 @@ export class ReclamosVariosComponent implements OnInit {
 
     //VERIFICA DATOS DEL RECLAMO
     let numReclamo: string = this.route.snapshot.paramMap.get('id') || ''
-    //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA UN RECLAMO RANDOM (SIMPRE SALE EL 81026, NO SE PORQUE)
+    //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA EL ULTIMO RECLAMO EN LA LISTA
     if (numReclamo != ''){
 
     this.api.listarReclamoInd(numReclamo).subscribe((data) => { 

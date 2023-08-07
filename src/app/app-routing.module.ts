@@ -37,9 +37,9 @@ const routes: Routes = [
     path: 'reclamointerno',
     component: ReclamoInternoComponent,
   },
-  //LINK A RECLAMO INTERNO EXISTENTE (SE ENTRA DESDE EL INICIO)
+  //LINK A RECLAMO INTERNO EXISTENTE
   {
-    path: 'reclamointerno/:id',
+    path: ':local/reclamointerno/:id',
     component: ReclamoInternoComponent,
   },
   //LINK A LISTA DE RECLAMOS
@@ -72,14 +72,14 @@ const routes: Routes = [
     path: 'cliente/:doc/nuevoReclamoVarios',
     component: ReclamosVariosComponent,
   },
-  //LINK A RECLAMO VARIOS CLIENTES EXISTENTE (SE ENTRA DESDE INICIO)
+  //LINK A RECLAMO VARIOS CLIENTES EXISTENTE
   {
-    path: 'cliente/:doc/ReclamoVarios/:id',
+    path: ':local/cliente/:doc/ReclamoVarios/:id',
     component: ReclamosVariosComponent,
   },
-  //LINK A RECLAMO DE MERCADERIA CLIENTES (SE ENTRA DESDE INICIO)
+  //LINK A RECLAMO DE MERCADERIA CLIENTES
   {
-    path: 'cliente/:doc/reclamo/:id',
+    path: ':local/cliente/:doc/reclamo/:id',
     component: ReclamoClienteComponent,
   },
   //LINK CUANDO NO EXISTE LA URL COLOCADA

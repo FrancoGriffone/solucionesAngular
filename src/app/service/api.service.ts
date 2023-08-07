@@ -4,6 +4,7 @@ import { clienteInterface } from '../models/cliente.interface';
 import { listaReclamosClienteInterface } from '../models/listaReclamosCliente.interface';
 import { listaReclamosInterface } from '../models/listaReclamos.interface';
 import { Observable } from 'rxjs/internal/Observable';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,18 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  //SERVICE PARA CAMBIO DE LOCAL
+  private cambioLocal = new Subject<any>()
+
+  enviarCambio(cambio: string){
+    this.cambioLocal.next(cambio)
+  }
+
+  recibirCambio(): Observable<any>{
+    return this.cambioLocal.asObservable()
+  }
+
+  //SERVICE PARA LOS RECLAMOS Y CLIENTES
   cargarCliente(id: string) {
     const url = this.GET_CLIENTE + id;
     return this.http.get<clienteInterface>(url);

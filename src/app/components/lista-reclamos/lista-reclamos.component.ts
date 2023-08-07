@@ -63,7 +63,6 @@ export class ListaReclamosComponent implements OnInit {
   //BOTON PARA BUSCAR RECLAMOS ENTRE DOS FECHAS
   onSubmit(){
     this.api.listarReclamos(this.profileForm.value).subscribe(data =>{
-      console.log(data)
       this.rowData = data
     })
   }

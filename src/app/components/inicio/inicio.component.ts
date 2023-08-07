@@ -14,6 +14,8 @@ export class InicioComponent implements OnInit {
   constructor(private api: ApiService, private router: Router) {}
   ngOnInit(): void {}
 
+  local: string = "" //PARA DEFINIR EL LOCAL
+
   //FORMULARIO PARA SELECCIONAR ENTRE RECLAMO Y DNI + COLOCAR EL DATO
   profileForm = new FormGroup({
     eleccion: new FormControl('', Validators.required),
@@ -38,21 +40,26 @@ export class InicioComponent implements OnInit {
     } else {
       this.api.listarReclamoInd(dataUser).subscribe((data)=>{
         this.datos = data
+        this.local = this.datos[0].empresa //PARA TOMAR LA EMPRESA
+        this.local = this.local.split(" ").join("") //PARA QUITAR LOS ESPACIOS EN BLANCO AL STRING DE LA EMPRESA
         //SI EL LARGO DEL OBJETO ES IGUAL A 1 VA A LEGAJO PORQUE EXISTE UN RECLAMO, SINO SALE UN ALERT AVISANDO QUE NO EXISTE
         if (Object.keys(data).length == 1){
           //SI NO TIENE DNI, SIGNIFICA QUE EL RECLAMO ES INTERNO
           if (this.datos[0].docNro == null) {
-            this.router.navigate(["reclamointerno/" + dataUser])
+            this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
+            this.router.navigate([this.local + "/reclamointerno/" + dataUser])
           } //SI TIENE DNI, PERO EL TIPO DE RECLAMO ES ATENCION AL CLIENTE EL RECLAMO ES RECLAMO VARIOS
             else if (this.datos[0].tipoRec == 'Atención al Cliente') {
-            this.router.navigate(["cliente/" + this.datos[0].docNro + "/ReclamoVarios/" + dataUser])
+              this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
+              this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/ReclamoVarios/" + dataUser])
           } //SI ES UN RECLAMO DE MERCADERIA DE CLIENTE
             else {
-            this.router.navigate(["cliente/" + this.datos[0].docNro + "/reclamo/" + dataUser])
+              this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
+              this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/reclamo/" + dataUser])
           }
         } //SI NO SE ENCONTRO EL NUMERO DE RECLAMO, SALE EL ALERT. NO ME GUSTA PERO MOMENTANEAMENTE RESUELVE EL PROBLEMA
           else {
-          alert("El reclamo que está intentando ingresar no existe, por favor verifique los datos colocados")
+            alert("El reclamo que está intentando ingresar no existe, por favor verifique los datos colocados")
           }
         })
     }
