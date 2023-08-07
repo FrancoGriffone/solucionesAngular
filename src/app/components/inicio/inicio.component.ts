@@ -12,9 +12,12 @@ import { ApiService } from 'src/app/service/api.service';
 export class InicioComponent implements OnInit {
 
   constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) {}
+
   ngOnInit(): void {}
 
   local: string = "" //PARA DEFINIR EL LOCAL
+
+  datos: any //SE USA PARA BAJAR LOS DATOS DE LAS API
 
   //FORMULARIO PARA SELECCIONAR ENTRE RECLAMO Y DNI + COLOCAR EL DATO
   profileForm = new FormGroup({
@@ -22,12 +25,10 @@ export class InicioComponent implements OnInit {
     datos: new FormControl('', Validators.required),
   });
 
-  datos: any //SE USA PARA BAJAR LOS DATOS DE LAS API
-
   onSubmit(){
     let opcion = this.profileForm.value.eleccion
     let dataUser = this.profileForm.value.datos;
-    let localExistente = this.route.snapshot.paramMap.get('local') || '' 
+    let localExistente = this.route.snapshot.paramMap.get('local') || ''
     //SI EXISTE DNI, LLEVA A LAS OPCIONES DE CLIENTE, YA SEA LEGAJO SI EXISTE EL CLIENTE O EL NUEVO CLIENTE
     if (opcion == 'DNI') {
       this.api.cargarCliente(dataUser).subscribe((data)=>{

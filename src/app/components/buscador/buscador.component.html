@@ -10,6 +10,21 @@
                 <mat-option value="Reclamo">Reclamo</mat-option>
               </mat-select>
             </mat-form-field>
+
+            <!-- CONDICIONALES DE TALLER, BOLETA DE CARGO Y HORMA -->
+            <ng-template [ngIf]="profileForm.get('eleccion')?.value == 'DNI'">
+              <mat-form-field appearance="fill">
+                <mat-label disabled>Local donde se va a cargar el reclamo</mat-label>
+                  <mat-select formControlName="local">
+                  <mat-option value="Tate">Tate</mat-option>
+                  <mat-option value="TateExpress">Tate Express</mat-option>
+                  <mat-option value="Kilroy">Kilroy</mat-option>
+                  <mat-option value="KitExpress">Kit Express</mat-option>
+                  <mat-option value="KilroyKids">Kilroy Kids</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-template>
+
             <mat-form-field appearance="fill">
                 <mat-label>N° de Reclamo o DNI</mat-label>
                 <input matInput formControlName="datos" />
