@@ -1,3 +1,7 @@
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+  <mat-spinner></mat-spinner>
+</div>
+
 <div class="container card card-body containerForm">
   <!-- DATOS DEL CLIENTE Y DEL RECLAMO -->
   <div class="dataCliente">

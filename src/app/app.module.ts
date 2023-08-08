@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NabvarComponent } from './components/nabvar/nabvar.component';
 import { InicioComponent } from './components/inicio/inicio.component';
@@ -13,6 +13,9 @@ import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclam
 import { RegistroClienteComponent } from './components/partials/registro-cliente/registro-cliente.component';
 import { ReclamoClienteComponent } from './components/partials/reclamo-cliente/reclamo-cliente.component';
 import { LegajoClienteComponent } from './components/partials/legajo-cliente/legajo-cliente.component';
+import { ReclamosVariosComponent } from './components/partials/reclamos-varios/reclamos-varios.component';
+import { SelecTipoReclamoComponent } from './components/partials/selec-tipo-reclamo/selec-tipo-reclamo.component';
+import { BuscadorComponent } from './components/buscador/buscador.component';
 //Para el form es necesario importar esto
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Material UI
@@ -24,11 +27,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 //AG GRID
 import { AgGridModule } from 'ag-grid-angular';
-import { ReclamosVariosComponent } from './components/partials/reclamos-varios/reclamos-varios.component';
-import { SelecTipoReclamoComponent } from './components/partials/selec-tipo-reclamo/selec-tipo-reclamo.component';
-import { BuscadorComponent } from './components/buscador/buscador.component';
+import { InterceptorService } from './service/loader/interceptor.service';
+
 
 
 @NgModule({
@@ -62,9 +65,12 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
     MatCardModule,
     MatTableModule,
     HttpClientModule,
-    AgGridModule
+    AgGridModule,
+    MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
+import { LoaderService } from 'src/app/service/loader/loader.service';
 
 @Component({
   selector: 'app-reclamo-cliente',
@@ -9,7 +10,7 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./reclamo-cliente.component.scss'],
 })
 export class ReclamoClienteComponent implements OnInit {
-  constructor(private api: ApiService, private route: ActivatedRoute) {}
+  constructor(private api: ApiService, private route: ActivatedRoute, public loaderService: LoaderService) {}
 
   producto: any //PARA VOLCAR LA DESCRIPCION DEL PRODUCTO
 
@@ -42,7 +43,8 @@ export class ReclamoClienteComponent implements OnInit {
     //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA EL ULTIMO RECLAMO EN LA LISTA
     if (numReclamo != ''){
       
-    this.api.listarReclamoInd(numReclamo).subscribe((data) => { 
+    this.api.listarReclamoInd(numReclamo).subscribe((data) => {
+      setTimeout(()=>{ //ESTE TIMEOUT PERMITE CARGAR LOS DATOS SIN QUE LA PAGINA PAREZCA QUE SE TILDA MIENTRAS CARGA TODO  
       this.datosReclamo = data
       this.datosReclamo = this.datosReclamo[0] //TOMAMOS EL ARRAY QUE TRAE Y LO VOLCAMOS
       console.log(this.datosReclamo)
@@ -84,8 +86,9 @@ export class ReclamoClienteComponent implements OnInit {
         reclamo: this.datosReclamo?.reclamo
       })
     })
-    }
+    })
   }
+}
 
   //FORMULARIO PARA RECLAMO INTERNO
   profileForm = new FormGroup({

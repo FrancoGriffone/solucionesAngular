@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
+import { LoaderService } from 'src/app/service/loader/loader.service';
 
 @Component({
   selector: 'app-reclamo-interno',
@@ -22,7 +23,7 @@ export class ReclamoInternoComponent implements OnInit {
    fecha = new Date().toISOString().substring(0,10)
    disabled: boolean = true;
 
-  constructor(private api: ApiService, private route: ActivatedRoute) {}
+  constructor(private api: ApiService, private route: ActivatedRoute, public loaderService: LoaderService) {}
 
   ngOnInit(): void {
      //VERIFICA DATOS DEL RECLAMO
@@ -30,7 +31,8 @@ export class ReclamoInternoComponent implements OnInit {
      //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA EL ULTIMO RECLAMO EN LA LISTA
      if (numReclamo != ''){
   
-     this.api.listarReclamoInd(numReclamo).subscribe((data) => { 
+     this.api.listarReclamoInd(numReclamo).subscribe((data) => {
+       setTimeout(()=>{ //ESTE TIMEOUT PERMITE CARGAR LOS DATOS SIN QUE LA PAGINA PAREZCA QUE SE TILDA MIENTRAS CARGA TODO 
        this.datosReclamo = data
        this.datosReclamo = this.datosReclamo[0] //TOMAMOS EL ARRAY QUE TRAE Y LO VOLCAMOS
 
@@ -63,7 +65,8 @@ export class ReclamoInternoComponent implements OnInit {
          descripcion: this.datosReclamo.prodDescripcion,
          reclamo: this.datosReclamo.reclamo
        })
-     })
+      })
+      }) 
     }
   }
 

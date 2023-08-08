@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ColDef } from 'ag-grid-community';
 import { ApiService } from 'src/app/service/api.service';
+import { LoaderService } from 'src/app/service/loader/loader.service';
 
 @Component({
   selector: 'app-lista-reclamos',
@@ -33,7 +34,7 @@ export class ListaReclamosComponent implements OnInit {
       hasta: new FormControl('', Validators.required)
     })
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, public loaderService: LoaderService) {}
 
   ngOnInit(): void {
     //TOMA LOS RECLAMOS DE 1 MES PARA ATRAS
@@ -55,15 +56,19 @@ export class ListaReclamosComponent implements OnInit {
       "hasta": hasta,
     }
     //SI EXISTEN RECLAMOS EN EL LAPSO DE ESE MES, LOS MUESTRA AL INICIAR EL COMPONENTE
-    this.api.listarReclamos(inicio).subscribe(data =>{
-      this.rowData = data
-    })
+      this.api.listarReclamos(inicio).subscribe(data =>{
+        setTimeout(()=>{
+          this.rowData = data
+        })
+      })
   }
 
   //BOTON PARA BUSCAR RECLAMOS ENTRE DOS FECHAS
   onSubmit(){
     this.api.listarReclamos(this.profileForm.value).subscribe(data =>{
-      this.rowData = data
+      setTimeout(()=>{
+        this.rowData = data
+      })
     })
   }
 }
