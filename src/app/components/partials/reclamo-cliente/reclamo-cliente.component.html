@@ -26,7 +26,7 @@
       <!-- CODIGO DE BARRAS -->
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Código de barras</mat-label>
-        <input matInput formControlName="codigoBarras" />
+        <input matInput formControlName="codigoBarras" (blur)="onChange()"/>
       </mat-form-field>
       <!-- FECHA -->
       <mat-form-field appearance="fill" class="spacingComponents">
@@ -35,10 +35,8 @@
       </mat-form-field>
     </div>
     <!-- DESCRIPCION DE CÓDIGO -->
-    <ng-template [ngIf]="profileForm.get('reclamo')?.value != ''">
-      <!-- ESTA PUESTO COMO CONDICIONAL QUE EXISTA EL RECLAMO, PERO LO IDEAL SERIA VINCULARLO A UNA API
-      DE PRODUCTOS PARA QUE CUANDO REGISTRE QUE EL PRODUCTO EXISTE SALGA LA DESCRIPCION -->
-      <h4 style="color: grey;">Descripción: {{datosReclamo.prodDescripcion}}</h4>
+    <ng-template [ngIf]="profileForm.get('codigoBarras')?.value != ''">
+      <h4 style="color: grey;">Descripción: {{producto}}</h4>
     </ng-template>
     <!-- ALERT DIV CODIGO DE BARRAS -->
     <div

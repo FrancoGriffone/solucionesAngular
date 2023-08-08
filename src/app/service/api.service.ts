@@ -20,6 +20,8 @@ export class ApiService {
   private POST_LISTA_RECLAMOS =
     'http://192.168.0.9:100/api/reclamos/listarreclamos';
 
+  private GET_PRODUCTO = 'http://192.168.0.9:100/api/reclamos/productos/';
+
   constructor(private http: HttpClient) {}
 
   //SERVICE PARA CAMBIO DE LOCAL
@@ -31,6 +33,12 @@ export class ApiService {
 
   recibirCambio(): Observable<any>{
     return this.cambioLocal.asObservable()
+  }
+
+  //SERVICE PARA OBTENER PRODUCTO
+  cargarProducto(prod: any) {
+    const url = this.GET_PRODUCTO + prod;
+    return this.http.get(url, {responseType: 'text'})
   }
 
   //SERVICE PARA LOS RECLAMOS Y CLIENTES

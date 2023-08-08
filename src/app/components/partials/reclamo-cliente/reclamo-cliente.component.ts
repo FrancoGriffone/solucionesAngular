@@ -11,6 +11,8 @@ import { ApiService } from 'src/app/service/api.service';
 export class ReclamoClienteComponent implements OnInit {
   constructor(private api: ApiService, private route: ActivatedRoute) {}
 
+  producto: any //PARA VOLCAR LA DESCRIPCION DEL PRODUCTO
+
   datos: any //PARA VOLCAR LOS DATOS DEL DNI
 
   datosReclamo: any //PARA VOLCAR LOS DATOS DEL RECLAMO
@@ -98,6 +100,14 @@ export class ReclamoClienteComponent implements OnInit {
     cerrado: new FormControl(''),
     reclamo: new FormControl('')
   });
+
+  //CAMBIAR DESCRIPCION DEL PRODUCTO
+  onChange(){
+    let codigo = this.profileForm.value.codigoBarras
+    this.api.cargarProducto(codigo).subscribe((data)=>{
+      this.producto = data
+    })
+  }
 
   //BOTON PARA GRABAR RECLAMO
   onSubmit() {

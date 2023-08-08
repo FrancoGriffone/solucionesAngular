@@ -10,6 +10,8 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class ReclamoInternoComponent implements OnInit {
 
+  producto: any //PARA VOLCAR LA DESCRIPCION DEL PRODUCTO
+
   datosReclamo: any //PARA VOLCAR LOS DATOS DEL RECLAMO
 
   pagadoTaller: number = 0 //PARA EL TILDE DE TALLER, DADO QUE LLEGA COMO STRING "Sí" O "No"
@@ -74,6 +76,14 @@ export class ReclamoInternoComponent implements OnInit {
     cerrado: new FormControl(''),
     reclamo: new FormControl(''),
   });
+
+  //CAMBIAR DESCRIPCION DEL PRODUCTO
+  onChange(){
+    let codigo = this.profileForm.value.codigoBarras
+    this.api.cargarProducto(codigo).subscribe((data)=>{
+      this.producto = data
+    })
+  }
 
   //BOTON PARA GRABAR
   onSubmit() {
