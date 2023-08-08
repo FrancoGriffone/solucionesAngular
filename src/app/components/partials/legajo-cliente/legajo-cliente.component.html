@@ -1,7 +1,7 @@
 <div class="container card card-body containerList">
     <div class="cliente">
         <!-- DATOS DEL CLIENTE -->
-        <ng-template [ngIf]="datos?.ayN.value != ''">
+        <ng-template [ngIf]="datos?.ayN != undefined">
             <h2 class="spacingComponents">{{datos?.ayN}} - {{datos?.docNro}}</h2>
         </ng-template>
         <button class="btn btn-primary spacingComponents" type="submit" (click)="onSubmit()">

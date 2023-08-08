@@ -1,9 +1,9 @@
 <div class="container card card-body containerForm">
-  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <ng-template [ngIf]="datos?.ayN.value != undefined">
+  <form [formGroup]="profileForm" (ngSubmit)="nuevoCliente()">
+    <ng-template [ngIf]="datos?.ayN != undefined">
       <h2 class="spacingComponents">{{datos?.ayN}} - {{datos?.docNro}}</h2>
     </ng-template>
-    <ng-template [ngIf]="datos?.ayN.value == undefined">
+    <ng-template [ngIf]="datos?.ayN == undefined">
       <h2 class="spacingComponents">Nuevo cliente - {{nuevoDocNro}} </h2>
     </ng-template>
     <!-- NOMBRE COMPLETO ++ ALERT DIV -->

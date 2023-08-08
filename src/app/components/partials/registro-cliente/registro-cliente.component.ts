@@ -18,6 +18,7 @@ export class RegistroClienteComponent implements OnInit {
 
   //FORMULARIO PARA CARGAR EL CLIENTE
   profileForm = new FormGroup({
+    docNro: new FormControl(this.route.snapshot.paramMap.get('doc') || ''),
     nombre: new FormControl('', Validators.required),
     apellido: new FormControl('', Validators.required),
     domicilio: new FormControl(''),
@@ -50,10 +51,25 @@ export class RegistroClienteComponent implements OnInit {
     });
   }
 
-  //CON LOS DATOS DEL DNI, SE VA A SELECCIONAR QUE TIPO DE RECLAMO VAMOS
-  onSubmit() {
+  //CREAR NUEVO CLIENTE
+  nuevoCliente(){
+    let doc: string = this.route.snapshot.paramMap.get('doc') || ''
+    let cliente = {
+      DocNro: doc,
+      Apellidos:this.profileForm.value.apellido,
+      Nombres:this.profileForm.value.nombre,
+      CalleOtra:this.profileForm.value.domicilio,
+      CalleNro: this.profileForm.value.localidad,
+      PisoDpto:this.profileForm.value.pisoDpto,
+      Telefono1:this.profileForm.value.telefono,
+      Observaciones:this.profileForm.value.observaciones,
+    }
+    this.api.nuevoCliente(cliente).subscribe((data) => {
+      console.log(data)
+    })
+
+    //CON LOS DATOS DEL DNI Y LOCAL, SE VA A SELECCIONAR QUE TIPO DE RECLAMO VAMOS
     let local: string = this.route.snapshot.paramMap.get('local') || ''
-    let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
-    this.router.navigate([local + "/cliente/", usuarioDoc, "selectorReclamo"]);
+    this.router.navigate([local + "/cliente/", doc, "selectorReclamo"]);
   }
 }

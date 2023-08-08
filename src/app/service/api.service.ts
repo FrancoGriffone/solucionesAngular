@@ -1,15 +1,18 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { clienteInterface } from '../models/cliente.interface';
 import { listaReclamosClienteInterface } from '../models/listaReclamosCliente.interface';
 import { listaReclamosInterface } from '../models/listaReclamos.interface';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subject } from 'rxjs';
+import { nuevoClienteInterface } from '../models/nuevoClienteInterface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+  private POST_CLIENTE = 'http://192.168.0.9:100/api/clientes/nuevo'
+
   private GET_CLIENTE = 'http://192.168.0.9:100/api/reclamos/buscarcliente/';
 
   private GET_RECLAMOS_CLIENTE =
@@ -42,6 +45,11 @@ export class ApiService {
   }
 
   //SERVICE PARA LOS RECLAMOS Y CLIENTES
+  nuevoCliente(cliente: Object): Observable<nuevoClienteInterface> {
+    const url = this.POST_CLIENTE;
+    return this.http.post<nuevoClienteInterface>(url, cliente)
+  }
+
   cargarCliente(id: string) {
     const url = this.GET_CLIENTE + id;
     return this.http.get<clienteInterface>(url);
