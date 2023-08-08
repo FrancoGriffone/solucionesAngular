@@ -35,7 +35,6 @@ export class RegistroClienteComponent implements OnInit {
     this.api.cargarCliente(usuarioDoc).subscribe((data) => {
       this.datos = data
       this.datos = this.datos[0]
-      console.log(this.datos)
       //SI EXISTE EL CLIENTE, LO CARGAMOS EN EL FORMULARIO
       this.profileForm.patchValue({
         nombre:this.datos?.nombres,
@@ -68,7 +67,6 @@ export class RegistroClienteComponent implements OnInit {
       CalleNro: this.profileForm.value.numero,
       PisoDpto:this.profileForm.value.pisoDpto,
     }
-    console.log(cliente)
     //SI NO ESTA REGISTRADO, SE PASA A LA API PARA NUEVOS CLIENTES
     if(this.datos == undefined){
       this.api.nuevoCliente(cliente).subscribe((data) => {

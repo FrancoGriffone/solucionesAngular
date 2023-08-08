@@ -6,6 +6,7 @@ import { listaReclamosInterface } from '../models/listaReclamos.interface';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subject } from 'rxjs';
 import { nuevoClienteInterface } from '../models/nuevoClienteInterface';
+import { NuevoReclamoInterface } from '../models/nuevoReclamoInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,10 @@ export class ApiService {
 
   private GET_RECLAMOS_CLIENTE =
     'http://192.168.0.9:100/api/reclamos/buscarreclamos/';
+
+  private POST_RECLAMO = 'http://192.168.0.9:100/api/reclamos/nuevo'
+
+  private PUT_RECLAMO = 'http://192.168.0.9:100/api/reclamos/editar'
 
   private GET_RECLAMO_INDIVIDUAL = 'http://192.168.0.9:100/api/reclamos/listarreclamos/';
 
@@ -64,6 +69,16 @@ export class ApiService {
   listaReclamosCliente(id: string) {
     const url = this.GET_RECLAMOS_CLIENTE + id;
     return this.http.get<listaReclamosClienteInterface>(url);
+  }
+
+  nuevoReclamo(reclamo: Object): Observable<NuevoReclamoInterface> {
+    const url = this.POST_RECLAMO;
+    return this.http.post<NuevoReclamoInterface>(url, reclamo)
+  }
+
+  editarReclamo(reclamo: Object): Observable<NuevoReclamoInterface> {
+    const url = this.PUT_RECLAMO;
+    return this.http.put<NuevoReclamoInterface>(url, reclamo)
   }
 
   listarReclamoInd(id: string) {

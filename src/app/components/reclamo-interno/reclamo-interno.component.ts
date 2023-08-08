@@ -33,6 +33,11 @@ export class ReclamoInternoComponent implements OnInit {
      this.api.listarReclamoInd(numReclamo).subscribe((data) => { 
        this.datosReclamo = data
        this.datosReclamo = this.datosReclamo[0] //TOMAMOS EL ARRAY QUE TRAE Y LO VOLCAMOS
+
+        //SI EL RECLAMO EXISTE, PERMITE APARECER A LA DESCRIPCION DEL PRODUCTO
+          this.api.cargarProducto(this.datosReclamo.prodCodBar).subscribe((data)=>{
+          this.producto = data
+        })
  
        //PARA TRAER EL STRING DE LA FECHA SE TOMARON INDIVIDUALMENTE PARA APLICAR UN SLICE
        this.fechaReclamo = this.datosReclamo.fecha 
@@ -87,7 +92,59 @@ export class ReclamoInternoComponent implements OnInit {
 
   //BOTON PARA GRABAR
   onSubmit() {
-    console.log(this.profileForm.value);
+    let reclamo = {
+      Id: 126699,
+      //IdTipo: 1, 
+      //FechaCompra: "2023-08-05",
+      IdCliente: 99697, 
+      //ProdMarca: "",
+      //ProdPrecio: 999, 
+      //ProdFuv: "2023-08-05",
+      //PrometidoDia: "2023-08-10",
+      //IdTurno: 1, 
+      //Importe: 100, 
+      IdSolTipo: 1, 
+      //Ncred: "",
+      //FechaSol: "2023-08-07",
+      //Observaciones: "Prueba",
+      //IdOrigen: 1, 
+      //IdBc: 1, 
+      IdEmp: "T",
+      //Cantidad: 1,
+      //Ticket: false,
+      //NroTransferInt: "",
+      //IdOtr: 1, 
+      //IdTipoMmv: 1, 
+      //IdEmpleado: 1, 
+      //Usado: false,
+      //NroHojaLr: "789",
+    }
+    // let reclamo = {
+    //   Id: this.datosReclamo?.id,
+    //   ProdCodBar: this.profileForm.value.codigoBarras,
+    //   ProdDescripcion: this.producto,
+    //   IdSec: this.profileForm.value.seccion, 
+    //   Fecha: this.profileForm.value.fecha,
+    //   IdSolEstado: this.profileForm.value.estado,
+    //   Motivo: this.profileForm.value.motivo,
+    //   Solucion: this.profileForm.value.observaciones,
+    //   IdTaller: this.profileForm.value.taller,
+    //   Costo: this.profileForm.value.importe || 0,
+    //   Pagado: this.profileForm.value.pagado || false
+    // }
+    console.log(reclamo)
+    if(this.datosReclamo == undefined){
+      // this.api.nuevoReclamo(reclamo).subscribe((data) => {
+      //   console.log(data)
+      // })
+      console.log('ENTRANDO EN NUEVO RECLAMO')
+    } else {
+    //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
+      // this.api.editarReclamo(reclamo).subscribe((data) => {
+      //   console.log(data)
+      // })
+      console.log('ENTRANDO EN RECLAMO EXISTENTE')
+    }
   }
 }
 

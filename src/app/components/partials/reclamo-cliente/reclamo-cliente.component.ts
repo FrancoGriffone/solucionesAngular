@@ -45,6 +45,12 @@ export class ReclamoClienteComponent implements OnInit {
     this.api.listarReclamoInd(numReclamo).subscribe((data) => { 
       this.datosReclamo = data
       this.datosReclamo = this.datosReclamo[0] //TOMAMOS EL ARRAY QUE TRAE Y LO VOLCAMOS
+      console.log(this.datosReclamo)
+
+      //SI EL RECLAMO EXISTE, PERMITE APARECER A LA DESCRIPCION DEL PRODUCTO
+      this.api.cargarProducto(this.datosReclamo.prodCodBar).subscribe((data)=>{
+        this.producto = data
+      })
 
       //PARA TRAER EL STRING DE LA FECHA SE TOMARON INDIVIDUALMENTE PARA APLICAR UN SLICE
       this.fechaReclamo = this.datosReclamo.fecha //FECHA DE RECLAMO
@@ -59,23 +65,23 @@ export class ReclamoClienteComponent implements OnInit {
       
       //SI EXISTE EL RECLAMO SE VUELCAN LOS DATOS
       this.profileForm.patchValue({
-        codigoBarras: this.datosReclamo.prodCodBar,
-        fecha: this.fechaReclamo.slice(0,-9),
-        fechaCompra: this.fechaComprado.slice(0,-9),
-        ticket: this.datosReclamo.ticket,
-        monto: this.datosReclamo.importe,
-        tipo: this.datosReclamo.tipo,
-        estado: this.datosReclamo.estado,
-        prometidoDia: this.fechaPrometido.slice(0,-9),
-        motivo: this.datosReclamo.motivo,
-        observaciones: this.datosReclamo.solucion,
-        taller: this.datosReclamo.taller,
-        importe: this.datosReclamo.costo,
+        codigoBarras: this.datosReclamo?.prodCodBar,
+        fecha: this.fechaReclamo?.slice(0,-9),
+        fechaCompra: this.fechaComprado?.slice(0,-9),
+        ticket: this.datosReclamo?.ticket,
+        monto: this.datosReclamo?.importe,
+        tipo: this.datosReclamo?.tipo,
+        estado: this.datosReclamo?.estado,
+        prometidoDia: this.fechaPrometido?.slice(0,-9),
+        motivo: this.datosReclamo?.motivo,
+        observaciones: this.datosReclamo?.solucion,
+        taller: this.datosReclamo?.taller,
+        importe: this.datosReclamo?.costo,
         pagado: this.pagadoTaller,
-        ncred: this.datosReclamo.ncred,
-        cerrado: this.datosReclamo.cerrado,
-        descripcion: this.datosReclamo.prodDescripcion,
-        reclamo: this.datosReclamo.reclamo
+        ncred: this.datosReclamo?.ncred,
+        cerrado: this.datosReclamo?.cerrado,
+        descripcion: this.datosReclamo?.prodDescripcion,
+        reclamo: this.datosReclamo?.reclamo
       })
     })
     }
@@ -111,7 +117,17 @@ export class ReclamoClienteComponent implements OnInit {
 
   //BOTON PARA GRABAR RECLAMO
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.log(this.profileForm.value);
+    if(this.datosReclamo == undefined){
+      // this.api.nuevoReclamo(reclamo).subscribe((data) => {
+      //   console.log(data)
+      // })
+      console.log('ENTRANDO EN NUEVO RECLAMO')
+    } else {
+    //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
+      // this.api.editarReclamo(reclamo).subscribe((data) => {
+      //   console.log(data)
+      // })
+      console.log('ENTRANDO EN RECLAMO EXISTENTE')
+    }
   }
 }

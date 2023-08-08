@@ -1,0 +1,37 @@
+export interface NuevoReclamoInterface {
+    Id:              number;
+    IdTipo:          number;
+    Fecha:           string;
+    FechaCompra:     string;
+    IdCliente:       number;
+    ProdCodBar:      string;
+    ProdDescripcion: string;
+    ProdMarca:       string;
+    ProdPrecio:      number;
+    ProdFuv:         string;
+    Motivo:          string;
+    PrometidoDia:    string;
+    IdTurno:         number;
+    Importe:         number;
+    Solucion:        string;
+    IdSolTipo:       number;
+    IdSolEstado:     number;
+    Ncred:           string;
+    FechaSol:        string;
+    Costo:           number;
+    IdTaller:        number;
+    Observaciones:   string;
+    Pagado:          boolean;
+    IdOrigen:        number;
+    IdBc:            number;
+    IdEmp:           string;
+    Cantidad:        number;
+    Ticket:          boolean;
+    IdSec:           number;
+    NroTransferInt:  string;
+    IdOtr:           number;
+    IdTipoMmv:       number;
+    IdEmpleado:      number;
+    Usado:           boolean;
+    NroHojaLr:       string;
+}

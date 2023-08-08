@@ -69,7 +69,17 @@ export class ReclamosVariosComponent implements OnInit {
   
   //BOTON PARA GRABAR RECLAMO
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.log(this.profileForm.value);
+    if(this.datosReclamo == undefined){
+      // this.api.nuevoReclamo(cliente).subscribe((data) => {
+      //   console.log(data)
+      // })
+      console.log('ENTRANDO EN NUEVO RECLAMO')
+    } else {
+    //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
+      // this.api.editarReclamo(cliente).subscribe((data) => {
+      //   console.log(data)
+      // })
+      console.log('ENTRANDO EN RECLAMO EXISTENTE')
+    }
   }
 }
