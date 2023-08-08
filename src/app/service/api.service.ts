@@ -11,7 +11,9 @@ import { nuevoClienteInterface } from '../models/nuevoClienteInterface';
   providedIn: 'root',
 })
 export class ApiService {
-  private POST_CLIENTE = 'http://192.168.0.9:100/api/clientes/nuevo'
+  private POST_CLIENTE = 'http://192.168.0.9:100/api/clientes/nuevo';
+
+  private PUT_CLIENTE = 'http://192.168.0.9:100/api/clientes/editar';
 
   private GET_CLIENTE = 'http://192.168.0.9:100/api/reclamos/buscarcliente/';
 
@@ -48,6 +50,10 @@ export class ApiService {
   nuevoCliente(cliente: Object): Observable<nuevoClienteInterface> {
     const url = this.POST_CLIENTE;
     return this.http.post<nuevoClienteInterface>(url, cliente)
+  }
+  actualizarCliente(cliente: Object): Observable<nuevoClienteInterface> {
+    const url = this.PUT_CLIENTE;
+    return this.http.put<nuevoClienteInterface>(url, cliente)
   }
 
   cargarCliente(id: string) {

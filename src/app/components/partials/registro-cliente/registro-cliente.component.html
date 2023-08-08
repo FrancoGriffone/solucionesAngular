@@ -27,12 +27,17 @@
     >
       Es necesario colocar al menos un nombre y un apellido
     </div>
-    <!-- DOMICILIO + PISO/DPTO DIV -->
+    <!-- CALLE + NUMERO + PISO/DPTO DIV -->
     <div class="formComponent">
-      <!-- DOMICILIO -->
+      <!-- CALLE -->
       <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label>Domicilio</mat-label>
+        <mat-label>Calle</mat-label>
         <input matInput formControlName="domicilio"/>
+      </mat-form-field>
+      <!-- LOCALIDAD -->
+      <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label>Número</mat-label>
+        <input matInput formControlName="numero"/>
       </mat-form-field>
       <!-- PISO -->
       <mat-form-field appearance="fill" class="spacingComponents">
@@ -40,18 +45,24 @@
         <input matInput formControlName="pisoDpto"/>
       </mat-form-field>
     </div>
-    <!-- LOCALIDAD + CP DIV -->
-    <div class="formComponent">
-      <!-- LOCALIDAD -->
-      <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label>Localidad</mat-label>
-        <input matInput formControlName="localidad"/>
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="spacingComponents">
+    <!-- ALERT DIV FORMATO CALLE -->
+    <div class="alert alert-danger">
+      Si se desea cambiar el número o el piso/dpto es necesario borrarlo de la calle y colocar los nuevos
+      en los espacios correspondientes. <b>SI NO SE BORRAN MANUALMENTE LOS QUE YA ESTAN, VAN A QUEDAR ANTES
+      QUE LOS NUEVOS AGREGADOS</b>. Esto no funciona con clientes cargados en el soluciones anterior.
+    </div>
+
+    <!-- LOCALIDAD + CP DIV  ACTUALMENTE EN DESUSO-->
+      <!-- ACTUALMENTE DESHABILITADO PORQUE NO EXISTE EL CODIGO POSTAL EN LAS API -->
+
+      <!-- <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Código Postal</mat-label>
         <input matInput formControlName="codigoPostal"/>
-      </mat-form-field>
+      </mat-form-field> -->
+
+    <div class="formComponent">
     </div>
+    
     <!-- TELEFONO DIV -->
     <div class="formComponent motivo">
       <mat-form-field appearance="fill" class="spacingComponents">

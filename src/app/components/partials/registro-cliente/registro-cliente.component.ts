@@ -21,10 +21,9 @@ export class RegistroClienteComponent implements OnInit {
     docNro: new FormControl(this.route.snapshot.paramMap.get('doc') || ''),
     nombre: new FormControl('', Validators.required),
     apellido: new FormControl('', Validators.required),
-    domicilio: new FormControl(''),
+    domicilio: new FormControl(''), //ES LA CALLE
+    numero: new FormControl(''),
     pisoDpto: new FormControl(''),
-    localidad: new FormControl(''),
-    codigoPostal: new FormControl(''),
     telefono: new FormControl(''),
     observaciones: new FormControl(''),
   });
@@ -36,14 +35,14 @@ export class RegistroClienteComponent implements OnInit {
     this.api.cargarCliente(usuarioDoc).subscribe((data) => {
       this.datos = data
       this.datos = this.datos[0]
-
+      console.log(this.datos)
       //SI EXISTE EL CLIENTE, LO CARGAMOS EN EL FORMULARIO
       this.profileForm.patchValue({
         nombre:this.datos?.nombres,
         apellido: this.datos?.apellidos,
         domicilio: this.datos?.direccion,
         pisoDpto: this.datos?.pisoDpto,
-        localidad: this.datos?.localidad,
+        numero: this.datos?.numero, //ACA IRIA LA LOCALIDAD PERO NO ESTA EN LAS API ESE DATO
         codigoPostal: this.datos?.codigoPostal,
         telefono: this.datos?.telefonos,
         observaciones: this.datos?.observaciones
@@ -55,18 +54,32 @@ export class RegistroClienteComponent implements OnInit {
   nuevoCliente(){
     let doc: string = this.route.snapshot.paramMap.get('doc') || ''
     let cliente = {
+      id: this.datos.id,
       DocNro: doc,
       Apellidos:this.profileForm.value.apellido,
       Nombres:this.profileForm.value.nombre,
-      CalleOtra:this.profileForm.value.domicilio,
-      CalleNro: this.profileForm.value.localidad,
-      PisoDpto:this.profileForm.value.pisoDpto,
       Telefono1:this.profileForm.value.telefono,
       Observaciones:this.profileForm.value.observaciones,
+      //ESTOS TRES ESTAN TERRIBLES, PORQUE DOMICILIO TOMA LA CALLE + NRO + PISO
+      //Y PARA ACTUALIZARLA TENES QUE BORRAR MANUALMENTE EL NRO Y CALLE + COLOCAR OTRAS EN DONDE VA SINO NO SE BORRA
+      //+++++ EN LOS CLIENTES YA EXISTENTES, QUE TIENEN LA CALLE PRECARGADA CON IDCALLE NO FUNCIONA LA EDICION DEL
+      //DOMICILIO, DADO QUE PARA EDITAR HAY QUE HACERLO MEDIANTE IDCALLE SI O SI
+      CalleOtra:this.profileForm.value.domicilio,
+      CalleNro: this.profileForm.value.numero,
+      PisoDpto:this.profileForm.value.pisoDpto,
     }
-    this.api.nuevoCliente(cliente).subscribe((data) => {
-      console.log(data)
-    })
+    console.log(cliente)
+    //SI NO ESTA REGISTRADO, SE PASA A LA API PARA NUEVOS CLIENTES
+    if(this.datos == undefined){
+      this.api.nuevoCliente(cliente).subscribe((data) => {
+        console.log(data)
+      })
+    } else {
+    //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
+      this.api.actualizarCliente(cliente).subscribe((data) => {
+        console.log(data)
+      })
+    }
 
     //CON LOS DATOS DEL DNI Y LOCAL, SE VA A SELECCIONAR QUE TIPO DE RECLAMO VAMOS
     let local: string = this.route.snapshot.paramMap.get('local') || ''
