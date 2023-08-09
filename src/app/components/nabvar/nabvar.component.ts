@@ -13,6 +13,7 @@ export class NabvarComponent implements OnInit {
   private receptorCambio: Subscription //SUBSCRIPCION PARA RECIBIR EL CAMBIO DE LOCAL
 
   cambioLocal: any; //CAMBIO DE LOCAL
+  reclamosAReparacion: string = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=T'
 
   constructor(private route: ActivatedRoute, private router: Router, private api: ApiService) {
     //ACA RECIBE EL NOMBRE DEL LOCAL PARA ACTUALIZARLO
@@ -42,19 +43,24 @@ export class NabvarComponent implements OnInit {
 
   //FUNCIONES PARA CAMBIO DE LOCAL
   cambioTate(){
-  this.cambioLocal = 'Tate'    
+    this.cambioLocal = 'Tate'
+    this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=T'    
   }
   cambioExpress(){
     this.cambioLocal = 'TateExpress'
+    this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=E'
   }
   cambioKilroy(){
     this.cambioLocal = 'Kilroy'
+    this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=K'  
   }
   cambioKit(){
     this.cambioLocal = 'KitExpress'
+    this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=M'
   }
   cambioKids(){
     this.cambioLocal = 'KilroyKids'
+    this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=N'
   }
 
   //FUNCIONES PARA CAMBIO DE COMPONENTE
@@ -66,12 +72,6 @@ export class NabvarComponent implements OnInit {
   }
   reclamoInterno() {
     this.router.navigate([this.cambioLocal + "/reclamointerno"]);
-  }
-  reclamosAReparacion() {
-    this.router.navigate([this.cambioLocal + "/reclamosareparacion"]);
-  }
-  reclamosEnReparacion() {
-    this.router.navigate([this.cambioLocal + "/reclamosenreparacion"]);
   }
   bCargo() {
     this.router.navigate([this.cambioLocal + "/bcargo"]);

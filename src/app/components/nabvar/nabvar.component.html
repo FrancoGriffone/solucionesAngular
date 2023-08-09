@@ -60,7 +60,9 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLinkActive="active" (click)="reclamosAReparacion()">
+          <a routerLinkActive="active"
+          href={{reclamosAReparacion}}
+          target="_blank">
             <img
               src="../../../assets/reclamosareparacion.png"
               alt="reclamos a reparacion"
@@ -75,7 +77,9 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLinkActive="active" (click)="reclamosEnReparacion()">
+          <a routerLinkActive="active" 
+          href="http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fRecEnRepar&rs:Command=Render" 
+          target="_blank">
             <img
               src="../../../assets/reclamosenreparacion.png"
               alt="reclamos en reparacion"
@@ -144,7 +148,9 @@
         </a>
       </li>
       <li>
-        <a routerLinkActive="activeResponsive" (click)="reclamosAReparacion()">
+        <a routerLinkActive="activeResponsive"
+        href="http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp="
+        target="_blank">
           <img
             src="../../../assets/reclamosareparacion.png"
             alt="reclamos a reparacion"
@@ -155,7 +161,8 @@
       <li>
         <a
           routerLinkActive="activeResponsive"
-          (click)="reclamosEnReparacion()"
+          href="http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fRecEnRepar&rs:Command=Render"
+          target="_blank"
         >
           <img
             src="../../../assets/reclamosenreparacion.png"
