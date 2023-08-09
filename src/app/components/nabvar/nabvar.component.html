@@ -23,7 +23,9 @@
       <li>
         <div class="iconDiv">
           <a routerLinkActive="active" (click)="home()">
-            <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
+            <div class="circle">
+              <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
+            </div>
             <p>Inicio</p>
           </a>
         </div>
@@ -31,11 +33,13 @@
       <li>
         <div class="iconDiv">
           <a routerLinkActive="active" (click)="listaReclamos()">
-            <img
+            <div class="circle">
+              <img
               src="../../../assets/listadereclamos.png"
               alt="lista de reclamos"
               width="40px"
             />
+            </div>
             <p>
               Lista de <br />
               reclamos
@@ -46,11 +50,13 @@
       <li>
         <div class="iconDiv">
           <a routerLinkActive="active" (click)="reclamoInterno()">
-            <img
+            <div class="circle">
+              <img
               src="../../../assets/reclamosinternos.png"
               alt="reclamos internos"
               width="40px"
             />
+            </div>
             <p>
               Reclamos <br />
               internos
@@ -63,11 +69,13 @@
           <a routerLinkActive="active"
           href={{reclamosAReparacion}}
           target="_blank">
-            <img
+            <div class="circle">
+              <img
               src="../../../assets/reclamosareparacion.png"
               alt="reclamos a reparacion"
               width="40px"
-            />
+              />
+            </div> 
             <p>
               Reclamos a <br />
               reparación
@@ -80,11 +88,13 @@
           <a routerLinkActive="active" 
           href="http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fRecEnRepar&rs:Command=Render" 
           target="_blank">
+          <div class="circle">
             <img
-              src="../../../assets/reclamosenreparacion.png"
-              alt="reclamos en reparacion"
-              width="40px"
+            src="../../../assets/reclamosenreparacion.png"
+            alt="reclamos en reparacion"
+            width="40px"
             />
+          </div>
             <p>
               Reclamos en <br />
               reparación
@@ -95,11 +105,13 @@
       <li>
         <div class="iconDiv">
           <a routerLinkActive="active" (click)="bCargo()">
-            <img
-              src="../../../assets/bcargo.png"
-              alt="boletas de cargo"
-              width="40px"
-            />
+            <div class="circle">
+              <img
+                src="../../../assets/bcargo.png"
+                alt="boletas de cargo"
+                width="40px"
+              />
+            </div>
             <p>
               Boletas <br />
               de cargo
@@ -126,36 +138,44 @@
     <ul class="options">
       <li>
         <a routerLinkActive="activeResponsive" (click)="home()">
-          <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
+          <div class="circle">
+            <img src="../../../assets/inicio.png" alt="inicio" width="40px" />
+          </div>
         </a>
       </li>
       <li>
         <a routerLinkActive="activeResponsive" (click)="listaReclamos()">
-          <img
+          <div class="circle">
+            <img
             src="../../../assets/listadereclamos.png"
             alt="lista de reclamos"
             width="40px"
-          />
+            />
+          </div>
         </a>
       </li>
       <li>
         <a routerLinkActive="activeResponsive" (click)="reclamoInterno()">
-          <img
+          <div class="circle">
+            <img
             src="../../../assets/reclamosinternos.png"
             alt="reclamos internos"
             width="40px"
-          />
+            />
+          </div>
         </a>
       </li>
       <li>
         <a routerLinkActive="activeResponsive"
         href="http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp="
         target="_blank">
-          <img
+          <div class="circle">
+            <img
             src="../../../assets/reclamosareparacion.png"
             alt="reclamos a reparacion"
             width="40px"
-          />
+            />
+          </div>
         </a>
       </li>
       <li>
@@ -164,20 +184,24 @@
           href="http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fRecEnRepar&rs:Command=Render"
           target="_blank"
         >
-          <img
+          <div class="circle">
+            <img
             src="../../../assets/reclamosenreparacion.png"
             alt="reclamos en reparacion"
             width="40px"
-          />
+            />
+          </div>
         </a>
       </li>
       <li>
         <a routerLinkActive="activeResponsive" (click)="bCargo()">
-          <img
+          <div class="circle">
+            <img
             src="../../../assets/bcargo.png"
             alt="boletas de cargo"
             width="40px"
-          />
+            />
+          </div>
         </a>
       </li>
     </ul>
