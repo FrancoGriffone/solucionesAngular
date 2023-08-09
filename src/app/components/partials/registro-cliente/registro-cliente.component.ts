@@ -33,6 +33,9 @@ export class RegistroClienteComponent implements OnInit {
     //TOMAMOS EL DNI PARA CARGAR LA DATA DEL CLIENTE SI FIGURA EN EL SISTEMA
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
     this.nuevoDocNro = usuarioDoc //PASAMOS EL DOCUMENTO PARA VISUALIZARLO SI NO EXISTE EN EL SISTEMA
+
+    this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
+
     this.api.cargarCliente(usuarioDoc).subscribe((data) => {
       this.datos = data
       this.datos = this.datos[0]

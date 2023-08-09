@@ -14,7 +14,9 @@ export class InicioComponent implements OnInit {
 
   constructor(private api: ApiService, private router: Router, private route: ActivatedRoute, private toastrSvc: ToastrService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.api.envioComponentes('NO') //ENVIA AL BUSCADOR OTRO STRING PARA DESHABILITARLO
+  }
 
   local: string = "" //PARA DEFINIR EL LOCAL
 

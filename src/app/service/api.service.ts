@@ -45,6 +45,17 @@ export class ApiService {
     return this.cambioLocal.asObservable()
   }
 
+  //SERVICE PARA HABILITAR/DESHABILITAR BUSCADOR
+  private cambio = new Subject<any>()
+
+  envioComponentes(cambio: string){
+    this.cambio.next(cambio)
+  }
+
+  receptorBuscador(): Observable<any>{
+    return this.cambio.asObservable()
+  }
+
   //SERVICE PARA OBTENER PRODUCTO
   cargarProducto(prod: any) {
     const url = this.GET_PRODUCTO + prod;

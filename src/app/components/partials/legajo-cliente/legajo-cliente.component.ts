@@ -44,6 +44,8 @@ export class LegajoClienteComponent implements OnInit {
   constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
+
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
     //SI EXISTE UN CLIENTE SE TOMAN LOS DATOS
     this.api.cargarCliente(usuarioDoc).subscribe((data) => {

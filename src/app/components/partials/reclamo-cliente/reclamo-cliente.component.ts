@@ -34,6 +34,9 @@ export class ReclamoClienteComponent implements OnInit {
   ngOnInit(): void {
     //VERIFICA DATOS DEL DNI
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
+
+    this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
+
     this.api.cargarCliente(usuarioDoc).subscribe((data) => {
       this.datos = data
       this.datos = this.datos[0]

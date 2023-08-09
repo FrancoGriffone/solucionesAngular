@@ -1,4 +1,4 @@
-<div class="container card card-body divForm">
+<div class="container card card-body divForm" [ngClass]="{'d-none d-block' : mostrar == 'NO'}">
     <div class="buscador">
         <form class="inicioForm" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   

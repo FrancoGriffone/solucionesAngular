@@ -29,6 +29,9 @@ export class ReclamoInternoComponent implements OnInit {
   ngOnInit(): void {
      //VERIFICA DATOS DEL RECLAMO
      let numReclamo: string = this.route.snapshot.paramMap.get('id') || ''
+
+     this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
+
      //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA EL ULTIMO RECLAMO EN LA LISTA
      if (numReclamo != ''){
   

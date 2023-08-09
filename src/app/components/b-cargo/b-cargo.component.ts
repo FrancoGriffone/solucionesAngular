@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-b-cargo',
@@ -28,9 +29,12 @@ export class BCargoComponent implements OnInit {
   //FORM CONTROL SOBRE LA FECHA
   date = new FormControl(this.fechaBusqueda);
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private api: ApiService) {}
 
   ngOnInit(): void {
+    this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
+    
+    //DEPENDE EL LOCAL, DA UNA LETRA (CADA UNA CORRESPONDE AL PARAMETRO QUE SE NECESITA SEGUN EL REPORTE)
     let local: string = this.route.snapshot.paramMap.get('local') || ''
     if (local == 'Tate') {
       this.idEmp = 'T'
@@ -47,9 +51,13 @@ export class BCargoComponent implements OnInit {
     }
   }
   
+  //BOTON PARA IR AL REPORTE
   onSubmit() {
+    //COMPLETAMOS EL STRING VACIO CON LA FECHA
     this.bcargoFecha = this.date.value
+    //ARMAMOS UN STRING CON = 1ERAPARTE LINK REPORTE + ID EMPRESA (LA LETRA) + 2DAPARTE LINK REPORTE + FECHA 
     let linkBCargo: string = this.bcargo1 + this.idEmp + this.bcargo2 + this.bcargoFecha
+    //ABRE EL LINK QUE ARMAMOS ANTES EN OTRA PESTAÑA
     window.open(linkBCargo, '_blank')
   }
 }

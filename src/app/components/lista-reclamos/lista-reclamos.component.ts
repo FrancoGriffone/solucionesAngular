@@ -37,6 +37,7 @@ export class ListaReclamosComponent implements OnInit {
   constructor(private api: ApiService, public loaderService: LoaderService) {}
 
   ngOnInit(): void {
+    this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
     //TOMA LOS RECLAMOS DE 1 MES PARA ATRAS
     //FECHA DEL DIA
     let date = new Date()
