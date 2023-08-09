@@ -56,6 +56,7 @@ export class ApiService {
     const url = this.POST_CLIENTE;
     return this.http.post<nuevoClienteInterface>(url, cliente)
   }
+
   actualizarCliente(cliente: Object): Observable<nuevoClienteInterface> {
     const url = this.PUT_CLIENTE;
     return this.http.put<nuevoClienteInterface>(url, cliente)

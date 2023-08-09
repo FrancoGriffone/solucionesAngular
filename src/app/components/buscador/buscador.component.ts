@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class BuscadorComponent implements OnInit {
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService, private router: Router, private toastrSvc: ToastrService) { }
 
   ngOnInit(): void {}
 
@@ -73,7 +74,7 @@ export class BuscadorComponent implements OnInit {
           }
         } //SI NO SE ENCONTRO EL NUMERO DE RECLAMO, SALE EL ALERT. NO ME GUSTA PERO MOMENTANEAMENTE RESUELVE EL PROBLEMA
           else {
-            alert("El reclamo que está intentando ingresar no existe, por favor verifique los datos colocados")
+            this.toastrSvc.error(`El reclamo ${dataUser} no existe, por favor verifique los datos colocados`)
           }
         })
     }

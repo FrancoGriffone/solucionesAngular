@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registro-cliente',
@@ -10,7 +11,7 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class RegistroClienteComponent implements OnInit {
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private api: ApiService, private route: ActivatedRoute, private router: Router, private toastrSvc: ToastrService) {}
 
   datos: any //PARA VOLCAR LOS DATOS DEL CLIENTE
 
@@ -69,13 +70,15 @@ export class RegistroClienteComponent implements OnInit {
     }
     //SI NO ESTA REGISTRADO, SE PASA A LA API PARA NUEVOS CLIENTES
     if(this.datos == undefined){
+      this.toastrSvc.success('Nuevo cliente cargado con éxito')
       this.api.nuevoCliente(cliente).subscribe((data) => {
-        console.log(data)
+          console.log(data)
       })
     } else {
-    //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
+      //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
+      this.toastrSvc.info('Cliente actualizado con éxito')
       this.api.actualizarCliente(cliente).subscribe((data) => {
-        console.log(data)
+          console.log(data)
       })
     }
 

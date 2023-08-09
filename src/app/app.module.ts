@@ -31,6 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 //AG GRID
 import { AgGridModule } from 'ag-grid-angular';
 import { InterceptorService } from './service/loader/interceptor.service';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -66,7 +67,8 @@ import { InterceptorService } from './service/loader/interceptor.service';
     MatTableModule,
     HttpClientModule,
     AgGridModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}

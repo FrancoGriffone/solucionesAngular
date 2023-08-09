@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/service/api.service';
 import { LoaderService } from 'src/app/service/loader/loader.service';
 
@@ -10,7 +11,7 @@ import { LoaderService } from 'src/app/service/loader/loader.service';
   styleUrls: ['./reclamo-cliente.component.scss'],
 })
 export class ReclamoClienteComponent implements OnInit {
-  constructor(private api: ApiService, private route: ActivatedRoute, public loaderService: LoaderService) {}
+  constructor(private api: ApiService, private route: ActivatedRoute, public loaderService: LoaderService, private toastrSvc: ToastrService) {}
 
   producto: any //PARA VOLCAR LA DESCRIPCION DEL PRODUCTO
 
@@ -47,7 +48,6 @@ export class ReclamoClienteComponent implements OnInit {
       setTimeout(()=>{ //ESTE TIMEOUT PERMITE CARGAR LOS DATOS SIN QUE LA PAGINA PAREZCA QUE SE TILDA MIENTRAS CARGA TODO  
       this.datosReclamo = data
       this.datosReclamo = this.datosReclamo[0] //TOMAMOS EL ARRAY QUE TRAE Y LO VOLCAMOS
-      console.log(this.datosReclamo)
 
       //SI EL RECLAMO EXISTE, PERMITE APARECER A LA DESCRIPCION DEL PRODUCTO
       this.api.cargarProducto(this.datosReclamo.prodCodBar).subscribe((data)=>{
@@ -121,12 +121,14 @@ export class ReclamoClienteComponent implements OnInit {
   //BOTON PARA GRABAR RECLAMO
   onSubmit() {
     if(this.datosReclamo == undefined){
+      this.toastrSvc.success('Nuevo reclamo creado con éxito')
       // this.api.nuevoReclamo(reclamo).subscribe((data) => {
       //   console.log(data)
       // })
       console.log('ENTRANDO EN NUEVO RECLAMO')
     } else {
     //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
+    this.toastrSvc.info('Reclamo actualizado con éxito')
       // this.api.editarReclamo(reclamo).subscribe((data) => {
       //   console.log(data)
       // })

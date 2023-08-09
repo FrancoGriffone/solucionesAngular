@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/service/api.service';
 
 
@@ -11,7 +12,7 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class InicioComponent implements OnInit {
 
-  constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private api: ApiService, private router: Router, private route: ActivatedRoute, private toastrSvc: ToastrService) {}
 
   ngOnInit(): void {}
 
@@ -59,9 +60,9 @@ export class InicioComponent implements OnInit {
               this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
               this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/reclamo/" + dataUser])
           }
-        } //SI NO SE ENCONTRO EL NUMERO DE RECLAMO, SALE EL ALERT. NO ME GUSTA PERO MOMENTANEAMENTE RESUELVE EL PROBLEMA
+        } //SI NO SE ENCONTRO EL NUMERO DE RECLAMO
           else {
-            alert("El reclamo que está intentando ingresar no existe, por favor verifique los datos colocados")
+            this.toastrSvc.error(`El reclamo ${dataUser} no existe, por favor verifique los datos colocados`)
           }
         })
     }

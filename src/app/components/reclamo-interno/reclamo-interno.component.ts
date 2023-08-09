@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/service/api.service';
 import { LoaderService } from 'src/app/service/loader/loader.service';
 
@@ -23,7 +24,7 @@ export class ReclamoInternoComponent implements OnInit {
    fecha = new Date().toISOString().substring(0,10)
    disabled: boolean = true;
 
-  constructor(private api: ApiService, private route: ActivatedRoute, public loaderService: LoaderService) {}
+  constructor(private api: ApiService, private route: ActivatedRoute, public loaderService: LoaderService, private toastrSvc: ToastrService) {}
 
   ngOnInit(): void {
      //VERIFICA DATOS DEL RECLAMO
@@ -137,12 +138,14 @@ export class ReclamoInternoComponent implements OnInit {
     // }
     console.log(reclamo)
     if(this.datosReclamo == undefined){
+      this.toastrSvc.success('Nuevo reclamo creado con éxito')
       // this.api.nuevoReclamo(reclamo).subscribe((data) => {
       //   console.log(data)
       // })
       console.log('ENTRANDO EN NUEVO RECLAMO')
     } else {
     //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
+    this.toastrSvc.info('Reclamo actualizado con éxito')
       // this.api.editarReclamo(reclamo).subscribe((data) => {
       //   console.log(data)
       // })
