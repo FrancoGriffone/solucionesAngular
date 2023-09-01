@@ -9,13 +9,17 @@
 }
 .bCargo {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin: 5% 0% 2% 0%;
+  .botones {
+    display: flex;
+  }
   .buscarBC {
     display: flex;
     align-self: center;
     height: 50%;
-    margin-left: 1%;
+    margin-left: 2%;
   }
 }
 

@@ -83,90 +83,16 @@
   background-color: rgb(151, 175, 114);
 }
 
+//COMO SON VARIAS MEDIA, DEJO LAS MEDIDAS Y LOS CODIGOS PARA CADA SELECCION
+//WIDTH => +600 // -600
+//HEIGHT => +600 // +525 // -524
 
-// HEIGTH HASTA 600 ++ WIDTH HASTA 800
-@media screen and (max-height: 600px) and (max-width: 800px) {
-  .containerDiv {
-    display: flex;
-    justify-content: center;
-    .lateralBar {
-      display: flex;
-      padding: 10px;
-      justify-content: space-evenly;
-      width: 100%;
-      mat-card-content {
-        display: flex;
-        justify-content: center;
-        transition: filter, 0.5s;
-        margin: 0;
-        img {
-          width: 50px;
-          height: 40px;
-        }
-        img:hover {
-          filter: invert(100%);
-        }
-      }
-    }
-  }
-}
+//EJEMPLO DE CODIGO: QUIERO BUSCAR WIDTH +600 Y HEIGHT +525 = H+525W+600
+//                   QUIERO BUSCAR WIDTH -600 Y HEIGHT +600 = H+600W-600 
 
-// HEIGTH HASTA 600 ++ WIDTH POST 800
-@media screen and (max-height: 600px) and (min-width: 800px) {
-  .containerDiv {
-    display: flex;
-    justify-content: center;
-    .lateralBar {
-      display: flex;
-      padding: 10px;
-      justify-content: space-evenly;
-      width: 100%;
-      mat-card-content {
-        display: flex;
-        justify-content: center;
-        transition: filter, 0.5s;
-        margin: 0;
-        img {
-          width: 50px;
-          height: 40px;
-        }
-        img:hover {
-          filter: invert(100%);
-        }
-      }
-    }
-  }
-}
-
-// HEIGTH POST 600 ++ WIDTH HASTA 800
-@media screen and (min-height: 600px) and (max-width: 800px) {
-  .containerDiv {
-    display: flex;
-    justify-content: center;
-    .lateralBar {
-      display: flex;
-      padding: 10px;
-      justify-content: space-evenly;
-      width: 100%;
-      mat-card-content {
-        display: flex;
-        justify-content: center;
-        transition: filter, 0.5s;
-        margin: 0;
-        img {
-          width: 50px;
-          height: 40px;
-        }
-        img:hover {
-          filter: invert(100%);
-        }
-      }
-    }
-  }
-}
-
-//HEIGTH POST 600 ++ WIDTH POST 800
-@media screen and (min-height: 600px) and (min-width: 800px) {
+//H+600W+600
+//HEIGHT POST 600 WIDTH POST 600
+@media screen and (min-height: 600px) and (min-width: 600px) {
   .containerDiv {
     position: fixed;
     .lateralBar {
@@ -199,3 +125,152 @@
     }
   }
 }
+
+//H+600W-600
+//HEIGHT POST 600 WIDTH HASTA 600
+@media screen and (min-height: 600px) and (max-width: 600px) {
+  .containerDiv {
+    display: flex;
+    justify-content: center;
+    .lateralBar {
+      display: flex;
+      padding: 10px;
+      justify-content: space-evenly;
+      width: 100%;
+      mat-card-content {
+        display: flex;
+        justify-content: center;
+        transition: filter, 0.5s;
+        margin: 0;
+        img {
+          width: 50px;
+          height: 40px;
+        }
+        img:hover {
+          filter: invert(100%);
+        }
+      }
+    }
+  }
+}
+
+//H+525W+600
+//HEIGHT POST 525 WIDTH POST 600
+@media screen and (min-height: 525px) and (min-width: 600px){
+  .containerDiv {
+    position: fixed;
+    .lateralBar {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      width: 75px;
+      height: 400px;
+      transition: width, 1s;
+      div {
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .lateralBar:hover {
+      width: 90px;
+    }
+  }
+  .logoLocal {
+    transition: width, 0.5s;
+  }
+  .logoLocal:hover {
+    width: 60px;
+  }
+  mat-card-content {
+    img:hover {
+      filter: invert(100%);
+    }
+  }
+}
+
+//H+525W-600
+//HEIGHT POST 525 WIDTH HASTA 600
+@media screen and (min-height: 525px) and (max-width: 600px) {
+  .containerDiv {
+    display: flex;
+    justify-content: center;
+    .lateralBar {
+      display: flex;
+      padding: 10px;
+      justify-content: space-evenly;
+      width: 100%;
+      mat-card-content {
+        display: flex;
+        justify-content: center;
+        transition: filter, 0.5s;
+        margin: 0;
+        img {
+          width: 50px;
+          height: 40px;
+        }
+        img:hover {
+          filter: invert(100%);
+        }
+      }
+    }
+  }
+}
+
+//H-524W+600
+// HEIGHT HASTA 525 WIDTH POST 600
+@media screen and (max-height: 524px) and (min-width: 600px) {
+  .containerDiv {
+    display: flex;
+    justify-content: center;
+    .lateralBar {
+      display: flex;
+      padding: 10px;
+      justify-content: space-evenly;
+      width: 100%;
+      mat-card-content {
+        display: flex;
+        justify-content: center;
+        transition: filter, 0.5s;
+        margin: 0;
+        img {
+          width: 50px;
+          height: 40px;
+        }
+        img:hover {
+          filter: invert(100%);
+        }
+      }
+    }
+  }
+}
+
+//H-524W-600
+// HEIGHT HASTA 524 WIDTH HASTA 600
+@media screen and (max-height: 524px) and (max-width: 600px) {
+  .containerDiv {
+      display: flex;
+      justify-content: center;
+      .lateralBar {
+        display: flex;
+        padding: 10px;
+        justify-content: space-evenly;
+        width: 100%;
+        mat-card-content {
+          display: flex;
+          justify-content: center;
+          transition: filter, 0.5s;
+          margin: 0;
+          img {
+            width: 50px;
+            height: 40px;
+          }
+          img:hover {
+            filter: invert(100%);
+          }
+        }
+      }
+    }
+  }
+
+
