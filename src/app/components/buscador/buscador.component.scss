@@ -1,5 +1,5 @@
 // PANTALLAS GRANDES
-@media screen and (min-width: 701px) and (max-width: 1029px) {
+@media screen and (max-width: 1029px) {
     .divForm {
       display: flex;
       justify-content: center;
@@ -42,8 +42,8 @@
       }
   }
   
-//HEIGTH POST 600 ++ WIDTH POST 800
-@media screen and (min-height: 600px) and (min-width: 1030px) {
+//WIDTH POST 1030
+@media screen and (min-width: 1030px) {
   .divForm {
     position: fixed;
     right: 0;
