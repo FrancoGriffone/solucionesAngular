@@ -12,14 +12,19 @@
   flex-direction: column;
   align-items: center;
   margin: 5% 0% 2% 0%;
+  div{
+    width: 50%
+  }
+  mat-form-field {
+    width: 100%;
+  }
   .botones {
     display: flex;
-  }
-  .buscarBC {
-    display: flex;
-    align-self: center;
-    height: 50%;
-    margin-left: 2%;
+    flex-wrap: wrap;
+    justify-content: center;
+    button {
+      margin: 2%;
+    }
   }
 }
 
