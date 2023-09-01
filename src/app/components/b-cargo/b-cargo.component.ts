@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 
@@ -14,25 +15,25 @@ export class BCargoComponent implements OnInit {
   bcargo1: string = "http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecABC_det&rs:Command%20=%20Render&IdEmp="
   bcargo2: string = "&Fecha="
   idEmp: string = ""
-  bcargoFecha: string = ""
+  bcargoFecha: string = "" 
+  link: string = ""
+  linkBCargo: SafeResourceUrl = ""
 
   // FECHA + FUNCION PARA RESTAR UN DIA + SETEAR DIA OBTENIDO
   fecha = new Date()
-
-  subtractDay(date: Date, day: number) {
-    date.setDate(date.getDate() - day);
-    return date;
-  }
 
   fechaBusqueda: any = this.subtractDay(this.fecha, 1).toISOString().slice(0,-14)
 
   //FORM CONTROL SOBRE LA FECHA
   date = new FormControl(this.fechaBusqueda);
 
-  constructor(private route: ActivatedRoute, private api: ApiService) {}
+  constructor(private route: ActivatedRoute, private api: ApiService, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
+
+    //COMPLETAMOS EL STRING VACIO CON LA FECHA
+    this.bcargoFecha = this.date.value
     
     //DEPENDE EL LOCAL, DA UNA LETRA (CADA UNA CORRESPONDE AL PARAMETRO QUE SE NECESITA SEGUN EL REPORTE)
     let local: string = this.route.snapshot.paramMap.get('local') || ''
@@ -49,15 +50,29 @@ export class BCargoComponent implements OnInit {
     } else {
       this.idEmp = 'T'
     }
+
+    //ARMAMOS UN STRING CON = 1ERAPARTE LINK REPORTE + ID EMPRESA (LA LETRA) + 2DAPARTE LINK REPORTE + FECHA 
+    this.link  = this.bcargo1 + this.idEmp + this.bcargo2 + this.bcargoFecha
+
+    this.linkBCargo = this.sanitizer.bypassSecurityTrustResourceUrl(this.link)
   }
   
+  subtractDay(date: Date, day: number) {
+    date.setDate(date.getDate() - day);
+    return date;
+  }
+
   //BOTON PARA IR AL REPORTE
   onSubmit() {
     //COMPLETAMOS EL STRING VACIO CON LA FECHA
     this.bcargoFecha = this.date.value
     //ARMAMOS UN STRING CON = 1ERAPARTE LINK REPORTE + ID EMPRESA (LA LETRA) + 2DAPARTE LINK REPORTE + FECHA 
-    let linkBCargo: string = this.bcargo1 + this.idEmp + this.bcargo2 + this.bcargoFecha
-    //ABRE EL LINK QUE ARMAMOS ANTES EN OTRA PESTAÑA
-    window.open(linkBCargo, '_blank')
+    this.link  = this.bcargo1 + this.idEmp + this.bcargo2 + this.bcargoFecha
+
+    this.linkBCargo = this.sanitizer.bypassSecurityTrustResourceUrl(this.link)
+  }
+
+  imprimir(){
+    window.open(this.link, '_blank')
   }
 }
