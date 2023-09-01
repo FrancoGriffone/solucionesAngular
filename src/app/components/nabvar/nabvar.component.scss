@@ -35,6 +35,7 @@
         align-items: center;
         text-decoration: none;
         color: whitesmoke;
+        cursor: pointer;
         p {
           margin: 0px 0px 0px 10px;
         }
@@ -52,16 +53,6 @@
   border-radius: 50%;
   width: 60px;
   height: 60px;
-}
-
-img:hover {
-  filter: invert(100%);
-}
-
-.activeResponsive {
-  img {
-    filter: invert(100%);
-  }
 }
 
 //CLASES PARA CAMBIO DE COLOR
@@ -198,9 +189,13 @@ img:hover {
   }
   .logoLocal {
     transition: width, 0.5s;
-    //filter: invert(100%);
   }
   .logoLocal:hover {
     width: 60px;
+  }
+  mat-card-content {
+    img:hover {
+      filter: invert(100%);
+    }
   }
 }
