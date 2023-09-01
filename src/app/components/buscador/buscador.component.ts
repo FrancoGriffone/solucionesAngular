@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
 
@@ -84,7 +85,13 @@ export class BuscadorComponent implements OnInit {
           }
         } //SI NO SE ENCONTRO EL NUMERO DE RECLAMO, SALE EL ALERT. NO ME GUSTA PERO MOMENTANEAMENTE RESUELVE EL PROBLEMA
           else {
-            this.toastrSvc.error(`El reclamo ${dataUser} no existe, por favor verifique los datos colocados`)
+            //this.toastrSvc.error(`El reclamo ${dataUser} no existe, por favor verifique los datos colocados`)
+            Swal.fire({
+              title: 'Error!',
+              text: `El reclamo ${dataUser} no existe, por favor verifique los datos colocados`,
+              icon: 'error',
+              confirmButtonText: 'Volver atrás'
+            })
           }
         })
     }
