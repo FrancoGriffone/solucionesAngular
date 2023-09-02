@@ -15,16 +15,7 @@ export class BuscadorComponent implements OnInit {
 
   private receptorCambio: Subscription //SUBSCRIPCION PARA RECIBIR EL CAMBIO DE LOCAL
 
-  constructor(private api: ApiService, private router: Router, private toastrSvc: ToastrService) { 
-    //ACA RECIBE EL NOMBRE DEL LOCAL PARA ACTUALIZARLO
-      this.receptorCambio = this.api.receptorBuscador().subscribe(data =>{
-        this.mostrar = data
-      })
-  }
-
-  ngOnInit(): void {}
-
-  local: string = "" //PARA DEFINIR EL LOCAL
+  local: string = "Tate" //PARA DEFINIR EL LOCAL
 
   datos: any //SE USA PARA BAJAR LOS DATOS DE LAS API
 
@@ -34,8 +25,17 @@ export class BuscadorComponent implements OnInit {
   profileForm = new FormGroup({
     eleccion: new FormControl('', Validators.required),
     datos: new FormControl('', Validators.required),
-    local: new FormControl('')
+    local: new FormControl(this.local)
   });
+
+  constructor(private api: ApiService, private router: Router, private toastrSvc: ToastrService) { 
+    //ACA RECIBE EL NOMBRE DEL LOCAL PARA ACTUALIZARLO
+      this.receptorCambio = this.api.receptorBuscador().subscribe(data =>{
+        this.mostrar = data
+      })
+  }
+
+  ngOnInit(): void {}
 
   onSubmit(){
     let opcion = this.profileForm.value.eleccion

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ColDef } from 'ag-grid-community';
 import { ApiService } from 'src/app/service/api.service';
 import { LoaderService } from 'src/app/service/loader/loader.service';
+import * as dayjs from 'dayjs'
 
 @Component({
   selector: 'app-lista-reclamos',
@@ -10,6 +11,9 @@ import { LoaderService } from 'src/app/service/loader/loader.service';
   styleUrls: ['./lista-reclamos.component.scss'],
 })
 export class ListaReclamosComponent implements OnInit {
+
+  desde: any = dayjs().subtract(1, 'month').format('YYYY-MM-DD')
+  hasta: any = dayjs().format('YYYY-MM-DD')
 
     //AG GRID
     colDefs: ColDef[] = [
@@ -30,33 +34,22 @@ export class ListaReclamosComponent implements OnInit {
 
     //FORMULARIO CON LAS FECHAS EN LAS CUALES SE VA A BUSCAR
     profileForm = new FormGroup({
-      desde: new FormControl('', Validators.required),
-      hasta: new FormControl('', Validators.required)
+      desde: new FormControl(this.desde, Validators.required),
+      hasta: new FormControl(this.hasta, Validators.required)
     })
 
   constructor(private api: ApiService, public loaderService: LoaderService) {}
 
   ngOnInit(): void {
     this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
-    //TOMA LOS RECLAMOS DE 1 MES PARA ATRAS
-    //FECHA DEL DIA
-    let date = new Date()
-    //FUNCION PARA RESTAR 1 MES
-    function subtractMonths(date: Date, months: number) {
-      date.setMonth(date.getMonth() - months);
-      return date;
-    }
-    //FECHA DESDE SIN FORMATO
-    let fechaDesde = subtractMonths(date, 1);
-    //PARAMETROS DE FECHA | DESDE + HASTA COMO STRINGS
-    let desde = fechaDesde.toISOString().slice(0,-14)
-    let hasta = date.toISOString().slice(0,-14)
+
     //OBJETO PARA QUE TOME LA API
     let inicio = {
-      "desde": desde,
-      "hasta": hasta,
+      "desde": this.desde,
+      "hasta": this.hasta,
     }
-    //SI EXISTEN RECLAMOS EN EL LAPSO DE ESE MES, LOS MUESTRA AL INICIAR EL COMPONENTE
+
+    //SI EXISTEN RECLAMOS EN EL LAPSO DE ESE TIEMPO, LOS MUESTRA AL INICIAR EL COMPONENTE
       this.api.listarReclamos(inicio).subscribe(data =>{
         setTimeout(()=>{
           this.rowData = data

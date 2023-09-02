@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
+import * as dayjs from 'dayjs'
+
 
 @Component({
   selector: 'app-b-cargo',
@@ -19,13 +21,11 @@ export class BCargoComponent implements OnInit {
   link: string = ""
   linkBCargo: SafeResourceUrl = ""
 
-  // FECHA + FUNCION PARA RESTAR UN DIA + SETEAR DIA OBTENIDO
-  fecha = new Date()
-
-  fechaBusqueda: any = this.subtractDay(this.fecha, 1).toISOString().slice(0,-14)
+  //FECHA DE BUSQUEDA
+  fecha: any = dayjs().subtract(1, 'day').format('YYYY-MM-DD')
 
   //FORM CONTROL SOBRE LA FECHA
-  date = new FormControl(this.fechaBusqueda);
+  date = new FormControl(this.fecha);
 
   constructor(private route: ActivatedRoute, private api: ApiService, private sanitizer: DomSanitizer) {}
 
@@ -56,22 +56,17 @@ export class BCargoComponent implements OnInit {
 
     this.linkBCargo = this.sanitizer.bypassSecurityTrustResourceUrl(this.link)
   }
-  
-  subtractDay(date: Date, day: number) {
-    date.setDate(date.getDate() - day);
-    return date;
-  }
 
-  //BOTON PARA IR AL REPORTE
   onSubmit() {
     //COMPLETAMOS EL STRING VACIO CON LA FECHA
     this.bcargoFecha = this.date.value
     //ARMAMOS UN STRING CON = 1ERAPARTE LINK REPORTE + ID EMPRESA (LA LETRA) + 2DAPARTE LINK REPORTE + FECHA 
     this.link  = this.bcargo1 + this.idEmp + this.bcargo2 + this.bcargoFecha
-
+    //PASA EL LINK
     this.linkBCargo = this.sanitizer.bypassSecurityTrustResourceUrl(this.link)
   }
 
+  //BOTON PARA IR AL REPORTE
   imprimir(){
     window.open(this.link, '_blank')
   }

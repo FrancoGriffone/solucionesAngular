@@ -11,10 +11,10 @@
               </mat-select>
             </mat-form-field>
 
-            <!-- CONDICIONALES SEGUN EL LOCAL-->
+            <!-- CONDICIONAL SEGUN EL LOCAL-->
             <ng-template [ngIf]="profileForm.get('eleccion')?.value == 'DNI'">
               <mat-form-field appearance="fill">
-                <mat-label disabled>Local donde se va a cargar el reclamo</mat-label>
+                <mat-label>Local donde se va a cargar el reclamo</mat-label>
                   <mat-select formControlName="local">
                   <mat-option value="Tate">Tate</mat-option>
                   <mat-option value="TateExpress">Tate Express</mat-option>
