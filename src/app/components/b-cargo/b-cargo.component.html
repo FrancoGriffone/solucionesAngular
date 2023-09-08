@@ -34,7 +34,10 @@
   [maximizable]="true"
   closeIcon="pi pi-times" >
   <div class="m-0">
-    <p-table [value]="rowData" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm" id="print-section">
+    <div class="flex justify-content-center mb-3">
+      <p-selectButton [options]="sizes" [(ngModel)]="selectedSize" [multiple]="false" optionLabel="name" optionValue="class"></p-selectButton>
+    </div>
+    <p-table [value]="rowData" [tableStyle]="{ 'min-width': '50rem' }" styleClass={{selectedSize}} id="print-section">
       <ng-template pTemplate="header">
           <tr>
               <th>Reclamo</th>

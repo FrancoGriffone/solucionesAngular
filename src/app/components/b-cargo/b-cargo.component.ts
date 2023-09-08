@@ -15,6 +15,10 @@ export class BCargoComponent implements OnInit {
 
   visible: boolean = false;
 
+  sizes!: any[];
+
+  selectedSize: any = 'p-datatable-sm';
+
   idEmp: string = ""
 
   //FECHA DE BUSQUEDA
@@ -64,6 +68,11 @@ export class BCargoComponent implements OnInit {
     } else {
       this.idEmp = 'T'
     }
+
+    this.sizes = [
+      { name: 'Pequeña', class: 'p-datatable-sm' },
+      { name: 'Normal', class: '' }
+  ];
   }
 
   onSubmit() {
