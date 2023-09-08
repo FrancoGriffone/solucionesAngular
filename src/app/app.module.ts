@@ -15,6 +15,8 @@ import { ReclamoClienteComponent } from './components/partials/reclamo-cliente/r
 import { LegajoClienteComponent } from './components/partials/legajo-cliente/legajo-cliente.component';
 import { ReclamosVariosComponent } from './components/partials/reclamos-varios/reclamos-varios.component';
 import { SelecTipoReclamoComponent } from './components/partials/selec-tipo-reclamo/selec-tipo-reclamo.component';
+import {NgxPrintModule} from 'ngx-print';
+
 import { BuscadorComponent } from './components/buscador/buscador.component';
 //Para el form es necesario importar esto
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,6 +30,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+//Prime NG
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 //AG GRID
 import { AgGridModule } from 'ag-grid-angular';
 import { InterceptorService } from './service/loader/interceptor.service';
@@ -70,6 +76,10 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     AgGridModule,
     MatProgressSpinnerModule,
     ToastrModule.forRoot(),
+    TableModule,
+    DialogModule,
+    ConfirmDialogModule,
+    NgxPrintModule,
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

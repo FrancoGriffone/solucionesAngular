@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Subject } from 'rxjs';
 import { nuevoClienteInterface } from '../models/nuevoClienteInterface';
 import { NuevoReclamoInterface } from '../models/nuevoReclamoInterface';
+import { ReclamosAReparacionInterface } from '../models/reclamosAReparacion.interface';
+import { BoletasCargoInterface } from '../models/boletaCargo.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +31,12 @@ export class ApiService {
 
   private POST_LISTA_RECLAMOS =
     'http://192.168.0.9:100/api/reclamos/listarreclamos';
+
+  private GET_RECLAMOS_EN_REPARACION = 'http://192.168.0.9:100/api/reclamos/informes/enreparacion/'
+
+  private POST_RECLAMOS_A_REPARACION = 'http://192.168.0.9:100/api/reclamos/informes/areparacion'
+
+  private POST_BOLETA_CARGO = 'http://192.168.0.9:100/api/reclamos/informes/boletascargo'
 
   private GET_PRODUCTO = 'http://192.168.0.9:100/api/reclamos/productos/';
 
@@ -101,5 +109,23 @@ export class ApiService {
   listarReclamos(fecha: Object): Observable<listaReclamosInterface> {
     const url = this.POST_LISTA_RECLAMOS;
     return this.http.post<listaReclamosInterface>(url, fecha)
+  }
+
+  //RECLAMOS EN REPARACIÓN
+  obtenerReclamosEnReparacion(id: string) {
+    const url = this.GET_RECLAMOS_EN_REPARACION + id;
+    return this.http.get(url);
+  }
+
+  //RECLAMOS A REPARACIÓN
+  obtenerReclamosAReparacion(localID: string, fecha: string) {
+    const url = this.POST_RECLAMOS_A_REPARACION;
+    return this.http.post<ReclamosAReparacionInterface>(url, localID + fecha)
+  }
+
+  //BOLETAS DE CARGO
+  obtenerBoletaCargo(data: Object): Observable<any> {
+    const url = this.POST_BOLETA_CARGO;
+    return this.http.post(url, data)
   }
 }

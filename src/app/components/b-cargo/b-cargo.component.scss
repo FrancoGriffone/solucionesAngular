@@ -28,9 +28,13 @@
   }
 }
 
-.table-responsive {
-  margin-right: 5%;
-  margin-left: 5%;
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: left;
+  /* border: 1px solid #dee2e6; */
+  border-width: 0 0 1px 0;
+  /* padding: 1rem 1rem; */
+  /* display: flex; */
+  justify-content: space-around;
 }
 
 //HEIGTH POST 600 ++ WIDTH POST 800
@@ -39,4 +43,22 @@
     margin-right: 10%;
     margin-left: 10%;
   }
+}
+
+@media print {
+  app-root * {
+    visibility: hidden;
+  }
+  #myGrid, #myGrid * {
+    visibility: visible;
+  }
+  #myGrid {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+.ag-cell {
+  page-break-inside: avoid !important;
 }
