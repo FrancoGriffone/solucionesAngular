@@ -34,6 +34,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SelectButtonModule } from 'primeng/selectbutton';
+
 //AG GRID
 import { AgGridModule } from 'ag-grid-angular';
 import { InterceptorService } from './service/loader/interceptor.service';
@@ -79,6 +81,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     TableModule,
     DialogModule,
     ConfirmDialogModule,
+    SelectButtonModule,
     NgxPrintModule,
   ],
   providers: [

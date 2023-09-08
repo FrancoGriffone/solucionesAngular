@@ -15,12 +15,7 @@ export class BCargoComponent implements OnInit {
 
   visible: boolean = false;
 
-  //LINKS BOLETAS DE CARGO
-  bcargo1: string = "http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecABC_det&rs:Command%20=%20Render&IdEmp="
-  bcargo2: string = "&Fecha="
   idEmp: string = ""
-  bcargoFecha: string = "" 
-  link: string = ""
 
   //FECHA DE BUSQUEDA
   fecha: any = dayjs().subtract(1, 'day').format('YYYY-MM-DD')
@@ -83,17 +78,11 @@ export class BCargoComponent implements OnInit {
 
   onBtPrint() {
     this.visible = true;
-    // const api = this.gridApi!;
-    // setPrinterFriendly(api);
-    setTimeout(function () {
-      print();
-      // setNormal(api);
-    }, 2000);
   }
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
-    this.fecha = "2023-09-05"
+    this.fecha = this.fecha
     let datos = {
       'idLocal': this.idEmp,
       'fechaDia': this.fecha
@@ -102,17 +91,4 @@ export class BCargoComponent implements OnInit {
       this.rowData = data
     })
   }
-}
-
-function setPrinterFriendly(api: GridApi) {
-  const eGridDiv = document.querySelector<HTMLElement>('#myGrid')! as any;
-  eGridDiv.style.width = '';
-  eGridDiv.style.height = '';
-  api?.setDomLayout('print');
-}
-function setNormal(api: GridApi) {
-  const eGridDiv = document.querySelector<HTMLElement>('#myGrid')! as any;
-  eGridDiv.style.width = '100%';
-  eGridDiv.style.height = '200px';
-  api?.setDomLayout();
 }

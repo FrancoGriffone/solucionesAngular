@@ -33,14 +33,14 @@
   [resizable]="false"
   [maximizable]="true"
   closeIcon="pi pi-times" >
-  <p class="m-0">
-    <p-table [value]="rowData" [tableStyle]="{ 'min-width': '50rem' }" id="print-section">
+  <div class="m-0">
+    <p-table [value]="rowData" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm" id="print-section">
       <ng-template pTemplate="header">
           <tr>
               <th>Reclamo</th>
               <th>Código</th>
               <th>Descripción</th>
-              <th>N. Crédito</th>
+              <th>NC</th>
               <th>Motivo</th>
           </tr>
       </ng-template>
@@ -54,7 +54,9 @@
           </tr>
       </ng-template>
   </p-table>
-  </p>
+  <button class="btn btn-outline-primary" printSectionId="print-section" [useExistingCss]="true" ngxPrint>Imprimir con formato</button>
+  <button class="btn btn-outline-danger" printSectionId="print-section" ngxPrint style="margin-left: 2%;">Imprimir sin formato</button>
+</div>
   
 
 

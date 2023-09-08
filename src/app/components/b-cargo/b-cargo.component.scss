@@ -44,21 +44,3 @@
     margin-left: 10%;
   }
 }
-
-@media print {
-  app-root * {
-    visibility: hidden;
-  }
-  #myGrid, #myGrid * {
-    visibility: visible;
-  }
-  #myGrid {
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-}
-
-.ag-cell {
-  page-break-inside: avoid !important;
-}
