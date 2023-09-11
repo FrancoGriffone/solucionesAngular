@@ -69,7 +69,7 @@
             <input pInputText id="idTipo" value={{this.opcion?.estado}} />
             <label htmlFor="idTipo">Opción</label>
         </span>
-        <span *ngIf="this.datos?.[0].ncred != ''" class="p-float-label p-input-icon-left">
+        <span *ngIf="this.datos?.[0].ncred != '' && this.datos?.[0].ncred != null" class="p-float-label p-input-icon-left">
             <i class="pi pi-ellipsis-v"></i>
             <input pInputText id="tipo" value={{this.datos?.[0].ncred}} />
             <label htmlFor="tipo">NC</label>
