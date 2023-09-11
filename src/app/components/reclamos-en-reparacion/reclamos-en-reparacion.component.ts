@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
+import { ColDef, DomLayoutType, GridApi, GridReadyEvent } from 'ag-grid-community';
 import * as dayjs from 'dayjs';
 import { ApiService } from 'src/app/service/api.service';
 import { LoaderService } from 'src/app/service/loader/loader.service';
-import { VistaReclamoComponent } from '../partials/vistas/vista-reclamo/vista-reclamo.component';
 import { AgGridReclamosComponent } from '../partials/vistas/ag-grid-reclamos/ag-grid-reclamos.component';
 
 @Component({
@@ -12,6 +11,8 @@ import { AgGridReclamosComponent } from '../partials/vistas/ag-grid-reclamos/ag-
   styleUrls: ['./reclamos-en-reparacion.component.scss']
 })
 export class ReclamosEnReparacionComponent implements OnInit {
+
+  public domLayout: DomLayoutType = 'autoHeight';
 
   talleres: any;
 

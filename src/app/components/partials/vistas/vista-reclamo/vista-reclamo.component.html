@@ -5,7 +5,7 @@
 
 <div class="reclamo">
     <div>
-        <h2 *ngIf="this.datos?.[0].docNro != null">{{this.datos?.[0].nombres}}, {{this.datos?.[0].apellidos}}</h2>
+        <h2 *ngIf="this.datos?.[0].docNro != null">{{this.datos?.[0].nombres}}, {{this.datos?.[0].apellidos}} - DNI: {{this.datos?.[0].docNro}}</h2>
         <h2 *ngIf="this.datos?.[0].docNro == null">Reclamo interno</h2>
         <h2>Reclamo: {{this.datos?.[0].reclamo}}</h2>
         <h3 style="color: red;">Pendiente</h3> 

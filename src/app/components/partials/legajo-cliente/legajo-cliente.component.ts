@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, DomLayoutType } from 'ag-grid-community';
+import * as dayjs from 'dayjs';
 import { ApiService } from 'src/app/service/api.service';
 
 
@@ -11,6 +12,8 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./legajo-cliente.component.scss'],
 })
 export class LegajoClienteComponent implements OnInit {
+
+  public domLayout: DomLayoutType = 'autoHeight';
 
   datos: any //PARA VOLCAR LOS DATOS DEL CLIENTE
 
@@ -31,7 +34,7 @@ export class LegajoClienteComponent implements OnInit {
   colDefs: ColDef[] = [
     {field: 'empresa', headerName: 'Empresa', width: 75, resizable: true, sortable: true, filter: true,},
     {field: 'reclamo', headerName: 'Reclamos', width: 75, resizable: true, sortable: true, filter: true,},
-    {field: 'fecha', headerName: 'Fecha', width: 100, resizable: true, sortable: true, filter: true, valueFormatter: params => params.data.fecha.slice(0,-9)},
+    {field: 'fecha', headerName: 'Fecha', width: 100, resizable: true, sortable: true, filter: true, valueFormatter: params => dayjs(params.data.fecha).format('DD/MM/YYYY')},
     //valueFormatter + fecha.slice SIRVE PARA ACORTAR EL STRING QUE LLEGA COMO FECHA
     {field: 'prodCodBar', headerName: 'Código de barras', width: 110, resizable: true, sortable: true, filter: true},
     {field: 'prodDescripcion', headerName: 'Descripción', width: 200, resizable: true, sortable: true, filter: true},
