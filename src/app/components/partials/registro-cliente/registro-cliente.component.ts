@@ -62,7 +62,7 @@ export class RegistroClienteComponent implements OnInit {
       Apellidos:this.profileForm.value.apellido,
       Nombres:this.profileForm.value.nombre,
       Telefono1:this.profileForm.value.telefono,
-      Observaciones:this.profileForm.value.observaciones,
+      Observaciones:this.profileForm.value.observaciones, //SI BORRAMOS TODO, NO SE GRABA Y QUEDA COMO ANTES
       //ESTOS TRES ESTAN TERRIBLES, PORQUE DOMICILIO TOMA LA CALLE + NRO + PISO
       //Y PARA ACTUALIZARLA TENES QUE BORRAR MANUALMENTE EL NRO Y CALLE + COLOCAR OTRAS EN DONDE VA SINO NO SE BORRA
       //+++++ EN LOS CLIENTES YA EXISTENTES, QUE TIENEN LA CALLE PRECARGADA CON IDCALLE NO FUNCIONA LA EDICION DEL
@@ -71,6 +71,7 @@ export class RegistroClienteComponent implements OnInit {
       CalleNro: this.profileForm.value.numero,
       PisoDpto:this.profileForm.value.pisoDpto,
     }
+    console.log(this.profileForm.value.observaciones)
     //SI NO ESTA REGISTRADO, SE PASA A LA API PARA NUEVOS CLIENTES
     if(this.datos == undefined){
       this.toastrSvc.success('Nuevo cliente cargado con éxito')

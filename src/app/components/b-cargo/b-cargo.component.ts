@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import * as dayjs from 'dayjs'
-import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
+import { ColDef, DomLayoutType, GridApi, GridReadyEvent } from 'ag-grid-community';
 
 
 @Component({
@@ -12,6 +12,8 @@ import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
   styleUrls: ['./b-cargo.component.scss'],
 })
 export class BCargoComponent implements OnInit {
+
+  public domLayout: DomLayoutType = 'autoHeight';
 
   visible: boolean = false;
 
