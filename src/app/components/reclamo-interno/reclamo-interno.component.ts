@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import * as dayjs from 'dayjs';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
 import { LoaderService } from 'src/app/service/loader/loader.service';
 
@@ -12,67 +14,19 @@ import { LoaderService } from 'src/app/service/loader/loader.service';
 })
 export class ReclamoInternoComponent implements OnInit {
 
+  talleres: any
+
+  opciones: any
+
   producto: any //PARA VOLCAR LA DESCRIPCION DEL PRODUCTO
 
   datosReclamo: any //PARA VOLCAR LOS DATOS DEL RECLAMO
 
   pagadoTaller: number = 0 //PARA EL TILDE DE TALLER, DADO QUE LLEGA COMO STRING "Sí" O "No"
 
-  fechaReclamo: string = "" //PARA FECHA DE RECLAMO
-
-   //LOS DOS SON PARA LA FECHA FIJA EN EL FORMCONTROL
-   fecha = new Date().toISOString().substring(0,10)
-   disabled: boolean = true;
-
-  constructor(private api: ApiService, private route: ActivatedRoute, public loaderService: LoaderService, private toastrSvc: ToastrService) {}
-
-  ngOnInit(): void {
-     //VERIFICA DATOS DEL RECLAMO
-     let numReclamo: string = this.route.snapshot.paramMap.get('id') || ''
-
-     this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
-
-     //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA EL ULTIMO RECLAMO EN LA LISTA
-     if (numReclamo != ''){
-  
-     this.api.listarReclamoInd(numReclamo).subscribe((data) => {
-       setTimeout(()=>{ //ESTE TIMEOUT PERMITE CARGAR LOS DATOS SIN QUE LA PAGINA PAREZCA QUE SE TILDA MIENTRAS CARGA TODO 
-       this.datosReclamo = data
-       this.datosReclamo = this.datosReclamo[0] //TOMAMOS EL ARRAY QUE TRAE Y LO VOLCAMOS
-
-        //SI EL RECLAMO EXISTE, PERMITE APARECER A LA DESCRIPCION DEL PRODUCTO
-          this.api.cargarProducto(this.datosReclamo.prodCodBar).subscribe((data)=>{
-          this.producto = data
-        })
- 
-       //PARA TRAER EL STRING DE LA FECHA SE TOMARON INDIVIDUALMENTE PARA APLICAR UN SLICE
-       this.fechaReclamo = this.datosReclamo.fecha 
- 
-       //EL PAGADO DEL TALLER LLEGA COMO SÍ O NO, LO PASAMOS A BOOLEANO PARA QUE TOME EL TILDE.
-       //SI ESTA PAGADO, CAMBIA A 1, SINO SIGUE EL 0
-       if (this.datosReclamo.pagado == 'Sí') {
-         this.pagadoTaller = 1
-       }
-
-       //SI EXISTE EL RECLAMO SE VUELCAN LOS DATOS
-       this.profileForm.patchValue({
-         codigoBarras: this.datosReclamo.prodCodBar,
-         seccion: this.datosReclamo.seccion,
-         fecha: this.fechaReclamo.slice(0,-9),
-         estado: this.datosReclamo.estado,
-         motivo: this.datosReclamo.motivo,
-         observaciones: this.datosReclamo.solucion,
-         taller: this.datosReclamo.taller,
-         importe: this.datosReclamo.costo,
-         pagado: this.pagadoTaller,
-         cerrado: this.datosReclamo.cerrado,
-         descripcion: this.datosReclamo.prodDescripcion,
-         reclamo: this.datosReclamo.reclamo
-       })
-      })
-      }) 
-    }
-  }
+  //LOS DOS SON PARA LA FECHA FIJA EN EL FORMCONTROL
+  fecha = dayjs().format('DD/MM/YYYY')
+  disabled: boolean = true;
 
   //FORMULARIO PARA RECLAMO INTERNO
   profileForm = new FormGroup({
@@ -88,6 +42,56 @@ export class ReclamoInternoComponent implements OnInit {
     cerrado: new FormControl(''),
     reclamo: new FormControl(''),
   });
+
+  constructor(private api: ApiService,
+    private route: ActivatedRoute, 
+    public loaderService: LoaderService, 
+    private toastrSvc: ToastrService) {}
+
+  ngOnInit(): void {
+     //VERIFICA DATOS DEL RECLAMO
+     let numReclamo: string = this.route.snapshot.paramMap.get('id') || ''
+
+     this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
+
+     //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA EL ULTIMO RECLAMO EN LA LISTA
+     if (numReclamo != ''){
+  
+    let listarReclamo = this.api.listarReclamoInd(numReclamo)
+    let talleres = this.api.talleres()
+    let tipoSolucion = this.api.opciones()
+
+    forkJoin([listarReclamo, talleres, tipoSolucion])
+    .subscribe( results => {
+      this.datosReclamo = results[0]
+      this.talleres = results[1]
+      this.opciones = results[2]
+
+        //SI EL RECLAMO EXISTE, PERMITE APARECER A LA DESCRIPCION DEL PRODUCTO
+        this.api.cargarProducto(this.datosReclamo[0].prodCodBar).subscribe((data)=>{
+          this.producto = data
+        })
+
+        if (this.datosReclamo.pagado == 'Sí') {
+          this.pagadoTaller = 1
+        }
+        this.profileForm.patchValue({
+          codigoBarras: this.datosReclamo[0].prodCodBar,
+          seccion: this.datosReclamo[0].seccion,
+          fecha: dayjs(this.datosReclamo[0].fecha).format('DD/MM/YYYY'),
+          estado: this.datosReclamo[0].estado,
+          motivo: this.datosReclamo[0].motivo,
+          observaciones: this.datosReclamo[0].solucion,
+          taller: this.datosReclamo[0].taller,
+          importe: this.datosReclamo[0].costo,
+          pagado: this.pagadoTaller,
+          cerrado: this.datosReclamo[0].cerrado,
+          descripcion: this.datosReclamo[0].prodDescripcion,
+          reclamo: this.datosReclamo[0].reclamo
+        })
+    })
+    }
+  }
 
   //CAMBIAR DESCRIPCION DEL PRODUCTO
   onChange(){

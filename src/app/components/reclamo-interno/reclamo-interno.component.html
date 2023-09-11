@@ -111,6 +111,10 @@
         <mat-label>Observaciones</mat-label>
         <textarea matInput formControlName="observaciones"></textarea>
       </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Solución (solo para vista, no se puede editar)</mat-label>
+        <textarea matInput readonly>{{this.datosReclamo?.observaciones}}</textarea>
+      </mat-form-field>
     </div>
 
     <!-- IMPORTE Y CHECKBOX DE PAGADO -->
