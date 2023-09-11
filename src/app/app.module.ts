@@ -10,7 +10,7 @@ import { BCargoComponent } from './components/b-cargo/b-cargo.component';
 import { ReclamoInternoComponent } from './components/reclamo-interno/reclamo-interno.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ListaReclamosComponent } from './components/lista-reclamos/lista-reclamos.component';
-import { RegistroClienteComponent } from './components/partials/registro-cliente/registro-cliente.component';
+import { RegistroClienteComponent } from './components/partials/registro-cliente/registro-cliente.component'
 import { ReclamoClienteComponent } from './components/partials/reclamo-cliente/reclamo-cliente.component';
 import { LegajoClienteComponent } from './components/partials/legajo-cliente/legajo-cliente.component';
 import { ReclamosVariosComponent } from './components/partials/reclamos-varios/reclamos-varios.component';
@@ -51,6 +51,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ReclamosEnReparacionComponent } from './components/reclamos-en-reparacion/reclamos-en-reparacion.component';
 import { VistaReclamoComponent } from './components/partials/vistas/vista-reclamo/vista-reclamo.component';
 import { AgGridReclamosComponent } from './components/partials/vistas/ag-grid-reclamos/ag-grid-reclamos.component';
+
 
 
 

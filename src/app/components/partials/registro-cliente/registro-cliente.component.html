@@ -27,42 +27,61 @@
     >
       Es necesario colocar al menos un nombre y un apellido
     </div>
+    <!-- DIRECCION COMPLETA DIV-->
+    <div class="formComponent">
+      <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-label>Dirección completa</mat-label>
+        <input matInput formControlName="direccion" readonly/>
+      </mat-form-field>
+    </div>
     <!-- CALLE + NUMERO + PISO/DPTO DIV -->
-    <div class="formComponent">
-      <!-- CALLE -->
-      <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label>Calle</mat-label>
-        <input matInput formControlName="domicilio"/>
-      </mat-form-field>
-      <!-- LOCALIDAD -->
-      <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label>Número</mat-label>
-        <input matInput formControlName="numero"/>
-      </mat-form-field>
-      <!-- PISO -->
-      <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label>Piso/Dpto</mat-label>
-        <input matInput formControlName="pisoDpto"/>
-      </mat-form-field>
+    <div class="alert alert-info cambioDatos">
+      <div>
+        <h3>Modifica los datos del domicilio</h3>
+      </div>
+      <div class="inputCambios">
+        <p-dropdown [options]="calles" 
+        [(ngModel)]="calleSeleccionada"
+        [ngModelOptions]="{standalone: true}"
+        optionLabel="calle1" 
+        [filter]="true" 
+        filterBy="calle1" 
+        [showClear]="true" 
+        placeholder="Selecciona una calle">
+          <ng-template pTemplate="selectedItem">
+              <div class="flex align-items-center gap-2" *ngIf="calleSeleccionada">
+                  <div>{{ calleSeleccionada.calle1 }}</div>
+              </div>
+          </ng-template>
+          <ng-template let-calles pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                  <div>{{ calles.calle1 }}</div>
+              </div>
+          </ng-template>
+      </p-dropdown>
+        <!-- NÚMERO -->
+        <span class="p-input-icon-left">
+          <i class="pi pi-info-circle"></i>
+          <input type="text"
+          formControlName="numero" 
+          style="width: 100%;" 
+          pInputText 
+          value={{value}} 
+          placeholder="Número"/>
+        </span>
+        <!-- PISO -->
+        <span class="p-input-icon-left">
+          <i class="pi pi-info-circle"></i>
+          <input type="text"
+          formControlName="pisoDpto"  
+          style="width: 100%;" 
+          pInputText 
+          value={{value}}
+          placeholder="Piso/dpto"/>
+        </span>
+      </div>
     </div>
-    <!-- ALERT DIV FORMATO CALLE -->
-    <div class="alert alert-danger">
-      Si se desea cambiar el número o el piso/dpto es necesario borrarlo de la calle y colocar los nuevos
-      en los espacios correspondientes. <b>SI NO SE BORRAN MANUALMENTE LOS QUE YA ESTAN, VAN A QUEDAR ANTES
-      QUE LOS NUEVOS AGREGADOS</b>. Esto no funciona con clientes cargados en el soluciones anterior.
-    </div>
-
-    <!-- LOCALIDAD + CP DIV  ACTUALMENTE EN DESUSO-->
-      <!-- ACTUALMENTE DESHABILITADO PORQUE NO EXISTE EL CODIGO POSTAL EN LAS API -->
-
-      <!-- <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label>Código Postal</mat-label>
-        <input matInput formControlName="codigoPostal"/>
-      </mat-form-field> -->
-
-    <div class="formComponent">
-    </div>
-    
+  
     <!-- TELEFONO DIV -->
     <div class="formComponent motivo">
       <mat-form-field appearance="fill" class="spacingComponents">
@@ -78,6 +97,9 @@
       </mat-form-field>
     </div>
 
+    <div class="alert alert-danger">
+      Observaciones no guardan un string vacío
+    </div>
     <!-- BOTON GRABAR -->
     <div class="formComponent">
       <button

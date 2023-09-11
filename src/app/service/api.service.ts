@@ -44,6 +44,10 @@ export class ApiService {
 
   private GET_TIPOS_SOLUCIONES = 'http://192.168.0.9:100/api/reclamos/soluciones/estados'
 
+  private GET_CALLES = 'http://192.168.0.9:100/api/reclamos/calles'
+
+  private GET_LOCALIDADES = 'http://192.168.0.9:100/api/reclamos/localidades'
+  
   constructor(private http: HttpClient) {}
 
   //SERVICE PARA CAMBIO DE LOCAL
@@ -142,6 +146,18 @@ export class ApiService {
   //OBTENER OPCIONES DE SOLUCION
   opciones(){
     const url = this.GET_TIPOS_SOLUCIONES;
+    return this.http.get(url)
+  }
+
+  //OBTENER CALLES
+  calles(){
+    const url = this.GET_CALLES;
+    return this.http.get(url)
+  }
+
+  //OBTENER LOCALIDADES
+  localidades(){
+    const url = this.GET_LOCALIDADES;
     return this.http.get(url)
   }
 }
