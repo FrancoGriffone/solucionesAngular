@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ColDef, DomLayoutType } from 'ag-grid-community';
 import * as dayjs from 'dayjs';
 import { ApiService } from 'src/app/service/api.service';
+import { AgGridReclamosComponent } from '../vistas/ag-grid-reclamos/ag-grid-reclamos.component';
 
 
 @Component({
@@ -32,17 +33,26 @@ export class LegajoClienteComponent implements OnInit {
 
   //AG GRID
   colDefs: ColDef[] = [
-    {field: 'empresa', headerName: 'Empresa', width: 75, resizable: true, sortable: true, filter: true,},
-    {field: 'reclamo', headerName: 'Reclamos', width: 75, resizable: true, sortable: true, filter: true,},
-    {field: 'fecha', headerName: 'Fecha', width: 100, resizable: true, sortable: true, filter: true, valueFormatter: params => dayjs(params.data.fecha).format('DD/MM/YYYY')},
+    {field: 'empresa', headerName: 'Empresa', width: 75},
+    {field: 'reclamo', headerName: 'Reclamos', width: 75, cellRenderer: AgGridReclamosComponent},
+    {field: 'fecha', headerName: 'Fecha', width: 100, valueFormatter: params => dayjs(params.data.fecha).format('DD/MM/YYYY')},
     //valueFormatter + fecha.slice SIRVE PARA ACORTAR EL STRING QUE LLEGA COMO FECHA
-    {field: 'prodCodBar', headerName: 'Código de barras', width: 110, resizable: true, sortable: true, filter: true},
-    {field: 'prodDescripcion', headerName: 'Descripción', width: 200, resizable: true, sortable: true, filter: true},
-    {field: 'motivo', headerName: 'Motivo', width: 300, resizable: true, sortable: true, filter: true},
-    {field: 'estado', headerName: 'Estado', width: 100, resizable: true, sortable: true, filter: true},
-    {field: 'solucion', headerName: 'Observaciones', width: 300, resizable: true, sortable: true, filter: true},
+    {field: 'prodCodBar', headerName: 'Código de barras', width: 110},
+    {field: 'prodDescripcion', headerName: 'Descripción', width: 200},
+    {field: 'motivo', headerName: 'Motivo', width: 300},
+    {field: 'estado', headerName: 'Estado', width: 100},
+    {field: 'solucion', headerName: 'Observaciones', width: 300},
   ];
   rowData: any = []; //FILAS AG GRID
+
+  gridOptions = {
+    defaultColDef:{
+      resizable: true,
+      sortable: true,
+      unSortIcon: true,
+      filter: true,
+    }
+  }
   
   constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) { }
 

@@ -69,6 +69,11 @@
             <input pInputText id="idTipo" value={{this.opcion?.estado}} />
             <label htmlFor="idTipo">Opción</label>
         </span>
+        <span *ngIf="this.datos?.[0].ncred != ''" class="p-float-label p-input-icon-left">
+            <i class="pi pi-ellipsis-v"></i>
+            <input pInputText id="tipo" value={{this.datos?.[0].ncred}} />
+            <label htmlFor="tipo">NC</label>
+        </span>
         <span class="p-float-label p-input-icon-left">
             <!-- DEJO ESTE COMENTARIO PARA EL FUTURO. LOS RECLAMOS INTERNOS VAN A DEJAR DE TENER FECHA PROMETIDO, SI ALGUN DIA SE ROMPE
             EL INPUT ES PORQUE LOS VIEJOS SI TIENEN PROMETIDO DIA PERO LOS NUEVOS YA NO VAN A TENER -->

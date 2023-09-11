@@ -44,6 +44,8 @@ export class VistaReclamoComponent implements OnInit {
     forkJoin([buscarReclamo, opciones])
     .subscribe(results => {
       this.datos = results[0]
+      console.log(this.datos)
+
       this.opciones = results[1]
 
       this.local = this.datos[0]?.empresa 

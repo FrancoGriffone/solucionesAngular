@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, DomLayoutType } from 'ag-grid-community';
 import { ApiService } from 'src/app/service/api.service';
 import { LoaderService } from 'src/app/service/loader/loader.service';
 import * as dayjs from 'dayjs'
+import { AgGridReclamosComponent } from '../partials/vistas/ag-grid-reclamos/ag-grid-reclamos.component';
 
 @Component({
   selector: 'app-lista-reclamos',
@@ -12,25 +13,36 @@ import * as dayjs from 'dayjs'
 })
 export class ListaReclamosComponent implements OnInit {
 
+  public domLayout: DomLayoutType = 'autoHeight';
+
   desde: any = dayjs().subtract(1, 'month').format('YYYY-MM-DD')
   hasta: any = dayjs().format('YYYY-MM-DD')
 
     //AG GRID
     colDefs: ColDef[] = [
-      {field: 'empresa', headerName: 'Empresa', width: 100, resizable: true, filter: true},
-      {field: 'reclamo', headerName: 'Reclamo', width: 75, resizable: true, sortable: true, filter: true},
-      {field: 'fecha', headerName: 'Fecha', width: 100, resizable: true, sortable: true, filter: true, valueFormatter: params => dayjs(params.data.fecha).format('DD/MM/YYYY')},
+      {field: 'empresa', headerName: 'Empresa', width: 100},
+      {field: 'reclamo', headerName: 'Reclamo', width: 75,  cellRenderer: AgGridReclamosComponent},
+      {field: 'fecha', headerName: 'Fecha', width: 100, valueFormatter: params => dayjs(params.data.fecha).format('DD/MM/YYYY')},
       //valueFormatter SIRVE PARA MODIFICAR EL STRING QUE LLEGA COMO FECHA
-      {field: 'apellidos', headerName: 'Apellidos', width: 100, resizable: true, sortable: true, filter: true},
-      {field: 'nombres', headerName: 'Nombres', width: 100, resizable: true, sortable: true, filter: true},
-      {field: 'prodCodBar', headerName: 'Código de barras', width: 150, resizable: true, filter: true},
-      {field: 'prodDescripcion', headerName: 'Descripción', width: 300, resizable: true, filter: true},
-      {field: 'tipo', headerName: 'Decisión', width: 100, resizable: true, filter: true},
-      {field: 'estado', headerName: 'Estado', width: 100, resizable: true, filter: true},
-      {field: 'taller', headerName: 'Taller', width: 100, resizable: true, filter: true},
-      {field: 'observaciones', headerName: 'Observaciones', width: 300, resizable: true, filter: true},
+      {field: 'apellidos', headerName: 'Apellidos', width: 100},
+      {field: 'nombres', headerName: 'Nombres', width: 100},
+      {field: 'prodCodBar', headerName: 'Código de barras', width: 150},
+      {field: 'prodDescripcion', headerName: 'Descripción', width: 300},
+      {field: 'tipo', headerName: 'Decisión', width: 100},
+      {field: 'estado', headerName: 'Estado', width: 100},
+      {field: 'taller', headerName: 'Taller', width: 100},
+      {field: 'observaciones', headerName: 'Observaciones', width: 300},
     ];
     rowData: any = []; //FILAS AG GRID
+
+    gridOptions = {
+      defaultColDef:{
+        resizable: true,
+        sortable: true,
+        unSortIcon: true,
+        filter: true,
+      }
+    }
 
     //FORMULARIO CON LAS FECHAS EN LAS CUALES SE VA A BUSCAR
     profileForm = new FormGroup({
