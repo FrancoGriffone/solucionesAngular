@@ -1,0 +1,25 @@
+<!-- SPINNER -->
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="container card card-body containerForm">
+    <h2>Lista reclamos en reparación por taller</h2>
+    <div class="talleres">
+        <p-dropdown [options]="talleres" [(ngModel)]="tallerSeleccionado" optionLabel="taller" class="spacingComponents"></p-dropdown>
+        <p-button icon="pi pi-search" styleClass="p-button-rounded p-button-primary" (onClick)="buscar()"></p-button>
+    </div>
+    <!-- RECLAMOS BUSCADOS POR LOCAL -->
+    <ag-grid-angular
+      class="ag-theme-balham mt-3"
+      style="width: 100%; height: 500px"
+      [rowData]="rowData"
+      [columnDefs]="colDefs"
+      [gridOptions]="gridOptions"
+      (gridReady)="onGridReady($event)"
+      [pagination]=true
+      [paginationPageSize]="25"
+      ></ag-grid-angular> 
+
+      <p-button icon="pi pi-print" label="Imprimir" styleClass="p-button-text p-button-help" class="mt-2" (click)="onBtExport()"></p-button>
+</div>

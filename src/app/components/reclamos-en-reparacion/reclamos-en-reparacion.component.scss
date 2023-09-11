@@ -1,0 +1,36 @@
+.containerForm {
+    width: 70%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    .talleres {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.spacingComponents {
+    margin-right: 2%;
+}
+
+//SPINNER
+
+.loader-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.8;
+  z-index: 99;
+  mat-spinner{
+    top: 50%;
+    left: 50%
+  }
+}
+
+// CONFIGURACION STYLE DE AG GRID
+.ag-theme-balham {
+  --ag-header-column-separator-display: block;
+  --ag-header-column-separator-height: 100%;
+  --ag-header-column-separator-width: 2px;
+  --ag-header-column-separator-color: rgba(0, 0, 0, 0.692);
+}

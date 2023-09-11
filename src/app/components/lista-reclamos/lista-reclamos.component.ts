@@ -19,8 +19,8 @@ export class ListaReclamosComponent implements OnInit {
     colDefs: ColDef[] = [
       {field: 'empresa', headerName: 'Empresa', width: 100, resizable: true, filter: true},
       {field: 'reclamo', headerName: 'Reclamo', width: 75, resizable: true, sortable: true, filter: true},
-      {field: 'fecha', headerName: 'Fecha', width: 100, resizable: true, sortable: true, filter: true, valueFormatter: params => params.data.fecha.slice(0,-9)},
-      //valueFormatter + fecha.slice SIRVE PARA ACORTAR EL STRING QUE LLEGA COMO FECHA
+      {field: 'fecha', headerName: 'Fecha', width: 100, resizable: true, sortable: true, filter: true, valueFormatter: params => dayjs(params.data.fecha).format('DD/MM/YYYY')},
+      //valueFormatter SIRVE PARA MODIFICAR EL STRING QUE LLEGA COMO FECHA
       {field: 'apellidos', headerName: 'Apellidos', width: 100, resizable: true, sortable: true, filter: true},
       {field: 'nombres', headerName: 'Nombres', width: 100, resizable: true, sortable: true, filter: true},
       {field: 'prodCodBar', headerName: 'Código de barras', width: 150, resizable: true, filter: true},

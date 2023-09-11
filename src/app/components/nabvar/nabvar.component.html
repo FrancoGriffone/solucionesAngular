@@ -85,9 +85,7 @@
       </li>
       <li>
         <div class="iconDiv">
-          <a routerLinkActive="active" 
-          href="http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fRecEnRepar&rs:Command=Render" 
-          target="_blank">
+          <a routerLinkActive="active" (click)="reclamosEnReparacion()">
           <div class="circle">
             <img
             src="../../../assets/reclamosenreparacion.png"
@@ -181,8 +179,7 @@
       <li>
         <a
           routerLinkActive="activeResponsive"
-          href="http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fRecEnRepar&rs:Command=Render"
-          target="_blank"
+          (click)="reclamosEnReparacion()"
         >
           <div class="circle">
             <img

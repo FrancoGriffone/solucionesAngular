@@ -10,6 +10,7 @@ import { LegajoClienteComponent } from './components/partials/legajo-cliente/leg
 import { SelecTipoReclamoComponent } from './components/partials/selec-tipo-reclamo/selec-tipo-reclamo.component';
 import { ReclamoClienteComponent } from './components/partials/reclamo-cliente/reclamo-cliente.component';
 import { ReclamosVariosComponent } from './components/partials/reclamos-varios/reclamos-varios.component';
+import { ReclamosEnReparacionComponent } from './components/reclamos-en-reparacion/reclamos-en-reparacion.component';
 
 const routes: Routes = [
   //LINK AL HOME
@@ -81,6 +82,11 @@ const routes: Routes = [
   {
     path: ':local/cliente/:doc/reclamo/:id',
     component: ReclamoClienteComponent,
+  },
+  //LINK A RECLAMOS EN REPARACION
+  {
+    path: ':local/reclamosenreparacion',
+    component: ReclamosEnReparacionComponent,
   },
   //LINK CUANDO NO EXISTE LA URL COLOCADA
   {

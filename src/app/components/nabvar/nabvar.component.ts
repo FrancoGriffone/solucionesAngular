@@ -73,6 +73,9 @@ export class NabvarComponent implements OnInit {
   reclamoInterno() {
     this.router.navigate([this.cambioLocal + "/reclamointerno"]);
   }
+  reclamosEnReparacion() {
+    this.router.navigate([this.cambioLocal + "/reclamosenreparacion"]);
+  }
   bCargo() {
     this.router.navigate([this.cambioLocal + "/bcargo"]);
   }

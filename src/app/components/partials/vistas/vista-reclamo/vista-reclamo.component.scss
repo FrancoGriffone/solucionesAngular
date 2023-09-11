@@ -1,0 +1,10 @@
+.datos {
+    display: flex;
+    flex-direction: row;
+    span {
+        width: 100%;
+        input{
+            width: 100%;
+        }
+    }
+}

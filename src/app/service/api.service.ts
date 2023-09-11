@@ -40,6 +40,10 @@ export class ApiService {
 
   private GET_PRODUCTO = 'http://192.168.0.9:100/api/reclamos/productos/';
 
+  private GET_TALLERES = 'http://192.168.0.9:100/api/reclamos/talleres'
+
+  private GET_TIPOS_SOLUCIONES = 'http://192.168.0.9:100/api/reclamos/soluciones/estados'
+
   constructor(private http: HttpClient) {}
 
   //SERVICE PARA CAMBIO DE LOCAL
@@ -112,7 +116,7 @@ export class ApiService {
   }
 
   //RECLAMOS EN REPARACIÓN
-  obtenerReclamosEnReparacion(id: string) {
+  obtenerReclamosEnReparacion(id: number) {
     const url = this.GET_RECLAMOS_EN_REPARACION + id;
     return this.http.get(url);
   }
@@ -127,5 +131,17 @@ export class ApiService {
   obtenerBoletaCargo(data: Object): Observable<any> {
     const url = this.POST_BOLETA_CARGO;
     return this.http.post(url, data)
+  }
+
+  //OBTENER TALLERES
+  talleres() {
+    const url = this.GET_TALLERES;
+    return this.http.get(url)
+  }
+
+  //OBTENER OPCIONES DE SOLUCION
+  opciones(){
+    const url = this.GET_TIPOS_SOLUCIONES;
+    return this.http.get(url)
   }
 }

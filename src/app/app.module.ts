@@ -30,17 +30,27 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import {MatDialogModule} from '@angular/material/dialog';
+
 //Prime NG
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 //AG GRID
 import { AgGridModule } from 'ag-grid-angular';
+import 'ag-grid-enterprise';
+
 import { InterceptorService } from './service/loader/interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ReclamosEnReparacionComponent } from './components/reclamos-en-reparacion/reclamos-en-reparacion.component';
+import { VistaReclamoComponent } from './components/partials/vistas/vista-reclamo/vista-reclamo.component';
+import { AgGridReclamosComponent } from './components/partials/vistas/ag-grid-reclamos/ag-grid-reclamos.component';
 
 
 
@@ -59,6 +69,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ReclamosVariosComponent,
     SelecTipoReclamoComponent,
     BuscadorComponent,
+    ReclamosEnReparacionComponent,
+    VistaReclamoComponent,
+    AgGridReclamosComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +87,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatNativeDateModule,
     MatCardModule,
     MatTableModule,
+    MatDialogModule,
     HttpClientModule,
     AgGridModule,
     MatProgressSpinnerModule,
@@ -82,6 +96,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     DialogModule,
     ConfirmDialogModule,
     SelectButtonModule,
+    DropdownModule,
+    InputTextModule,
     NgxPrintModule,
   ],
   providers: [
