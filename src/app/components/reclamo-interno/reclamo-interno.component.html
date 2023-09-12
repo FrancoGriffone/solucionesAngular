@@ -6,7 +6,7 @@
 <div class="container card card-body containerForm">
   <!-- DATOS RECLAMO -->
   <ng-template [ngIf]="profileForm.get('reclamo')?.value != ''">
-    <h2 class="spacingComponents">Reclamo: {{datosReclamo.reclamo}} </h2>
+    <h2 class="spacingComponents">Reclamo: {{datosReclamo[0].reclamo}} </h2>
   </ng-template>
   <ng-template [ngIf]="profileForm.get('reclamo')?.value == ''">
     <h2 class="spacingComponents">Nuevo reclamo</h2>
@@ -30,19 +30,33 @@
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label disabled>Sección</mat-label>
         <mat-select formControlName="seccion">
-          <mat-option value="ADMRIOIV">Administración</mat-option>
-          <mat-option value="AUTOSERVICIO">Autoservicio</mat-option>
-          <mat-option value="CARTERAS">Carteras</mat-option>
-          <mat-option value="DAMAS">Damas</mat-option>
-          <mat-option value="DEPORTES">Deportes/Sneakers</mat-option>
-          <mat-option value="HOMBRES">Hombres</mat-option>
-          <mat-option value="NINOS">Niños</mat-option>
-          <mat-option value="ZAPATILLERIA">Zapatillería</mat-option>
+          <ng-template [ngIf]="this.route.snapshot.paramMap.get('local') == 'Tate'">
+            <mat-option value="ADMRIOIV">Administración</mat-option>
+            <mat-option value="AUTOSERVICIO">Autoservicio</mat-option>
+            <mat-option value="CARTERAS">Carteras</mat-option>
+            <mat-option value="DAMAS">Damas</mat-option>
+            <mat-option value="DEPORTES">Deportes/Sneakers</mat-option>
+            <mat-option value="HOMBRES">Hombres</mat-option>
+            <mat-option value="NINOS">Niños</mat-option>
+            <mat-option value="ZAPATILLERIA">Zapatillería</mat-option>
+          </ng-template>
+          <ng-template [ngIf]="this.route.snapshot.paramMap.get('local') == 'TateExpress'">
+            <mat-option value="TATEEXPRESS">Tate Express</mat-option>
+          </ng-template>
+          <ng-template [ngIf]="this.route.snapshot.paramMap.get('local') == 'Kilroy'">
+            <mat-option value="KILROY">Kilroy</mat-option>
+          </ng-template>
+          <ng-template [ngIf]="this.route.snapshot.paramMap.get('local') == 'KilroyKids'">
+            <mat-option value="KILROYKIDS">Kilroy Kids</mat-option>
+          </ng-template>
+          <ng-template [ngIf]="this.route.snapshot.paramMap.get('local') == 'KitExpress'">
+            <mat-option value="KITEXPRESS">Kit Express</mat-option>
+          </ng-template>
         </mat-select>
       </mat-form-field>
       <!-- FECHA -->
       <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label>Fecha (año/mes/dia)</mat-label>
+        <mat-label>Fecha</mat-label>
         <input matInput formControlName="fecha" class="fecha" readonly="disabled"/>
       </mat-form-field>
     </div>
@@ -65,22 +79,17 @@
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label disabled>Tipo de solución</mat-label>
         <mat-select formControlName="estado">
-          <mat-option value="A Reparación">A reparación</mat-option>
-          <mat-option value="En Reparación">En reparación</mat-option>
-          <mat-option value="Reparado" disabled>Reparado</mat-option>
-          <mat-option value="Entregado">Entregado</mat-option>
+          <mat-option value={{3}}>A reparación</mat-option>
+          <mat-option value={{4}}>En reparación</mat-option>
+          <mat-option value={{5}} disabled>Reparado</mat-option>
+          <mat-option value={{13}}>Entregado</mat-option>
         </mat-select>
       </mat-form-field>
       <!-- TALLER -->
       <mat-form-field appearance="fill">
         <mat-label disabled>Taller</mat-label>
         <mat-select formControlName="taller">
-          <mat-option value="<Sin Asignar>">Sin Asignar</mat-option>
-          <mat-option value="Dante">Dante "Sport D"</mat-option>
-          <mat-option value="Gabriela">Gabiela Pereyra</mat-option>
-          <mat-option value="Georgina Reinoso">Georgina Reinoso</mat-option>
-          <mat-option value="Perla">Perla Barrio</mat-option>
-          <mat-option value="Ordoñez Walter">Walter Ordoñez</mat-option>
+          <mat-option value={{taller.id}} *ngFor="let taller of talleresActivos">{{taller.taller}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
