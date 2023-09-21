@@ -1,11 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as dayjs from 'dayjs';
 import { ToastrService } from 'ngx-toastr';
-import { forkJoin } from 'rxjs';
+import { catchError, forkJoin, throwError } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
 import { LoaderService } from 'src/app/service/loader/loader.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reclamo-cliente',
@@ -188,33 +190,51 @@ export class ReclamoClienteComponent implements OnInit {
     })
   }
 
-  //BOTON PARA GRABAR RECLAMO
-  onSubmit() {
-    let tipo = ''
-    let estado = ''
-
-    if(this.profileForm.value.tipo == '6' || this.profileForm.value.tipo == '21'){
+  controlCampos(){
+    //CONTROL ESTADOS Y TIPOS
+    if(this.profileForm.value.tipo == '1' ||
+    this.profileForm.value.tipo == '4' ||
+    this.profileForm.value.tipo == '5') {
+      this.profileForm.value.estado = ''
+      this.profileForm.value.taller = ''
+    } else if (this.profileForm.value == '2') {
+      if (this.profileForm.value == undefined) {
+        this.profileForm.value.taller = 0
+      }
+      if (this.profileForm.value.estado == undefined) {
+        this.profileForm.value.estado = 3
+      }
+    } else if(this.profileForm.value.tipo == '6' || this.profileForm.value.tipo == '21'){
       let opc = this.opciones.find((x: any) => x?.id == this.profileForm.value.tipo)
-      tipo = opc.idTipo
-      estado = this.profileForm.value.tipo
-    } else if (this.profileForm.value.tipo == '2') {
-      tipo = this.profileForm.value.tipo
-      estado = this.profileForm.value.estado
-    } else {
-      tipo = this.profileForm.value.tipo
+      this.profileForm.value.estado = this.profileForm.value.tipo
+      this.profileForm.value.tipo = opc.idTipo
     }
 
+    //CONTROL IMPORTE
     if (this.profileForm.value.importe == ''){
       this.profileForm.value.importe = 0
     }
 
+    //CONTROL TICKET Y PAGADO
+    //LLEGAN COMO '' O COMO UN 1 CUANDO ES TRUE
     if (this.profileForm.value.ticket == ''){
       this.profileForm.value.ticket = false
+    } else {
+      this.profileForm.value.ticket = true
     }
 
+    //LLEGAN COMO '' O COMO UN 1 CUANDO SI TIENE EL TICKET
     if (this.profileForm.value.pagado == ''){
       this.profileForm.value.pagado = false
+    } else {
+      this.profileForm.value.pagado = true
     }
+  }
+
+  //BOTON PARA GRABAR RECLAMO
+  onSubmit() {
+
+    this.controlCampos()
 
     let reclamo = {
       Id: this.datosReclamo?.[0].id,
@@ -226,8 +246,8 @@ export class ReclamoClienteComponent implements OnInit {
       FechaCompra: this.profileForm.value.fechaCompra,
       PrometidoDia: this.profileForm.value.prometidoDia,
       IdEmp: this.idEmp,
-      IdSolTipo: parseInt(tipo),
-      IdSolEstado: parseInt(estado),
+      IdSolTipo: parseInt(this.profileForm.value.tipo),
+      IdSolEstado: parseInt(this.profileForm.value.estado),
       Motivo: this.profileForm.value.motivo,
       Solucion: this.profileForm.value.observaciones,
       Observaciones: this.profileForm.value.solucion,
@@ -240,17 +260,32 @@ export class ReclamoClienteComponent implements OnInit {
 
     if(this.datosReclamo == undefined){
       this.toastrSvc.success('Nuevo reclamo creado con éxito')
-      this.api.nuevoReclamo(reclamo).subscribe((data) => {
+      this.api.nuevoReclamo(reclamo).pipe(catchError((errors: HttpErrorResponse)=>{
+        Swal.fire({
+          title: '¡Error!',
+          text: 'Ups, hubo un error al intentar la carga de datos. Verifica los campos colocados, si el error persiste ponete en contacto con el responsable de mantenimiento del servidor o la red.',
+          icon: 'error',
+          confirmButtonText: 'Volver atrás'
+        })
+        return throwError(errors);
+      })).subscribe((data) => {
         console.log(data)
       })
       // this.router.navigate([this.route.snapshot.paramMap.get('local') + "/cliente/", this.route.snapshot.paramMap.get('doc'), "/reclamo/"]);
     } else {
     //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
     this.toastrSvc.info('Reclamo actualizado con éxito')
-      this.api.editarReclamo(reclamo).subscribe((data) => {
+      this.api.editarReclamo(reclamo).pipe(catchError((errors: HttpErrorResponse)=>{
+        Swal.fire({
+          title: '¡Error!',
+          text: 'Ups, hubo un error al intentar la carga de datos. Verifica los campos colocados, si el error persiste ponete en contacto con el responsable de mantenimiento del servidor o la red.',
+          icon: 'error',
+          confirmButtonText: 'Volver atrás'
+        })
+        return throwError(errors);
+      })).subscribe((data) => {
         console.log(data)
       })
-      console.log('ENTRANDO EN RECLAMO EXISTENTE')
     }
   }
 }

@@ -143,6 +143,13 @@ export class ReclamoInternoComponent implements OnInit {
 
   //BOTON PARA GRABAR
   onSubmit() {
+    //LLEGAN COMO '' O COMO UN 1 CUANDO SI TIENE EL TICKET
+    if (this.profileForm.value.pagado == ''){
+      this.profileForm.value.pagado = false
+    } else {
+      this.profileForm.value.pagado = true
+    }
+
     let reclamo = {
       ProdCodBar: this.profileForm.value.codigoBarras,
       ProdDescripcion: this.producto,
