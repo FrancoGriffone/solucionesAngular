@@ -42,7 +42,9 @@ export class ApiService {
 
   private GET_TALLERES = 'http://192.168.0.9:100/api/reclamos/talleres'
 
-  private GET_TIPOS_SOLUCIONES = 'http://192.168.0.9:100/api/reclamos/soluciones/estados'
+  private GET_ESTADOS_SOLUCIONES = 'http://192.168.0.9:100/api/reclamos/soluciones/estados'
+
+  private GET_TIPOS_SOLUCIONES = 'http://192.168.0.9:100/api/reclamos/soluciones/tipos'
 
   private GET_CALLES = 'http://192.168.0.9:100/api/reclamos/calles'
 
@@ -145,6 +147,12 @@ export class ApiService {
 
   //OBTENER OPCIONES DE SOLUCION
   opciones(){
+    const url = this.GET_ESTADOS_SOLUCIONES;
+    return this.http.get(url)
+  }
+
+  //OBTENER TIPOS DE SOLUCION (EJEMPLO, ACÁ UN TIPO ES REPARACIÓN. EL DE ARRIBA TIENE, POR EJEMPLO, A REPARACIÓN COMO OPCIÓN)
+  tiposSolucion(){
     const url = this.GET_TIPOS_SOLUCIONES;
     return this.http.get(url)
   }

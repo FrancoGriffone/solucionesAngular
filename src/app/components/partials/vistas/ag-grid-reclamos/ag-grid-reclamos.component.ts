@@ -26,7 +26,7 @@ export class AgGridReclamosComponent implements OnInit {
       setTimeout(() => {
         const dialogRef = this.dialog.open(VistaReclamoComponent,{
           data : this.value,
-          height: '90vh'
+          maxHeight: '90vh'
         });
         dialogRef.afterClosed().subscribe(result => {});
       });

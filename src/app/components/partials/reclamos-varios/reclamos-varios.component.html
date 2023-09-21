@@ -29,15 +29,15 @@
         <!--FECHA Y TIPO DE SOLUCION ++ ALERT DIV -->
       <div class="formComponent">
         <mat-form-field appearance="fill" class="spacingComponents">
-            <mat-label>Fecha (año/mes/dia)</mat-label>
-            <input matInput formControlName="fecha" class="fecha" readonly="disabled"/>
+            <mat-label>Fecha</mat-label>
+            <input matInput formControlName="fecha" class="fecha" readonly />
           </mat-form-field>
         <!-- TIPO DE SOLUCION -->
         <mat-form-field appearance="fill" class="spacingComponents">
           <mat-label disabled>Tipo de solución</mat-label>
           <mat-select formControlName="estado">
-            <mat-option value="Pendiente de Respuesta">Pendiente</mat-option>
-            <mat-option value="Solucionado">Resuelto</mat-option>
+            <mat-option value={{14}}>Pendiente</mat-option>
+            <mat-option value={{16}}>Resuelto</mat-option>
           </mat-select>
         </mat-form-field>
         </div>
@@ -51,7 +51,7 @@
         <!-- MOTIVO -->
         <mat-form-field appearance="fill">
           <mat-label>Motivo</mat-label>
-          <textarea matInput formControlName="motivo"></textarea>
+          <input matInput formControlName="motivo" />
         </mat-form-field>
         <!-- ALERT DIV MOTIVO -->
         <div
@@ -66,7 +66,7 @@
       <div class="formComponent">
         <mat-form-field appearance="fill">
           <mat-label>Observaciones</mat-label>
-          <textarea matInput formControlName="observaciones"></textarea>
+          <input matInput formControlName="observaciones" />
         </mat-form-field>
       </div>
 
@@ -76,7 +76,7 @@
       <div class="formComponent">
         <mat-form-field appearance="fill">
           <mat-label>Solución (solo para lectura)</mat-label>
-          <input matInput formControlName="solucion" readonly="disabled">
+          <input matInput formControlName="solucion" readonly>
         </mat-form-field>
       </div>
 

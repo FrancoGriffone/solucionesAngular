@@ -6,12 +6,12 @@
 <div class="container card card-body containerForm">
   <!-- DATOS DEL CLIENTE Y DEL RECLAMO -->
   <div class="dataCliente">
-    <ng-template [ngIf]="datos?.ayN != undefined">
-      <h2 class="spacingComponents">{{datos?.ayN}} - {{datos?.docNro}}</h2>
+    <ng-template [ngIf]="datos?.[0].ayN != undefined">
+      <h2 class="spacingComponents">{{datos?.[0].ayN}} - {{datos?.[0].docNro}}</h2>
     </ng-template>
     <div class="dataReclamo">
       <ng-template [ngIf]="profileForm.get('reclamo')?.value != ''">
-        <h2 class="spacingComponents">Reclamo: {{datosReclamo.reclamo}}</h2>
+        <h2 class="spacingComponents">Reclamo: {{datosReclamo[0].reclamo}}</h2>
       </ng-template>
       <ng-template [ngIf]="profileForm.get('reclamo')?.value == ''">
         <h2 class="spacingComponents">Nuevo reclamo</h2>
@@ -35,7 +35,7 @@
       </mat-form-field>
       <!-- FECHA -->
       <mat-form-field appearance="fill" class="spacingComponents">
-        <mat-label>Fecha (año/mes/dia)</mat-label>
+        <mat-label>Fecha</mat-label>
         <input matInput formControlName="fecha" class="fecha" readonly="disabled"/>
       </mat-form-field>
     </div>
@@ -44,10 +44,7 @@
       <h4 style="color: grey;">Descripción: {{producto}}</h4>
     </ng-template>
     <!-- ALERT DIV CODIGO DE BARRAS -->
-    <div
-      class="alert alert-danger"
-      [hidden]="profileForm.get('codigoBarras')?.valid"
-    >
+    <div class="alert alert-danger" [hidden]="profileForm.get('codigoBarras')?.valid">
       Es necesario cargar un algo en el espacio del código de barras para grabar
       el reclamo
     </div>
@@ -63,31 +60,15 @@
       <div class="pagado spacingComponents">
         <label for="">Ticket:</label>
         <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="flexCheckDefault"
-            formControlName="ticket"
-          />
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="ticket"/>
         </div>
       </div>
       <!-- MONTO DEL PRODUCTO -->
-      <mat-form-field
-      appearance="fill"
-      floatLabel="always"
-      class="spacingComponents"
-    >
-      <mat-label>Monto del producto</mat-label>
+      <mat-form-field appearance="fill" floatLabel="always" class="spacingComponents">
+        <mat-label>Monto del producto</mat-label>
       <div class="importe"> <!-- OJO, TIENE LA MISMA CLASE QUE EL IMPORTE DEL TALLER -->
         <span matTextPrefix>$&nbsp;</span>
-        <input
-          matInput
-          type="number"
-          class="example-right-align"
-          placeholder="0"
-          formControlName="monto"
-        />
+        <input matInput type="number" class="example-right-align" placeholder="0" formControlName="monto"/>
       </div>
     </mat-form-field>
     </div>
@@ -100,10 +81,7 @@
         <textarea matInput formControlName="motivo"></textarea>
       </mat-form-field>
       <!-- ALERT DIV MOTIVO -->
-      <div
-        class="alert alert-danger"
-        [hidden]="profileForm.get('motivo')?.valid"
-      >
+      <div class="alert alert-danger" [hidden]="profileForm.get('motivo')?.valid">
         Es necesario cargar un motivo para grabar el reclamo
       </div>
     </div>
@@ -114,33 +92,33 @@
       <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label disabled>Tipo de solución</mat-label>
         <mat-select formControlName="tipo">
-          <mat-option value="A Determinar">A determinar</mat-option>
-          <mat-option value="Reparación">Taller</mat-option>
-          <mat-option value="Cambio Directo">Cambio directo</mat-option>
-          <mat-option value="NC / Baja Stock">Boleta de Cargo</mat-option>
-          <mat-option value="Fuera de garantía">Fuera de garantía</mat-option>
-          <mat-option value="Horma">Horma</mat-option>
+          <mat-option value={{1}}>A determinar</mat-option>
+          <mat-option value={{2}}>Taller</mat-option>
+          <mat-option value={{21}}>Cambio directo</mat-option>
+          <mat-option value={{6}}>Boleta de Cargo</mat-option>
+          <mat-option value={{4}}>Fuera de garantía</mat-option>
+          <mat-option value={{5}}>Horma</mat-option>
         </mat-select>
       </mat-form-field>
       <!-- CONDICIONALES DE TALLER, BOLETA DE CARGO Y HORMA -->
-      <ng-template [ngIf]="profileForm.get('tipo')?.value == 'Reparación'">
+      <ng-template [ngIf]="profileForm.get('tipo')?.value == '2'">
             <mat-form-field appearance="fill" class="spacingComponents">
-              <mat-label disabled>Opciones de taller</mat-label>
+              <mat-label disabled>Opcion es de taller</mat-label>
               <mat-select formControlName="estado">
-                <mat-option value="A Reparación">A reparación</mat-option>
-                <mat-option value="En Reparación">En reparación</mat-option>
-                <mat-option value="Reparado">Reparado</mat-option>
-                <mat-option value="Entregado">Entregado</mat-option>
+                <mat-option value={{3}}>A reparación</mat-option>
+                <mat-option value={{4}}>En reparación</mat-option>
+                <mat-option value={{5}}>Reparado</mat-option>
+                <mat-option value={{13}}>Entregado</mat-option>
               </mat-select>
             </mat-form-field>
       </ng-template>
-      <ng-template [ngIf]="profileForm.get('tipo')?.value == 'NC / Baja Stock'">
+      <ng-template [ngIf]="profileForm.get('tipo')?.value == '6'">
         <mat-form-field appearance="fill" class="spacingComponents">
           <mat-label>Nota de Crédito</mat-label>
           <input matInput formControlName="ncred"/>
         </mat-form-field>
       </ng-template>
-      <ng-template [ngIf]="profileForm.get('tipo')?.value == 'Horma'">
+      <ng-template [ngIf]="profileForm.get('tipo')?.value == '5'">
         <mat-form-field appearance="fill" class="spacingComponents">
           <mat-label disabled>Opciones de horma</mat-label>
           <mat-select formControlName="estado">
@@ -157,19 +135,14 @@
     </div>
 
     <!-- TALLER ES CONDICIONAL, SI SE ELIGE OTRA OPCION QUE NO SEA REPARACION NO APARECE -->
-    <ng-template [ngIf]="profileForm.get('tipo')?.value == 'Reparación'">
+    <ng-template [ngIf]="profileForm.get('tipo')?.value == '2'">
       <!-- TALLER, IMPORTE Y CHECKBOX DE PAGADO -->
 <div class="formComponent">
   <!-- TALLER -->
   <mat-form-field appearance="fill" class="spacingComponents">
     <mat-label disabled>Taller</mat-label>
     <mat-select formControlName="taller">
-      <mat-option value="<Sin Asignar>">Sin Asignar</mat-option>
-      <mat-option value="Dante">Dante "Sport D"</mat-option>
-      <mat-option value="Gabriela">Gabiela Pereyra</mat-option>
-      <mat-option value="Georgina Reinoso">Georgina Reinoso</mat-option>
-      <mat-option value="Perla">Perla Barrio</mat-option>
-      <mat-option value="Ordoñez Walter">Walter Ordoñez</mat-option>
+      <mat-option value={{taller.id}} *ngFor="let taller of talleresActivos">{{taller.taller}}</mat-option>
     </mat-select>
   </mat-form-field>
   <!-- IMPORTE -->
@@ -216,6 +189,10 @@
       <mat-form-field appearance="fill">
         <mat-label>Observaciones</mat-label>
         <textarea matInput formControlName="observaciones"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Solución (solo para vista, no se puede editar)</mat-label>
+        <textarea matInput readonly>{{this.datosReclamo?.[0].observaciones}}</textarea>
       </mat-form-field>
     </div>
     

@@ -55,7 +55,7 @@ export class InicioComponent implements OnInit {
             this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
             this.router.navigate([this.local + "/reclamointerno/" + dataUser])
           } //SI TIENE DNI, PERO EL TIPO DE RECLAMO ES ATENCION AL CLIENTE EL RECLAMO ES RECLAMO VARIOS
-            else if (this.datos[0].tipoRec == 'Atención al Cliente') {
+            else if (this.datos[0].prodCodBar == null) {
               this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
               this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/ReclamoVarios/" + dataUser])
           } //SI ES UN RECLAMO DE MERCADERIA DE CLIENTE

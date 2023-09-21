@@ -71,7 +71,7 @@ export class BuscadorComponent implements OnInit {
               this.router.navigate([this.local + "/reclamointerno/" + dataUser])
             });
           } //SI TIENE DNI, PERO EL TIPO DE RECLAMO ES ATENCION AL CLIENTE EL RECLAMO ES RECLAMO VARIOS
-            else if (this.datos[0].tipoRec == 'Atención al Cliente') {
+            else if (this.datos[0].prodCodBar == null) {
               this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
               this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
                 this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/ReclamoVarios/" + dataUser])
@@ -83,9 +83,8 @@ export class BuscadorComponent implements OnInit {
                 this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/reclamo/" + dataUser])
               });
           }
-        } //SI NO SE ENCONTRO EL NUMERO DE RECLAMO, SALE EL ALERT. NO ME GUSTA PERO MOMENTANEAMENTE RESUELVE EL PROBLEMA
+        } 
           else {
-            //this.toastrSvc.error(`El reclamo ${dataUser} no existe, por favor verifique los datos colocados`)
             Swal.fire({
               title: 'Error!',
               text: `El reclamo ${dataUser} no existe, por favor verifique los datos colocados`,

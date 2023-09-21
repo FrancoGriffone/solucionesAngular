@@ -13,8 +13,6 @@ import { LoaderService } from 'src/app/service/loader/loader.service';
 })
 export class VistaReclamoComponent implements OnInit {
 
-  value: any
-
   datos: any
 
   local: any
@@ -30,6 +28,8 @@ export class VistaReclamoComponent implements OnInit {
   opciones: any
 
   opcion: any
+
+  reclamoMercaderia: boolean = true
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, 
     public dialogRef: MatDialogRef<VistaReclamoComponent>, 
@@ -50,14 +50,20 @@ export class VistaReclamoComponent implements OnInit {
 
       this.local = this.datos[0]?.empresa 
       this.fechaReclamo = dayjs(this.datos[0]?.fecha).format('DD-MM-YYYY')
-      this.fechaCompra = dayjs(this.datos[0]?.fechaCompra).format('DD-MM-YYYY')
-      this.prometidoDia = dayjs(this.datos[0]?.prometidoDia).format('DD-MM-YYYY')
 
       this.idTipo()
-      if (this.datos[0]?.ticket == 1){
-        this.ticket = 'Sí'
+
+      if (this.datos[0]?.tipo == 'Sin Carta') {
+        this.reclamoMercaderia = false
       } else {
-        this.ticket = 'No'
+        this.fechaCompra = dayjs(this.datos[0]?.fechaCompra).format('DD-MM-YYYY')
+        this.prometidoDia = dayjs(this.datos[0]?.prometidoDia).format('DD-MM-YYYY')
+
+        if (this.datos[0]?.ticket == 1){
+          this.ticket = 'Sí'
+        } else {
+          this.ticket = 'No'
+        }
       }
     })
   }
@@ -79,7 +85,7 @@ export class VistaReclamoComponent implements OnInit {
           this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
           this.router.navigate([this.local + "/reclamointerno/" + this.data])
         } //SI TIENE DNI, PERO EL TIPO DE RECLAMO ES ATENCION AL CLIENTE EL RECLAMO ES RECLAMO VARIOS
-          else if (this.datos[0].tipoRec == 'Atención al Cliente') {
+          else if (this.datos[0].prodCodBar == null) {
             this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
             this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/ReclamoVarios/" + this.data])
         } //SI ES UN RECLAMO DE MERCADERIA DE CLIENTE

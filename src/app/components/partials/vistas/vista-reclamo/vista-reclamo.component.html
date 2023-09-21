@@ -1,9 +1,8 @@
-<!-- SPINNER -->
-<div *ngIf="loaderService.isLoading | async" class="loader-container">
-    <mat-spinner></mat-spinner>
-</div>
+<!-- -------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------RECLAMOS DE MERCADERIA---------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------- -->
 
-<div class="reclamo">
+<div *ngIf="this.reclamoMercaderia == true" class="reclamo">
     <div>
         <h2 *ngIf="this.datos?.[0].docNro != null">{{this.datos?.[0].nombres}}, {{this.datos?.[0].apellidos}} - DNI: {{this.datos?.[0].docNro}}</h2>
         <h2 *ngIf="this.datos?.[0].docNro == null">Reclamo interno</h2>
@@ -97,6 +96,62 @@
             <i class="pi pi-check-circle"></i>
             <input pInputText id="pagado" value={{this.datos?.[0].pagado}} />
             <label htmlFor="pagado">Pagado</label>
+        </span>
+    </div>
+    <div class="observacionesYResolucion mt-5 datos">
+        <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-book"></i>
+            <input pInputText id="solucion" value={{this.datos?.[0].solucion}}/>
+            <label htmlFor="solucion">Solucion</label>
+        </span>
+        <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-history"></i>
+            <input pInputText id="observaciones" value={{this.datos?.[0].observaciones}} />
+            <label htmlFor="observaciones">Observaciones</label>
+        </span>
+    </div>
+
+    <p-button icon="pi pi-info-circle" (click)="irReclamo()" label="Ir al Reclamo" styleClass="p-button-text p-button-danger"></p-button>
+</div>
+
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------RECLAMOS VARIOS---------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<div *ngIf="this.reclamoMercaderia == false" class="reclamo">
+    <div>
+        <h2 *ngIf="this.datos?.[0].docNro != null">{{this.datos?.[0].nombres}}, {{this.datos?.[0].apellidos}} - DNI: {{this.datos?.[0].docNro}}</h2>
+        <h2 *ngIf="this.datos?.[0].docNro == null">Reclamo interno</h2>
+        <h2>Reclamo: {{this.datos?.[0].reclamo}}</h2>
+        <h3 *ngIf="this.datos?.[0].cerrado == 'Sí'" style="color: green;">Resuelto</h3>
+        <h3 *ngIf="this.datos?.[0].cerrado == 'No'" style="color: red;">Pendiente</h3> 
+    </div>
+    <div class="fechaYSeccion mt-5 datos">
+        <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-calendar"></i>
+            <input pInputText id="fecha" value={{this.fechaReclamo}} />
+            <label htmlFor="fecha">Fecha</label>
+        </span>
+    </div>
+    <div class="motivo mt-5 datos">
+        <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-exclamation-circle"></i>
+            <input pInputText id="motivo" value={{this.datos?.[0].motivo}} />
+            <label htmlFor="motivo">Motivo</label>
+        </span>
+    </div>
+    <div class="solucionOpcionYPrometidoDia mt-5 datos">
+        <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-ellipsis-v"></i>
+            <input pInputText id="tipo" value={{this.datos?.[0].tipo}} />
+            <label htmlFor="tipo">Tipo</label>
+        </span>
+        <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-align-justify"></i>
+            <input pInputText id="idTipo" value={{this.opcion?.estado}} />
+            <label htmlFor="idTipo">Opción</label>
         </span>
     </div>
     <div class="observacionesYResolucion mt-5 datos">

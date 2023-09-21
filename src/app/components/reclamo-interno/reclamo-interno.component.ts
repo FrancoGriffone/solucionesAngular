@@ -14,6 +14,8 @@ import { LoaderService } from 'src/app/service/loader/loader.service';
 })
 export class ReclamoInternoComponent implements OnInit {
 
+  idEmp: any
+
   talleres: any
 
   talleresActivos: any[] = []
@@ -38,7 +40,7 @@ export class ReclamoInternoComponent implements OnInit {
     estado: new FormControl('', Validators.required),
     motivo: new FormControl('', Validators.required),
     observaciones: new FormControl(''),
-    taller: new FormControl(''),
+    taller: new FormControl('', Validators.required),
     importe: new FormControl(''),
     pagado: new FormControl(''),
     cerrado: new FormControl(''),
@@ -51,6 +53,20 @@ export class ReclamoInternoComponent implements OnInit {
     private toastrSvc: ToastrService) {}
 
   ngOnInit(): void {
+    let local: string = this.route.snapshot.paramMap.get('local') || ''
+    if (local == 'Tate') {
+      this.idEmp = 'T'
+    } else if (local == 'Kilroy') {
+      this.idEmp = 'K'
+    } else if (local == 'KilroyKids') {
+      this.idEmp = 'N'
+    } else if (local == 'TateExpress') {
+      this.idEmp = 'E'
+    } else if (local == 'KitExpress') {
+      this.idEmp = 'M'
+    } else {
+      this.idEmp = 'T'
+    }
      //VERIFICA DATOS DEL RECLAMO
      let numReclamo: string = this.route.snapshot.paramMap.get('id') || ''
 
@@ -107,7 +123,7 @@ export class ReclamoInternoComponent implements OnInit {
       .subscribe( results => {
         this.talleres = results[0]
         this.opciones = results[1]
-  
+
         this.talleres.forEach((taller: any) => {
           if (taller.desactivado != true) {
             this.talleresActivos.push(taller)
@@ -135,9 +151,11 @@ export class ReclamoInternoComponent implements OnInit {
       IdSolEstado: parseInt(this.profileForm.value.estado),
       Motivo: this.profileForm.value.motivo,
       Solucion: this.profileForm.value.observaciones,
+      Observaciones: this.profileForm.value.solucion,
       IdTaller: parseInt(this.profileForm.value.taller),
       Costo: this.profileForm.value.importe,
-      Pagado: this.profileForm.value.pagado, 
+      Pagado: this.profileForm.value.pagado,
+      IdEmp: this.idEmp 
     }
     console.log(reclamo)
     if(this.datosReclamo == undefined){

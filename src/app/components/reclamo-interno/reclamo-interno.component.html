@@ -94,8 +94,8 @@
       </mat-form-field>
     </div>
     <!-- ALERT DIV TIPO DE SOLUCION -->
-    <div class="alert alert-danger" [hidden]="profileForm.get('estado')?.valid">
-      Es necesario elegir un estado para grabar el reclamo
+    <div class="alert alert-danger" [hidden]="profileForm.get('estado')?.valid && profileForm.get('taller')?.valid">
+      Es necesario elegir un estado y un taller para grabar el reclamo
     </div>
 
     <!-- MOTIVO ++ ALERT DIV -->
@@ -122,7 +122,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Solución (solo para vista, no se puede editar)</mat-label>
-        <textarea matInput readonly>{{this.datosReclamo?.observaciones}}</textarea>
+        <textarea matInput readonly>{{this.datosReclamo?.[0].observaciones}}</textarea>
       </mat-form-field>
     </div>
 
