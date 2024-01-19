@@ -1,10 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as dayjs from 'dayjs';
-import { forkJoin } from 'rxjs';
+import { catchError, forkJoin, throwError } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
-import { LoaderService } from 'src/app/service/loader/loader.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-vista-reclamo',
@@ -12,6 +13,8 @@ import { LoaderService } from 'src/app/service/loader/loader.service';
   styleUrls: ['./vista-reclamo.component.scss']
 })
 export class VistaReclamoComponent implements OnInit {
+
+  loadingComponent: boolean = true
 
   datos: any
 
@@ -34,15 +37,24 @@ export class VistaReclamoComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, 
     public dialogRef: MatDialogRef<VistaReclamoComponent>, 
     private api: ApiService, 
-    private router: Router,
-    public loaderService: LoaderService) {}
+    private router: Router) {}
 
   ngOnInit(): void {
+    this.loadingComponent = false
+
     let buscarReclamo = this.api.listarReclamoInd(this.data)
     let opciones = this.api.opciones()
 
-    forkJoin([buscarReclamo, opciones])
-    .subscribe(results => {
+    forkJoin([buscarReclamo, opciones]).pipe(catchError((errors: HttpErrorResponse)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      this.loadingComponent = true
+      return throwError(errors);
+    })).subscribe(results => {
       this.datos = results[0]
       console.log(this.datos)
 
@@ -65,6 +77,7 @@ export class VistaReclamoComponent implements OnInit {
           this.ticket = 'No'
         }
       }
+      this.loadingComponent = true
     })
   }
 
@@ -74,7 +87,15 @@ export class VistaReclamoComponent implements OnInit {
   }
 
   irReclamo(){
-    this.api.listarReclamoInd(this.data).subscribe((data)=>{
+    this.api.listarReclamoInd(this.data).pipe(catchError((errors: HttpErrorResponse)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      return throwError(errors);
+    })).subscribe((data)=>{
       this.datos = data
       this.local = this.datos[0]?.empresa //PARA TOMAR LA EMPRESA
       this.local = this.local?.split(" ").join("") //PARA QUITAR LOS ESPACIOS EN BLANCO AL STRING DE LA EMPRESA
@@ -82,15 +103,15 @@ export class VistaReclamoComponent implements OnInit {
       if (Object.keys(data).length == 1){
         //SI NO TIENE DNI, SIGNIFICA QUE EL RECLAMO ES INTERNO
         if (this.datos[0].docNro == null) {
-          this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
+          this.api.enviarCambio(this.local) //ENVIA AL NAVBAR EL NOMBRE DEL LOCAL
           this.router.navigate([this.local + "/reclamointerno/" + this.data])
         } //SI TIENE DNI, PERO EL TIPO DE RECLAMO ES ATENCION AL CLIENTE EL RECLAMO ES RECLAMO VARIOS
           else if (this.datos[0].prodCodBar == null) {
-            this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
+            this.api.enviarCambio(this.local) //ENVIA AL NAVBAR EL NOMBRE DEL LOCAL
             this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/ReclamoVarios/" + this.data])
         } //SI ES UN RECLAMO DE MERCADERIA DE CLIENTE
           else {
-            this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
+            this.api.enviarCambio(this.local) //ENVIA AL NAVBAR EL NOMBRE DEL LOCAL
             this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/reclamo/" + this.data])
         }
       }

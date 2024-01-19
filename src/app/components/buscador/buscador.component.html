@@ -1,41 +1,40 @@
-<div class="container card card-body divForm" [ngClass]="{'d-none d-block' : mostrar == 'NO'}">
-    <div class="buscador">
-        <form class="inicioForm" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<div class="card card-body divForm">
+  <div class="buscador">
+    <form class="inicioForm" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   
-            <!-- SELECTOR DE OPCIONES PARA BUSCAR ENTRE DNI Y RECLAMOS -->
-            <mat-form-field appearance="fill">
-              <mat-label disabled>DNI/RECLAMO</mat-label>
-              <mat-select formControlName="eleccion">
-                <mat-option value="DNI">DNI</mat-option>
-                <mat-option value="Reclamo">Reclamo</mat-option>
-              </mat-select>
-            </mat-form-field>
+        <!-- SELECTOR DE OPCIONES PARA BUSCAR ENTRE DNI Y RECLAMOS -->
+        <mat-form-field appearance="fill">
+          <mat-label disabled>DNI/RECLAMO</mat-label>
+          <mat-select formControlName="eleccion">
+            <mat-option value="DNI">DNI</mat-option>
+            <mat-option value="Reclamo">Reclamo</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-            <!-- CONDICIONAL SEGUN EL LOCAL-->
-            <ng-template [ngIf]="profileForm.get('eleccion')?.value == 'DNI'">
-              <mat-form-field appearance="fill">
-                <mat-label>Local donde se va a cargar el reclamo</mat-label>
-                  <mat-select formControlName="local">
-                  <mat-option value="Tate">Tate</mat-option>
-                  <mat-option value="TateExpress">Tate Express</mat-option>
-                  <mat-option value="Kilroy">Kilroy</mat-option>
-                  <mat-option value="KitExpress">Kit Express</mat-option>
-                  <mat-option value="KilroyKids">Kilroy Kids</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </ng-template>
+        <!-- CONDICIONAL SEGUN EL LOCAL-->
+        <ng-template [ngIf]="profileForm.get('eleccion')?.value == 'DNI'">
+          <mat-form-field appearance="fill">
+            <mat-label>Local donde se va a cargar el reclamo</mat-label>
+              <mat-select formControlName="local">
+              <mat-option value="Tate">Tate</mat-option>
+              <mat-option value="TateExpress">Tate Express</mat-option>
+              <mat-option value="Kilroy">Kilroy</mat-option>
+              <mat-option value="KitExpress">Kit Express</mat-option>
+              <mat-option value="KilroyKids">Kilroy Kids</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-template>
 
-            <mat-form-field appearance="fill">
-                <mat-label>N° de Reclamo o DNI</mat-label>
-                <input type="number" matInput formControlName="datos" />
-            </mat-form-field>
-              <button
-              type="submit"
-              class="btn btn-primary"
-              [disabled]="profileForm.invalid"
-            >
-              Buscar
-            </button>
-        </form>
-    </div>
+        <mat-form-field appearance="fill">
+          <mat-label>Número de DNI/Reclamo</mat-label>
+          <input type="number" matInput formControlName="datos" />
+        </mat-form-field>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="profileForm.invalid">
+            Buscar
+        </button>
+    </form>
   </div>
+</div>

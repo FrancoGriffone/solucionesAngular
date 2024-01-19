@@ -1,14 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ApiService } from 'src/app/service/api.service';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
-  selector: 'app-nabvar',
-  templateUrl: './nabvar.component.html',
-  styleUrls: ['./nabvar.component.scss'],
+  selector: 'app-navbar',
+  //ANIMACION PARA EL DESPLEGABLE DE LOS LOCALES
+  animations: [
+    trigger('animacion', [
+      transition(':enter', [
+        style({transform: 'translateX(100%)', opacity: 0}),
+        animate('200ms', style({transform: 'translateX(0)', opacity: 1}))
+      ]),
+      transition(':leave', [
+        style({transform: 'translateX(0)', opacity: 1}),
+        animate('200ms', style({transform: 'translateX(100%)', opacity: 0}))
+      ])
+    ]),
+  ], 
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
 })
-export class NabvarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit  {
+
+  //SELECCIONAMOS ELEMENTOS DEL DOM PARA LA BARRA LATERAL
+  @ViewChild('menuBoton') menuBtn!: ElementRef;
+  @ViewChild('sidemenu') sideMenu!: ElementRef;
+
+  verLocales: boolean = false
 
   private receptorCambio: Subscription //SUBSCRIPCION PARA RECIBIR EL CAMBIO DE LOCAL
 
@@ -35,6 +55,8 @@ export class NabvarComponent implements OnInit {
       this.cambioLocal = 'TateExpress'
     } else if (local == 'KitExpress') {
       this.cambioLocal = 'KitExpress'
+    } else if (local == 'Volca') {
+      this.cambioLocal = 'Volca'
     } else {
       this.router.navigate(["Tate/home"])
       this.cambioLocal = 'Tate'
@@ -44,23 +66,41 @@ export class NabvarComponent implements OnInit {
   //FUNCIONES PARA CAMBIO DE LOCAL
   cambioTate(){
     this.cambioLocal = 'Tate'
+    this.router.navigate([this.cambioLocal + '/home'])
+
+    //DEJO COMENTADA UN MODO PARA QUE AL PRESIONAR SOBRE UN LOCAL, TE DEJE EN EL COMPONENTE CAMBIANDO SOLO LA PARTE DEL LOCAL
+    //CREO QUE EVITA PROBLEMAS EL QUE TE VUELVA AL HOME, POR LO QUE POR EL MOMENTO NO SE USA
+
+    // let currentUrl = this.router.url; 
+    // let newUrl = currentUrl.replace(/\/[^\/]*\//, '/' + this.cambioLocal + '/');
+    // this.router.navigateByUrl(newUrl)
+
     this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=T'    
   }
   cambioExpress(){
     this.cambioLocal = 'TateExpress'
+    this.router.navigate([this.cambioLocal + '/home'])
     this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=E'
   }
   cambioKilroy(){
     this.cambioLocal = 'Kilroy'
+    this.router.navigate([this.cambioLocal + '/home'])
     this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=K'  
   }
   cambioKit(){
     this.cambioLocal = 'KitExpress'
+    this.router.navigate([this.cambioLocal + '/home'])
     this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=M'
   }
   cambioKids(){
     this.cambioLocal = 'KilroyKids'
+    this.router.navigate([this.cambioLocal + '/home'])
     this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=N'
+  }
+  cambioVolca(){
+    this.cambioLocal = 'Volca'
+    this.router.navigate([this.cambioLocal + '/home'])
+    this.reclamosAReparacion = 'http://192.168.0.111/ReportServer/Pages/ReportViewer.aspx?%2fReclamos%2fInfRecARep&rs:Command=Render&IdEmp=V'
   }
 
   //FUNCIONES PARA CAMBIO DE COMPONENTE
@@ -78,5 +118,13 @@ export class NabvarComponent implements OnInit {
   }
   bCargo() {
     this.router.navigate([this.cambioLocal + "/bcargo"]);
+  }
+
+  //AL CLICKEAR, CAMBIA LAS CLASES
+  ngAfterViewInit() {
+    this.menuBtn.nativeElement.addEventListener('click', () => {
+      this.sideMenu.nativeElement.classList.toggle('menu-expanded');
+      this.sideMenu.nativeElement.classList.toggle('menu-collapsed');
+    });
   }
 }

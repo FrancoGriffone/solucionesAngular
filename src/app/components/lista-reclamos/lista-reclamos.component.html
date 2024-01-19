@@ -1,9 +1,15 @@
 <!-- SPINNER -->
-<div *ngIf="loaderService.isLoading | async" class="loader-container">
-    <mat-spinner></mat-spinner>
+<div *ngIf="!loadingComponent" class="loader-container">
+  <mat-spinner></mat-spinner>
 </div>
+<!-- SPINNER INTERCEPTOR DE PETICONES HTTP-->
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+  <mat-spinner></mat-spinner>
+</div>
+  
+<app-buscador *ngIf="loadingComponent"></app-buscador>
 
-<div class="container card card-body containerForm">
+<div class="card card-body containerForm" *ngIf="loadingComponent">
     <form class="formComponent" [formGroup]="profileForm">
         <div class="spacingComponents">
             <mat-form-field appearance="fill" class="spacingComponents">
@@ -24,14 +30,18 @@
     </div>
     <!-- RECLAMOS BUSCADOS POR FECHA -->
     <ag-grid-angular
-      class="ag-theme-balham mt-3"
-      style="width: 100%; height: 100%"
-      [rowData]="rowData"
-      [columnDefs]="colDefs"
-      [gridOptions]="gridOptions"
-      [pagination]=true
-      [paginationPageSize]="25"
-      [domLayout]="domLayout"
-      ></ag-grid-angular> 
+        *ngIf="rowData.length != 0"
+        class="ag-theme-material mt-3"
+        id="agGrid"
+        [rowData]="rowData"
+        [columnDefs]="colDefs"
+        [gridOptions]="gridOptions"
+        [pagination]=true
+        [paginationPageSize]="25"
+        [domLayout]="domLayout"
+        (gridReady)="onGridReady($event)"
+        ></ag-grid-angular> 
+
+    <div class="alert alert-danger mt-2" *ngIf="rowData.length == 0">No hay filas para mostrar en las fechas seleccionadas.</div>
 </div>
 

@@ -1,6 +1,7 @@
 //NECESARIOS PARA LOS STYLE DE AG GRID
 @import 'ag-grid-community/styles/ag-grid.css';
 @import 'ag-grid-community/styles/ag-theme-balham.css';
+@import 'ag-grid-community/styles/ag-theme-material.css';
 
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
@@ -15,12 +16,11 @@
 html,
 body {
   height: 100%;
-  background-color: rgb(196, 192, 192);
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #4a4e69;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
+

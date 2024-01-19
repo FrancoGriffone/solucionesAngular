@@ -1,16 +1,11 @@
-.contenedor {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 5%;
-  margin: 0% 30% 0% 30%;
-}
+
 .cuerpo {
-  padding-top: 7%;
+  display: flex;
+  align-items: center;
   height: 100%;
-  background: url(https://i.ibb.co/ZfSdQrQ/3804949.jpg);
-  background-size: contain;
+  .contenedor {
+    margin: 0% 30% 0% 30%;
+  }
 }
 .buttonHome {
   text-decoration: none;

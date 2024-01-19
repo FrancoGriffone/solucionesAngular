@@ -1,13 +1,19 @@
 <!-- SPINNER -->
+<div *ngIf="!loadingComponent" class="loader-container">
+  <mat-spinner></mat-spinner>
+</div>
+<!-- SPINNER INTERCEPTOR DE PETICONES HTTP-->
 <div *ngIf="loaderService.isLoading | async" class="loader-container">
   <mat-spinner></mat-spinner>
 </div>
+  
+<app-buscador *ngIf="loadingComponent"></app-buscador>
 
-<div class="container card card-body containerForm">
+<div class="card card-body containerForm" *ngIf="loadingComponent">
   <!-- DATOS DEL CLIENTE Y DEL RECLAMO -->
   <div class="dataCliente">
     <ng-template [ngIf]="datos?.[0].ayN != undefined">
-      <h2 class="spacingComponents">{{datos?.[0].ayN}} - {{datos?.[0].docNro}}</h2>
+      <h2>{{datos?.[0].ayN}} - {{datos?.[0].docNro}}</h2>
     </ng-template>
     <div class="dataReclamo">
       <ng-template [ngIf]="profileForm.get('reclamo')?.value != ''">
@@ -34,9 +40,9 @@
         <input matInput formControlName="codigoBarras" (blur)="onChange()"/>
       </mat-form-field>
       <!-- FECHA -->
-      <mat-form-field appearance="fill" class="spacingComponents">
+      <mat-form-field appearance="fill">
         <mat-label>Fecha</mat-label>
-        <input matInput formControlName="fecha" class="fecha" readonly="disabled"/>
+        <input matInput formControlName="fecha" class="fecha" readonly/>
       </mat-form-field>
     </div>
     <!-- DESCRIPCION DE CÓDIGO -->
@@ -64,7 +70,7 @@
         </div>
       </div>
       <!-- MONTO DEL PRODUCTO -->
-      <mat-form-field appearance="fill" floatLabel="always" class="spacingComponents">
+      <mat-form-field appearance="fill" floatLabel="always">
         <mat-label>Monto del producto</mat-label>
       <div class="importe"> <!-- OJO, TIENE LA MISMA CLASE QUE EL IMPORTE DEL TALLER -->
         <span matTextPrefix>$&nbsp;</span>
@@ -128,7 +134,7 @@
         </mat-form-field>
       </ng-template>
       <!-- PROMETIDO DIA -->
-      <mat-form-field appearance="fill" class="spacingComponents">
+      <mat-form-field appearance="fill">
         <mat-label>Prometido para el día</mat-label>
         <input type=date matInput formControlName="prometidoDia" />
       </mat-form-field>
@@ -186,13 +192,13 @@
 
     <!-- OBSERVACIONES -->
     <div class="formComponent">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Observaciones</mat-label>
-        <textarea matInput formControlName="observaciones"></textarea>
+        <textarea matInput formControlName="observaciones">{{this.datosReclamo?.[0].observaciones}}</textarea>
       </mat-form-field>
       <mat-form-field appearance="fill">
-        <mat-label>Solución (solo para vista, no se puede editar)</mat-label>
-        <textarea matInput readonly>{{this.datosReclamo?.[0].observaciones}}</textarea>
+        <mat-label>Solución</mat-label>
+        <textarea matInput formControlName="solucion">{{this.datosReclamo?.[0].solucion}}</textarea>
       </mat-form-field>
     </div>
     

@@ -5,6 +5,9 @@ import { ApiService } from 'src/app/service/api.service';
 import { LoaderService } from 'src/app/service/loader/loader.service';
 import * as dayjs from 'dayjs'
 import { AgGridReclamosComponent } from '../partials/vistas/ag-grid-reclamos/ag-grid-reclamos.component';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-reclamos',
@@ -13,25 +16,30 @@ import { AgGridReclamosComponent } from '../partials/vistas/ag-grid-reclamos/ag-
 })
 export class ListaReclamosComponent implements OnInit {
 
-  public domLayout: DomLayoutType = 'autoHeight';
+  //VARIABLES
+
+  loadingComponent: boolean = true
 
   desde: any = dayjs().subtract(1, 'month').format('YYYY-MM-DD')
   hasta: any = dayjs().format('YYYY-MM-DD')
 
+  public domLayout: DomLayoutType = 'autoHeight';
+
     //AG GRID
     colDefs: ColDef[] = [
-      {field: 'empresa', headerName: 'Empresa', width: 100},
-      {field: 'reclamo', headerName: 'Reclamo', width: 75,  cellRenderer: AgGridReclamosComponent},
-      {field: 'fecha', headerName: 'Fecha', width: 100, valueFormatter: params => dayjs(params.data.fecha).format('DD/MM/YYYY')},
+      {field: 'empresa', headerName: 'Empresa', width: 120, suppressAutoSize: true, suppressSizeToFit: true},
+      {field: 'reclamo', headerName: 'Reclamo', width: 120, suppressAutoSize: true, suppressSizeToFit: true,  cellRenderer: AgGridReclamosComponent},
+      {field: 'fecha', headerName: 'Fecha', width: 120, suppressAutoSize: true, suppressSizeToFit: true, valueFormatter: params => dayjs(params.data.fecha).format('DD/MM/YYYY')},
       //valueFormatter SIRVE PARA MODIFICAR EL STRING QUE LLEGA COMO FECHA
-      {field: 'apellidos', headerName: 'Apellidos', width: 100},
-      {field: 'nombres', headerName: 'Nombres', width: 100},
-      {field: 'prodCodBar', headerName: 'Código de barras', width: 150},
-      {field: 'prodDescripcion', headerName: 'Descripción', width: 300},
-      {field: 'tipo', headerName: 'Decisión', width: 100},
-      {field: 'estado', headerName: 'Estado', width: 100},
-      {field: 'taller', headerName: 'Taller', width: 100},
-      {field: 'observaciones', headerName: 'Observaciones', width: 300},
+      {field: 'apellidos', headerName: 'Apellidos'},
+      {field: 'nombres', headerName: 'Nombres'},
+      {field: 'prodCodBar', headerName: 'Código de barras'},
+      {field: 'prodDescripcion', headerName: 'Descripción'},
+      {field: 'tipo', headerName: 'Decisión'},
+      {field: 'estado', headerName: 'Estado'},
+      {field: 'taller', headerName: 'Taller'},
+      {field: 'observaciones', headerName: 'Observaciones'},
+      {field: 'solucion', headerName: 'Solución'}
     ];
     rowData: any = []; //FILAS AG GRID
 
@@ -39,8 +47,8 @@ export class ListaReclamosComponent implements OnInit {
       defaultColDef:{
         resizable: true,
         sortable: true,
-        unSortIcon: true,
-        filter: true,
+        floatingFilter: true,
+        filter: 'agSetColumnFilter',
       }
     }
 
@@ -50,28 +58,69 @@ export class ListaReclamosComponent implements OnInit {
       hasta: new FormControl(this.hasta, Validators.required)
     })
 
+    private gridApi: any;
+    private gridColumnApi: any;
+
+  //<------------------------------------------------------------------------------------------------------------->
+
   constructor(private api: ApiService, public loaderService: LoaderService) {}
 
   ngOnInit(): void {
-    this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
+    this.loadingComponent = false
 
     //OBJETO PARA QUE TOME LA API
     let inicio = {
       "desde": this.desde,
       "hasta": this.hasta,
     }
-
+    console.log(this.rowData)
     //SI EXISTEN RECLAMOS EN EL LAPSO DE ESE TIEMPO, LOS MUESTRA AL INICIAR EL COMPONENTE
-      this.api.listarReclamos(inicio).subscribe(data =>{
+      this.api.listarReclamos(inicio).pipe(catchError((errors: HttpErrorResponse)=>{
+        Swal.fire({
+          title: '¡Error!',
+          text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+        this.loadingComponent = true
+        return throwError(errors);
+      })).subscribe(data =>{
         setTimeout(()=>{
           this.rowData = data
+          console.log(this.rowData)
         })
       })
+      this.loadingComponent = true
+  }
+
+//<------------------------------------------------------------------------------------------------------------->
+
+  //ON GRID READY
+  onGridReady(params: any){
+    this.gridApi = params.api
+    this.autoSizeAll(false)
+  }
+
+  //AJUSTAR TAMAÑO AG GRID A PANTALLA
+  autoSizeAll(skipHeader: boolean) {
+    const allColumnIds: string[] = [];
+    this.gridColumnApi.getColumns()!.forEach((column: { getId: () => string; }) => {
+      allColumnIds.push(column.getId());
+    });
+    this.gridColumnApi.autoSizeColumns(allColumnIds, skipHeader);
   }
 
   //BOTON PARA BUSCAR RECLAMOS ENTRE DOS FECHAS
   onSubmit(){
-    this.api.listarReclamos(this.profileForm.value).subscribe(data =>{
+    this.api.listarReclamos(this.profileForm.value).pipe(catchError((errors: HttpErrorResponse)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      return throwError(errors);
+    })).subscribe(data =>{
       setTimeout(()=>{
         this.rowData = data
       })

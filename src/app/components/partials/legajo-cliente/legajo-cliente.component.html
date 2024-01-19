@@ -1,4 +1,15 @@
-<div class="container card card-body containerList">
+<!-- SPINNER -->
+<div *ngIf="!loadingComponent" class="loader-container">
+  <mat-spinner></mat-spinner>
+</div>
+<!-- SPINNER INTERCEPTOR DE PETICONES HTTP-->
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+  <mat-spinner></mat-spinner>
+</div>
+  
+<app-buscador *ngIf="loadingComponent"></app-buscador>
+  
+<div class="card card-body containerList" *ngIf="loadingComponent">
     <div class="cliente">
         <!-- DATOS DEL CLIENTE -->
         <ng-template [ngIf]="datos?.ayN != undefined">
@@ -10,12 +21,12 @@
     </div>
     <!-- HISTORIAL DE RECLAMOS DE CLIENTE -->
     <ag-grid-angular
-      class="ag-theme-balham mt-3"
-      style="width: 100%; height: 100%"
+      class="ag-theme-material mt-3"
       [rowData]="rowData"
       [columnDefs]="colDefs"
       [domLayout]="domLayout"
       [gridOptions]="gridOptions"
-      ></ag-grid-angular> 
+      (gridReady)="onGridReady($event)">
+    </ag-grid-angular> 
 </div>  
 

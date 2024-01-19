@@ -1,0 +1,99 @@
+<div [ngClass]="{
+  'tate' : cambioLocal == 'Tate',
+  'texpress' : cambioLocal == 'TateExpress',
+  'kilroy' : cambioLocal == 'Kilroy',
+  'kids' : cambioLocal == 'KilroyKids',
+  'kit' : cambioLocal == 'KitExpress',
+  'volca' : cambioLocal == 'Volca'
+  }">
+    <div id="sidemenu" class="menu-collapsed" #sidemenu>
+      <!-- HEADER  -->
+      <div id="header">
+        <div id="menuBoton" #menuBoton>
+          <div class="btn-hamburger"></div>
+          <div class="btn-hamburger"></div>
+          <div class="btn-hamburger"></div>
+        </div>
+      </div>
+  
+      <!-- LOGO LOCAL -->
+      <div id="local">
+        <div id="logoLocal" [@animacion]>
+          <img src="../../../assets/tate.png" width="150px" alt="" *ngIf="cambioLocal == 'Tate'">
+          <img src="../../../assets/Express.png" width="150px" alt="" *ngIf="cambioLocal == 'TateExpress'">
+          <img src="../../../assets/kilroy.png" width="150px" alt="" *ngIf="cambioLocal == 'Kilroy'">
+          <img src="../../../assets/kit.png" width="150px" alt="" *ngIf="cambioLocal == 'KitExpress'">
+          <img src="../../../assets/kids.png" width="150px" alt="" *ngIf="cambioLocal == 'KilroyKids'">
+          <img src="../../../assets/logoVolca.png" width="150px" alt="" *ngIf="cambioLocal == 'Volca'">
+        </div>
+      </div>
+  
+      <!-- ITEMS -->
+      <div id="menuItems">
+        <div class="item">
+          <a href="#" (click)="home()" style="width: 120px;">
+            <div class="icono"><img src="../../../assets/inicio.png" alt="inicio"></div>
+            <div class="titulo">Inicio</div>
+          </a>
+        </div>
+        <div class="item" (click)="listaReclamos()">
+          <a href='#' style="width: 200px;">
+            <div class="icono"><img src="../../../assets/listadereclamos.png" alt="lista de reclamos"></div>
+            <div class="titulo">Lista de reclamos</div>
+          </a>
+        </div>
+        <div class="item" (click)="reclamoInterno()">
+          <a href="#" style="width: 240px;">
+            <div class="icono"><img src="../../../assets/reclamosinternos.png" alt="nuevo reclamo interno"></div>
+            <div class="titulo">Nuevo reclamo interno</div>
+          </a>
+        </div>
+        <div class="item">
+          <a href={{reclamosAReparacion}} target="_blank" style="width: 240px;">
+            <div class="icono"><img src="../../../assets/reclamosareparacion.png" alt="reclamos a reparación"></div>
+            <div class="titulo">Reclamos a reparación</div>
+          </a>
+        </div>
+        <div class="item" (click)="reclamosEnReparacion()">
+          <a href="#" style="width: 250px;">
+            <div class="icono"><img src="../../../assets/reclamosenreparacion.png" alt="reclamos en reparación"></div>
+            <div class="titulo">Reclamos en reparación</div>
+          </a>
+        </div>
+        <div class="item">
+          <a href="#" (click)="bCargo()" style="width: 200px;">
+            <div class="icono"><img src="../../../assets/bcargo.png" alt="boletas de cargo"></div>
+            <div class="titulo">Boletas de Cargo</div>
+          </a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- BOTON FIXED -->
+<div class="fixedButton">
+  <button mat-mini-fab (click)="verLocales = !verLocales">
+    <mat-icon *ngIf="!verLocales">keyboard_arrow_left</mat-icon>  
+    <mat-icon *ngIf="verLocales">keyboard_arrow_right</mat-icon>  
+  </button>
+  <div class="locales" *ngIf="verLocales" [@animacion]>
+    <button mat-mini-fab (click)="cambioTate()">
+      <img src="../../../assets/tate.png" width="25px" alt="">
+    </button>
+    <button mat-mini-fab (click)="cambioExpress()">
+      <img src="../../../assets/Express.png" width="25px" alt="">
+    </button>
+    <button mat-mini-fab (click)="cambioKilroy()">
+      <img src="../../../assets/kilroy.png" width="25px" alt="">
+    </button>
+    <button mat-mini-fab (click)="cambioKit()">
+      <img src="../../../assets/kit.png" width="25px" alt="">
+    </button>  
+    <button mat-mini-fab (click)="cambioKids()">
+      <img src="../../../assets/kids.png" width="25px" alt="">
+    </button>
+    <button mat-mini-fab (click)="cambioVolca()">
+      <img src="../../../assets/logoVolca.png" width="25px" alt="">
+    </button>
+  </div>
+</div>

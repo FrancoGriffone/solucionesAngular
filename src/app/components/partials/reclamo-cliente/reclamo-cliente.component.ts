@@ -16,6 +16,10 @@ import Swal from 'sweetalert2';
 })
 export class ReclamoClienteComponent implements OnInit {
 
+  //VARIABLES
+
+  loadingComponent: boolean = true
+
   idEmp: any
   
   talleres: any
@@ -40,9 +44,9 @@ export class ReclamoClienteComponent implements OnInit {
 
   //LOS DOS SON PARA LA FECHA FIJA EN EL FORMCONTROL
   fecha = dayjs().format('DD/MM/YYYY')
-  disabled: boolean = true;
 
   fechaCompra = dayjs().format('YYYY-MM-DD')
+
   fechaPrometido = dayjs().add(2, 'days').format('YYYY-MM-DD')
 
   //FORMULARIO PARA RECLAMO INTERNO
@@ -57,6 +61,7 @@ export class ReclamoClienteComponent implements OnInit {
     prometidoDia: new FormControl(this.fechaPrometido),
     motivo: new FormControl('', Validators.required),
     observaciones: new FormControl(''),
+    solucion: new FormControl(''),
     taller: new FormControl(''),
     importe: new FormControl(''),
     pagado: new FormControl(''),
@@ -65,6 +70,7 @@ export class ReclamoClienteComponent implements OnInit {
     reclamo: new FormControl('')
   });  
 
+//<-------------------------------------------------------------------------------------------------------------->
 
   constructor(private api: ApiService, 
     private route: ActivatedRoute, 
@@ -73,6 +79,8 @@ export class ReclamoClienteComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit(): void {
+    this.loadingComponent = false
+
     //DEPENDE EL LOCAL, DA UNA LETRA (CADA UNA CORRESPONDE AL PARAMETRO QUE SE NECESITA SEGUN EL REPORTE)
     let local: string = this.route.snapshot.paramMap.get('local') || ''
     if (local == 'Tate') {
@@ -94,8 +102,6 @@ export class ReclamoClienteComponent implements OnInit {
     //VERIFICA DATOS DEL RECLAMO
     let numReclamo: string = this.route.snapshot.paramMap.get('id') || ''
 
-    this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
-
     let listarReclamo = this.api.listarReclamoInd(numReclamo)
     let cargarCliente = this.api.cargarCliente(usuarioDoc)
     let talleres = this.api.talleres()
@@ -104,8 +110,16 @@ export class ReclamoClienteComponent implements OnInit {
 
     //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA EL ULTIMO RECLAMO EN LA LISTA
     if (numReclamo != ''){
-      forkJoin([listarReclamo, cargarCliente, talleres, tipoSolucion, solucion])
-      .subscribe( results => {
+      forkJoin([listarReclamo, cargarCliente, talleres, tipoSolucion, solucion]).pipe(catchError((errors: HttpErrorResponse)=>{
+        Swal.fire({
+          title: '¡Error!',
+          text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+        this.loadingComponent = true
+        return throwError(errors);
+      })).subscribe( results => {
         this.datosReclamo = results[0]
         this.datos = results[1]
         this.talleres = results[2]
@@ -147,7 +161,7 @@ export class ReclamoClienteComponent implements OnInit {
        //SI EXISTE EL RECLAMO SE VUELCAN LOS DATOS
        this.profileForm.patchValue({
           codigoBarras: this.datosReclamo?.[0].prodCodBar,
-          fecha: dayjs(this.datosReclamo?.[0].fecha).format('DD/MM/YYYY'),
+          fecha: dayjs(this.datosReclamo?.[0].fecha).format('DD-MM-YYYY'),
           fechaCompra: dayjs(this.datosReclamo?.[0].fechaCompra).format('YYYY-MM-DD'),
           ticket: this.datosReclamo?.[0].ticket,
           monto: this.datosReclamo?.[0].importe,
@@ -155,7 +169,8 @@ export class ReclamoClienteComponent implements OnInit {
           estado: this.estado?.id.toString(), //LLEGA COMO NUMBER, HAY QUE PASARLO A STRING PARA QUE SE PUEDA VER
           prometidoDia: dayjs(this.datosReclamo?.[0].prometidoDia).format('YYYY-MM-DD'),
           motivo: this.datosReclamo?.[0].motivo,
-          observaciones: this.datosReclamo?.[0].solucion,
+          observaciones: this.datosReclamo?.[0].observaciones,
+          solucion: this.datosReclamo?.[0].solucion,
           taller: taller?.id.toString(), //LLEGA COMO NUMBER, HAY QUE PASARLO A STRING PARA QUE SE PUEDA VER
           importe: this.datosReclamo?.[0].costo,
           pagado: this.pagadoTaller,
@@ -165,9 +180,18 @@ export class ReclamoClienteComponent implements OnInit {
           reclamo: this.datosReclamo?.[0].reclamo
         })
     })
+    this.loadingComponent = true
   } else {
-    forkJoin([talleres, tipoSolucion, solucion, cargarCliente])
-    .subscribe( results => {
+    forkJoin([talleres, tipoSolucion, solucion, cargarCliente]).pipe(catchError((errors: HttpErrorResponse)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      this.loadingComponent = true
+      return throwError(errors);
+    })).subscribe( results => {
       this.talleres = results[0]
       this.opciones = results[1]
       this.soluciones = results[2]
@@ -179,13 +203,19 @@ export class ReclamoClienteComponent implements OnInit {
         }
       });
     })
+    this.loadingComponent = true
   }
 }
+
+//<-------------------------------------------------------------------------------------------------------------->
 
   //CAMBIAR DESCRIPCION DEL PRODUCTO
   onChange(){
     let codigo = this.profileForm.value.codigoBarras
-    this.api.cargarProducto(codigo).subscribe((data)=>{
+    this.api.cargarProducto(codigo).pipe(catchError((errors: HttpErrorResponse)=>{
+      this.toastrSvc.error('Hubo un error y no se pudo devolver la descripción del producto')
+      return throwError(errors);
+    })).subscribe((data)=>{
       this.producto = data
     })
   }
@@ -242,15 +272,15 @@ export class ReclamoClienteComponent implements OnInit {
       ProdCodBar: this.profileForm.value.codigoBarras,
       ProdDescripcion: this.producto,
       Ticket: this.profileForm.value.ticket,
-      Fecha: dayjs().format('YYYY-MM-DD'),
+      Fecha: this.profileForm.value.fecha,
       FechaCompra: this.profileForm.value.fechaCompra,
       PrometidoDia: this.profileForm.value.prometidoDia,
       IdEmp: this.idEmp,
       IdSolTipo: parseInt(this.profileForm.value.tipo),
       IdSolEstado: parseInt(this.profileForm.value.estado),
       Motivo: this.profileForm.value.motivo,
-      Solucion: this.profileForm.value.observaciones,
-      Observaciones: this.profileForm.value.solucion,
+      Solucion: this.profileForm.value.solucion,
+      Observaciones: this.profileForm.value.observaciones,
       IdTaller: parseInt(this.profileForm.value.taller),
       Ncred:this.profileForm.value.ncred,
       Costo: this.profileForm.value.importe,
@@ -259,32 +289,34 @@ export class ReclamoClienteComponent implements OnInit {
     console.log(reclamo)
 
     if(this.datosReclamo == undefined){
-      this.toastrSvc.success('Nuevo reclamo creado con éxito')
       this.api.nuevoReclamo(reclamo).pipe(catchError((errors: HttpErrorResponse)=>{
         Swal.fire({
           title: '¡Error!',
           text: 'Ups, hubo un error al intentar la carga de datos. Verifica los campos colocados, si el error persiste ponete en contacto con el responsable de mantenimiento del servidor o la red.',
           icon: 'error',
-          confirmButtonText: 'Volver atrás'
+          confirmButtonText: 'OK'
         })
         return throwError(errors);
       })).subscribe((data) => {
+        this.toastrSvc.success('Nuevo reclamo creado con éxito')
         console.log(data)
+        console.log(reclamo)
       })
       // this.router.navigate([this.route.snapshot.paramMap.get('local') + "/cliente/", this.route.snapshot.paramMap.get('doc'), "/reclamo/"]);
     } else {
     //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
-    this.toastrSvc.info('Reclamo actualizado con éxito')
       this.api.editarReclamo(reclamo).pipe(catchError((errors: HttpErrorResponse)=>{
         Swal.fire({
           title: '¡Error!',
           text: 'Ups, hubo un error al intentar la carga de datos. Verifica los campos colocados, si el error persiste ponete en contacto con el responsable de mantenimiento del servidor o la red.',
           icon: 'error',
-          confirmButtonText: 'Volver atrás'
+          confirmButtonText: 'OK'
         })
         return throwError(errors);
       })).subscribe((data) => {
+        this.toastrSvc.info('Reclamo actualizado con éxito')
         console.log(data)
+        console.log(reclamo)
       })
     }
   }

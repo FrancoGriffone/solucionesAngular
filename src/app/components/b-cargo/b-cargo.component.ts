@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import * as dayjs from 'dayjs'
 import { ColDef, DomLayoutType, GridApi, GridReadyEvent } from 'ag-grid-community';
+import { AgGridAngular } from 'ag-grid-angular';
+import { AgGridReclamosComponent } from '../partials/vistas/ag-grid-reclamos/ag-grid-reclamos.component';
+import { LoaderService } from 'src/app/service/loader/loader.service';
+import { BehaviorSubject, catchError, throwError } from 'rxjs';
+import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -13,7 +19,13 @@ import { ColDef, DomLayoutType, GridApi, GridReadyEvent } from 'ag-grid-communit
 })
 export class BCargoComponent implements OnInit {
 
+  //VARIABLES
+
+  loadingComponent: boolean = true
+
   public domLayout: DomLayoutType = 'autoHeight';
+
+  @ViewChild('agGrid') agGrid!: AgGridAngular;
 
   visible: boolean = false;
 
@@ -30,11 +42,11 @@ export class BCargoComponent implements OnInit {
   date = new FormControl(this.fecha);
 
   colDefs: ColDef[] = [
-    {field: 'reclamo', headerName: 'Reclamo', width: 75},
-    {field: 'prodCodBar', headerName: 'Código', width: 125},
+    {field: 'reclamo', headerName: 'Reclamo', width: 120, suppressAutoSize: true, suppressSizeToFit: true,  cellRenderer: AgGridReclamosComponent},
+    {field: 'prodCodBar', headerName: 'Código'},
     {field: 'prodDescripcion', headerName: 'Descripción'},
-    {field: 'ncred', headerName: 'Nota de Crédito', width: 75},
-    {field: 'motivo', headerName: 'Motivo', width: 500},
+    {field: 'ncred', headerName: 'Nota de Crédito'},
+    {field: 'motivo', headerName: 'Motivo'},
   ];
 
   public rowData!: any;
@@ -45,15 +57,17 @@ export class BCargoComponent implements OnInit {
     defaultColDef:{
       resizable: true,
       sortable: true,
-      unSortIcon: true,
-      filter: true,
+      floatingFilter: true,
+      filter: 'agSetColumnFilter',
     }
   }
 
-  constructor(private route: ActivatedRoute, private api: ApiService) {}
+//<------------------------------------------------------------------------------------------------------->
+
+  constructor(private route: ActivatedRoute, private api: ApiService, public loaderService: LoaderService) {}
 
   ngOnInit(): void {
-    this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
+    this.loadingComponent = false
     
     //DEPENDE EL LOCAL, DA UNA LETRA (CADA UNA CORRESPONDE AL PARAMETRO QUE SE NECESITA SEGUN EL REPORTE)
     let local: string = this.route.snapshot.paramMap.get('local') || ''
@@ -74,8 +88,31 @@ export class BCargoComponent implements OnInit {
     this.sizes = [
       { name: 'Pequeña', class: 'p-datatable-sm' },
       { name: 'Normal', class: '' }
-  ];
+    ];
+
+    //BAJAMOS LOS DATOS DEL DÍA ANTERIOR PARA OBTENER LA LISTA
+    this.fecha = this.fecha
+    let datos = {
+      'idLocal': this.idEmp,
+      'fechaDia': this.fecha
+    }
+    this.api.obtenerBoletaCargo(datos).pipe(catchError((errors: HttpErrorResponse)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      this.loadingComponent = true
+      //SI HAY ERROR EL LOADER SE DESACTIVA
+      return throwError(errors);
+    })).subscribe((data)=>{
+      this.rowData = data
+    })
+    this.loadingComponent = true
   }
+
+//<------------------------------------------------------------------------------------------------------->
 
   onSubmit() {
     let datos = {
@@ -91,15 +128,14 @@ export class BCargoComponent implements OnInit {
     this.visible = true;
   }
 
-  onGridReady(params: GridReadyEvent) {
-    this.gridApi = params.api;
-    this.fecha = this.fecha
-    let datos = {
-      'idLocal': this.idEmp,
-      'fechaDia': this.fecha
-    }
-    this.api.obtenerBoletaCargo(datos).subscribe((data)=>{
-      this.rowData = data
-    })
+  //ON GRID READY
+  onGridReady(params: any){
+    this.gridApi = params.api
+    this.sizeToFit()
+  }
+
+  //AJUSTAR TAMAÑO AG GRID A PANTALLA
+  sizeToFit() {
+    this.gridApi.sizeColumnsToFit();
   }
 }

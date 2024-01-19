@@ -1,36 +1,29 @@
-// PANTALLAS GRANDES
-@media screen and (min-width: 700px) {
-  .divForm {
-    display: flex;
-    justify-content: center;
-    width: 70%;
-    margin-top: 5%;
-  }
+.divForm {
+  height: 100%;
+  background: #4a4e69;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .inicioForm {
     display: flex;
     flex-direction: column;
-    margin: 10% 30% 10% 30%;
-    mat-form-field {
-      border-radius: 5px;
-    }
+    justify-content: center;
+    padding: 5%;
+    border-radius: 10px;
+    background: #fdfefc;
   }
 }
 
-// PANTALLAS PEQUEÑAS
-@media screen and (max-width: 700px) {
-  .divForm {
-    display: flex;
-    justify-content: center;
-    width: 70%;
-    margin-top: 5%;
-  }
-  .inicioForm {
-    display: flex;
-    flex-direction: column;
-    mat-form-field {
-      margin-top: 2%;
-      margin-bottom: 2%;
-      border-radius: 5px;
-    }
-  }
+//SPINNER
+.loader-container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.8;
+  z-index: 99;
 }

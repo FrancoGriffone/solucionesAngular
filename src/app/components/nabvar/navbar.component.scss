@@ -1,0 +1,426 @@
+//VARIABLES
+//GENERALES
+$width: 300px;
+$padding: 10px;
+$width-collapsed: 50px;
+
+//TATE
+.tate {
+  $bgcolor:#efe5dc;
+  $hovercolor: #c72a33;
+  $coloresLetras: #3a353c;
+  #sidemenu{
+    background-color: $bgcolor;
+  }
+
+  .menu-expanded {
+    box-shadow: 0px -10px 100px 5px $hovercolor;
+  }
+  
+  #sidemenu #header #menuBoton:hover {
+    background-color: $hovercolor;
+  }
+  
+  #sidemenu #menuItems .item a:hover {
+    background-color: $hovercolor;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
+
+  #sidemenu #header #menuBoton .btn-hamburger {
+    background-color: $coloresLetras;
+  }
+  
+  .item {
+    .titulo {
+      color: $coloresLetras;
+    }
+  }
+}
+
+//VOLCA
+.volca {
+  $bgcolor:#fecfc5;
+  $hovercolor: #fefae0;
+  $coloresLetras: #3a353c;
+  #sidemenu{
+    background-color: $bgcolor;
+  }
+
+  .menu-expanded {
+    box-shadow: 0px -10px 100px 5px $bgcolor;
+  }
+  
+  #sidemenu #header #menuBoton:hover {
+    background-color: $hovercolor;
+  }
+  
+  #sidemenu #local{
+    background: $hovercolor;
+  }
+  
+  #sidemenu #menuItems .item a:hover {
+    background-color: $hovercolor;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
+
+  #sidemenu #header #menuBoton .btn-hamburger {
+    background-color: $coloresLetras;
+  }
+  
+  .item {
+    .titulo {
+      color: $coloresLetras;
+    }
+  }
+}
+
+//KILROY
+.kilroy {
+  $bgcolor:#363532;
+  $hovercolor: #2a9d8f;
+  $coloresLetras: #fdfefc;
+  #sidemenu{
+    background-color: $bgcolor;
+  }
+
+  .menu-expanded {
+    box-shadow: 0px -10px 100px 5px $hovercolor;
+  }
+  
+  #sidemenu #header #menuBoton:hover {
+    background-color: $hovercolor;
+  }
+  
+  #sidemenu #local{
+    background: $hovercolor;
+  }
+  
+  #sidemenu #menuItems .item a:hover {
+    background-color: $hovercolor;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
+
+  #sidemenu #header #menuBoton .btn-hamburger {
+    background-color: $coloresLetras;
+  }
+  
+  .item {
+    .titulo {
+      color: $coloresLetras;
+    }
+  }
+}
+
+//KIT EXPRESS
+.kit {
+  $bgcolor:#363532;
+  $hovercolor: #fb5607;
+  $coloresLetras: #fdfefc;
+  #sidemenu{
+    background-color: $bgcolor;
+  }
+
+  .menu-expanded {
+    box-shadow: 0px -10px 100px 5px $hovercolor;
+  }
+  
+  #sidemenu #header #menuBoton:hover {
+    background-color: $hovercolor;
+  }
+  
+  #sidemenu #local{
+    background: $hovercolor;
+  }
+  
+  #sidemenu #menuItems .item a:hover {
+    background-color: $hovercolor;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
+
+  #sidemenu #header #menuBoton .btn-hamburger {
+    background-color: $coloresLetras;
+  }
+  
+  .item {
+    .titulo {
+      color: $coloresLetras;
+    }
+  }
+}
+
+//TATE EXPRESS
+.texpress {
+  $bgcolor:#efe5dc;
+  $hovercolor: #2a9d8f;
+  $coloresLetras: #363532;
+  #sidemenu{
+    background-color: $bgcolor;
+  }
+
+  .menu-expanded {
+    box-shadow: 0px -10px 100px 5px $hovercolor;
+  }
+  
+  #sidemenu #header #menuBoton:hover {
+    background-color: $hovercolor;
+  }
+  
+  #sidemenu #menuItems .item a:hover {
+    background-color: $hovercolor;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
+
+  #sidemenu #header #menuBoton .btn-hamburger {
+    background-color: $coloresLetras;
+  }
+  
+  .item {
+    .titulo {
+      color: $coloresLetras;
+    }
+  }
+}
+
+//KILROY KIDS
+.kids {
+  $bgcolor:#363532;
+  $hovercolor: #8ecae6;
+  $coloresLetras: #fefae0;
+  #sidemenu{
+    background-color: $bgcolor;
+  }
+
+  .menu-expanded {
+    box-shadow: 0px -10px 100px 5px $hovercolor;
+  }
+  
+  #sidemenu #header #menuBoton:hover {
+    background-color: $hovercolor;
+  }
+  
+  #sidemenu #local{
+    background: $hovercolor;
+  }
+  
+  #sidemenu #menuItems .item a:hover {
+    background-color: $hovercolor;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
+
+  #sidemenu #header #menuBoton .btn-hamburger {
+    background-color: $coloresLetras;
+  }
+  
+  .item {
+    .titulo {
+      color: $coloresLetras;
+    }
+  }
+}
+
+.bodyExpanded {
+  margin-left: $width;
+}
+
+#sidemenu{
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  overflow-y: auto;
+  transition: all 0.7s ease;
+  border-bottom-right-radius: 50px;
+}
+
+#sidemenu a {
+  text-decoration: none;
+}
+
+#sidemenu #header {
+  box-sizing: border-box;
+}
+
+#sidemenu #header #titulo {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#sidemenu #header #titulo, #sideMenu #header #menuBoton {
+  vertical-align: middle;
+}
+
+#sidemenu #header #menuBoton {
+  cursor: pointer;
+  padding: $padding;
+  width: $width-collapsed;
+  box-sizing: border-box;
+}
+
+#sidemenu #header #menuBoton .btn-hamburger {
+  width: 100%;
+  height: 2px;
+  margin: 5px 0;
+}
+
+//LOCAL
+
+#sidemenu #local{
+  text-align: center;
+}
+
+#sidemenu #local #logoLocal {
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+#sidemenu #local #logoLocal img{
+  padding: 5%;
+}
+
+#sidemenu #local #logoLocal, #sidemenu #local #nombreLocal {
+  font-size: 24px;
+  overflow: hidden;
+}
+
+//OPCIONES - ITEMS
+
+#sidemenu #menuItems {
+  overflow: hidden;
+}
+
+#sidemenu #menuItems .item {
+  width: $width;
+}
+
+#sidemenu #menuItems .item .icono {
+  display: inline-block;
+}
+
+#sidemenu #menuItems .item .icono, #sidemenu #menuItems .item .titulo {
+  font-size: 14px;
+  vertical-align: middle;
+  overflow: hidden;
+  display: inline-block;
+}
+
+#sidemenu #menuItems .item a {
+  display: block;
+}
+
+
+#sidemenu #menuItems .item .icono {
+  box-sizing: border-box;
+  padding: $padding;
+  width: $width-collapsed;
+}
+
+#sidemenu #menuItems .item .icono img {
+  width: 100%;
+}
+
+#sidemenu #menuItems .item .titulo {
+  padding: $padding 0;
+}
+
+.menu-expanded {
+  width: $width;
+  border-top-right-radius: 50px;
+}
+
+.menu-expanded #header #titulo {
+  display: inline-block;
+  width: calc(100% - 50px);
+  margin-right: -5px;
+  padding: $padding;
+}
+
+.menu-expanded #header #titulo span {
+  width: calc($width - $width-collapsed - 5px);
+  overflow: hidden;
+}
+
+.menu-expanded #local #logoLocal {
+  display: flex;
+  align-items: center;
+  padding: $padding;
+  width: 200px;
+  height: 200px;
+  transition: all 0.7s ease;
+}
+
+.menu-expanded #local #logoLocal img{
+  transition: all 0.7s ease;
+}
+
+.menu-expanded #local #nombreLocal {
+  width: 100%;
+}
+
+.menu-collapsed {
+  width: $width-collapsed;
+}
+
+.menu-collapsed #header #titulo {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-collapsed #local #nombreLocal {
+  display: none;
+}
+
+.menu-collapsed .item {
+  width: 100px;
+}
+
+.menu-collapsed #local #logoLocal {
+  padding: 5px;
+  width: $width-collapsed;
+  height: 45px;
+  transition: all 0.7s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-collapsed #local #logoLocal img{
+  transition: all 0.7s ease;
+}
+
+.menu-collapsed #local #logoLocal img, .menu-expanded #local #logoLocal img{
+  width: 100%;
+}
+
+//OPCIONES GENERALES 
+.item {
+  .titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+  }
+}
+
+.fixedButton {
+  position: fixed;
+  right: 0;
+  top: 40px;
+  z-index: 1;
+  button {
+    color: #3a353c;
+    background: #efe5dc;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .locales {
+    display: flex;
+    flex-direction: column;
+  }
+}

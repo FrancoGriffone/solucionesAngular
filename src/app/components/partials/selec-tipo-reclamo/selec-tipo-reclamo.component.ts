@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoaderService } from 'src/app/service/loader/loader.service';
 
 @Component({
   selector: 'app-selec-tipo-reclamo',
@@ -8,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SelecTipoReclamoComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, public loaderService: LoaderService) { }
 
   ngOnInit(): void {
   }

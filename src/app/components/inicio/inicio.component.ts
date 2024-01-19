@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { ApiService } from 'src/app/service/api.service';
+import { LoaderService } from 'src/app/service/loader/loader.service';
 
 
 @Component({
@@ -12,12 +13,6 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./inicio.component.scss'],
 })
 export class InicioComponent implements OnInit {
-
-  constructor(private api: ApiService, private router: Router, private route: ActivatedRoute, private toastrSvc: ToastrService) {}
-
-  ngOnInit(): void {
-    this.api.envioComponentes('NO') //ENVIA AL BUSCADOR OTRO STRING PARA DESHABILITARLO
-  }
 
   local: string = "" //PARA DEFINIR EL LOCAL
 
@@ -28,6 +23,11 @@ export class InicioComponent implements OnInit {
     eleccion: new FormControl('', Validators.required),
     datos: new FormControl('', Validators.required),
   });
+
+  constructor(private api: ApiService, private router: Router, private route: ActivatedRoute, public loaderService: LoaderService) {}
+
+  ngOnInit(): void {}
+
 
   onSubmit(){
     let opcion = this.profileForm.value.eleccion
@@ -52,25 +52,25 @@ export class InicioComponent implements OnInit {
         if (Object.keys(data).length == 1){
           //SI NO TIENE DNI, SIGNIFICA QUE EL RECLAMO ES INTERNO
           if (this.datos[0].docNro == null) {
-            this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
+            this.api.enviarCambio(this.local) //ENVIA AL NAVBAR EL NOMBRE DEL LOCAL
             this.router.navigate([this.local + "/reclamointerno/" + dataUser])
           } //SI TIENE DNI, PERO EL TIPO DE RECLAMO ES ATENCION AL CLIENTE EL RECLAMO ES RECLAMO VARIOS
             else if (this.datos[0].prodCodBar == null) {
-              this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
+              this.api.enviarCambio(this.local) //ENVIA AL NAVBAR EL NOMBRE DEL LOCAL
               this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/ReclamoVarios/" + dataUser])
           } //SI ES UN RECLAMO DE MERCADERIA DE CLIENTE
             else {
-              this.api.enviarCambio(this.local) //ENVIA AL NABVAR EL NOMBRE DEL LOCAL
+              this.api.enviarCambio(this.local) //ENVIA AL NAVBAR EL NOMBRE DEL LOCAL
               this.router.navigate([this.local + "/cliente/" + this.datos[0].docNro + "/reclamo/" + dataUser])
           }
         } //SI NO SE ENCONTRO EL NUMERO DE RECLAMO
           else {
             //this.toastrSvc.error(`El reclamo ${dataUser} no existe, por favor verifique los datos colocados`)
             Swal.fire({
-              title: 'Error!',
-              text: `El reclamo ${dataUser} no existe, por favor verifique los datos colocados`,
+              title: '¡Error!',
+              text: `El reclamo ${dataUser} no existe, por favor verifique los datos colocados.`,
               icon: 'error',
-              confirmButtonText: 'Volver atrás'
+              confirmButtonText: 'OK'
             })
           }
         })

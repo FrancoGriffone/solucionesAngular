@@ -1,9 +1,15 @@
 <!-- SPINNER -->
+<div *ngIf="!loadingComponent" class="loader-container">
+  <mat-spinner></mat-spinner>
+</div>
+<!-- SPINNER INTERCEPTOR DE PETICONES HTTP-->
 <div *ngIf="loaderService.isLoading | async" class="loader-container">
   <mat-spinner></mat-spinner>
 </div>
 
-<div class="container card card-body containerForm">
+<app-buscador *ngIf="loadingComponent"></app-buscador>
+
+<div class="card card-body containerForm" *ngIf="loadingComponent">
   <!-- DATOS RECLAMO -->
   <ng-template [ngIf]="profileForm.get('reclamo')?.value != ''">
     <h2 class="spacingComponents">Reclamo: {{datosReclamo[0].reclamo}} </h2>
@@ -52,12 +58,15 @@
           <ng-template [ngIf]="this.route.snapshot.paramMap.get('local') == 'KitExpress'">
             <mat-option value="KITEXPRESS">Kit Express</mat-option>
           </ng-template>
+          <ng-template [ngIf]="this.route.snapshot.paramMap.get('local') == 'Volca'">
+            <mat-option value="VOLCA">Volca</mat-option>
+          </ng-template>
         </mat-select>
       </mat-form-field>
       <!-- FECHA -->
-      <mat-form-field appearance="fill" class="spacingComponents">
+      <mat-form-field appearance="fill">
         <mat-label>Fecha</mat-label>
-        <input matInput formControlName="fecha" class="fecha" readonly="disabled"/>
+        <input matInput formControlName="fecha" class="fecha" readonly/>
       </mat-form-field>
     </div>
     <!-- DESCRIPCION DE CÓDIGO -->
@@ -116,13 +125,13 @@
     </div>
     <!-- OBSERVACIONES -->
     <div class="formComponent">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="spacingComponents">
         <mat-label>Observaciones</mat-label>
-        <textarea matInput formControlName="observaciones"></textarea>
+        <textarea matInput formControlName="observaciones">{{this.datosReclamo?.[0].observaciones}}</textarea>
       </mat-form-field>
       <mat-form-field appearance="fill">
-        <mat-label>Solución (solo para vista, no se puede editar)</mat-label>
-        <textarea matInput readonly>{{this.datosReclamo?.[0].observaciones}}</textarea>
+        <mat-label>Solución</mat-label>
+        <textarea matInput formControlName="solucion">{{this.datosReclamo?.[0].solucion}}</textarea>
       </mat-form-field>
     </div>
 

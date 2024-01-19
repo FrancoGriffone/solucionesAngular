@@ -1,7 +1,7 @@
 .containerForm {
-    width: 70%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 3%;
+    margin-left: 70px;
+    margin-right: 30px; 
     .titulos {
         text-align: center;
     }
@@ -19,6 +19,23 @@
         margin-right: 10%;
     }
     .itemDiv {
-        margin-top: 5%;
+        margin-top: 5%; 
+        button {
+            height: 10%;
+        }
     }
 }
+
+//SPINNER
+.loader-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background: black;
+    opacity: 0.8;
+    z-index: 99;
+  }

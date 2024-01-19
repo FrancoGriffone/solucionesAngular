@@ -1,20 +1,26 @@
 <!-- SPINNER -->
+<div *ngIf="!loadingComponent" class="loader-container">
+  <mat-spinner></mat-spinner>
+</div>
+<!-- SPINNER INTERCEPTOR DE PETICONES HTTP-->
 <div *ngIf="loaderService.isLoading | async" class="loader-container">
   <mat-spinner></mat-spinner>
 </div>
 
-<div class="container card card-body containerForm">
+<app-buscador *ngIf="loadingComponent"></app-buscador>
+
+<div class="card card-body containerForm" *ngIf="loadingComponent">
   <!-- DATOS DEL CLIENTE Y DEL RECLAMO -->
   <div class="dataCliente">
     <ng-template [ngIf]="datos?.ayN != undefined">
-      <h2 class="spacingComponents">{{datos?.ayN}} - {{datos?.docNro}} </h2>
+      <h2>{{datos?.ayN}} - {{datos?.docNro}} </h2>
     </ng-template>
     <div class="dataReclamo">
       <ng-template [ngIf]="profileForm.get('reclamo')?.value != ''">
-        <h2 class="spacingComponents">Reclamo: {{datosReclamo.reclamo}} </h2>
+        <h2>Reclamo: {{datosReclamo.reclamo}} </h2>
       </ng-template>
       <ng-template [ngIf]="profileForm.get('reclamo')?.value == ''">
-        <h2 class="spacingComponents">Nuevo reclamo</h2>
+        <h2>Nuevo reclamo</h2>
       </ng-template>
     </div>
   </div>
@@ -27,13 +33,13 @@
   </ng-template>
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <!--FECHA Y TIPO DE SOLUCION ++ ALERT DIV -->
-      <div class="formComponent">
+      <div class="formComponent fechaTipo">
         <mat-form-field appearance="fill" class="spacingComponents">
             <mat-label>Fecha</mat-label>
-            <input matInput formControlName="fecha" class="fecha" readonly />
+            <input matInput formControlName="fecha" class="fecha" readonly/>
           </mat-form-field>
         <!-- TIPO DE SOLUCION -->
-        <mat-form-field appearance="fill" class="spacingComponents">
+        <mat-form-field appearance="fill">
           <mat-label disabled>Tipo de solución</mat-label>
           <mat-select formControlName="estado">
             <mat-option value={{14}}>Pendiente</mat-option>
@@ -70,13 +76,10 @@
         </mat-form-field>
       </div>
 
-      <!-- ES SOLO PARA LA VISTA. LA IDEA ES QUE DEJE DE ESTAR DUPLICADO DADO QUE OBSERVACION
-      Y SOLUCION CUMPLEN EL MISMO ROL PERO HAY MUCHOS RECLAMOS VIEJOS QUE TIENEN DATA AHI -->
-      <!-- SOLUCION -->
       <div class="formComponent">
         <mat-form-field appearance="fill">
           <mat-label>Solución (solo para lectura)</mat-label>
-          <input matInput formControlName="solucion" readonly>
+          <input matInput formControlName="solucion">
         </mat-form-field>
       </div>
 

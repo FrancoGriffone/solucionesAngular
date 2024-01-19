@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { NabvarComponent } from './components/nabvar/nabvar.component';
+import { NavbarComponent } from './components/nabvar/navbar.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BCargoComponent } from './components/b-cargo/b-cargo.component';
@@ -31,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 //Prime NG
 import { TableModule } from 'primeng/table';
@@ -54,11 +55,10 @@ import { AgGridReclamosComponent } from './components/partials/vistas/ag-grid-re
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    NabvarComponent,
+    NavbarComponent,
     InicioComponent,
     BCargoComponent,
     ReclamoInternoComponent,
@@ -100,6 +100,7 @@ import { AgGridReclamosComponent } from './components/partials/vistas/ag-grid-re
     DropdownModule,
     InputTextModule,
     NgxPrintModule,
+    MatButtonModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

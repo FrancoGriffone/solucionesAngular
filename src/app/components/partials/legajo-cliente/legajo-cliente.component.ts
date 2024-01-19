@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { ColDef, DomLayoutType } from 'ag-grid-community';
+import { ColDef, DomLayoutType, GridApi } from 'ag-grid-community';
 import * as dayjs from 'dayjs';
 import { ApiService } from 'src/app/service/api.service';
 import { AgGridReclamosComponent } from '../vistas/ag-grid-reclamos/ag-grid-reclamos.component';
+import { LoaderService } from 'src/app/service/loader/loader.service';
+import { catchError, forkJoin, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -13,6 +17,10 @@ import { AgGridReclamosComponent } from '../vistas/ag-grid-reclamos/ag-grid-recl
   styleUrls: ['./legajo-cliente.component.scss'],
 })
 export class LegajoClienteComponent implements OnInit {
+
+  //VARIABLES
+
+  loadingComponent: boolean = true
 
   public domLayout: DomLayoutType = 'autoHeight';
 
@@ -33,42 +41,80 @@ export class LegajoClienteComponent implements OnInit {
 
   //AG GRID
   colDefs: ColDef[] = [
-    {field: 'empresa', headerName: 'Empresa', width: 75},
-    {field: 'reclamo', headerName: 'Reclamos', width: 75, cellRenderer: AgGridReclamosComponent},
-    {field: 'fecha', headerName: 'Fecha', width: 100, valueFormatter: params => dayjs(params.data.fecha).format('DD/MM/YYYY')},
-    //valueFormatter + fecha.slice SIRVE PARA ACORTAR EL STRING QUE LLEGA COMO FECHA
-    {field: 'prodCodBar', headerName: 'Código de barras', width: 110},
-    {field: 'prodDescripcion', headerName: 'Descripción', width: 200},
-    {field: 'motivo', headerName: 'Motivo', width: 300},
-    {field: 'estado', headerName: 'Estado', width: 100},
-    {field: 'solucion', headerName: 'Observaciones', width: 300},
+    {field: 'empresa', headerName: 'Empresa'},
+    {field: 'reclamo', headerName: 'Reclamos', width: 120, suppressAutoSize: true, suppressSizeToFit: true, cellRenderer: AgGridReclamosComponent},
+    {field: 'fecha', headerName: 'Fecha', valueFormatter: params => dayjs(params.data.fecha).format('DD/MM/YYYY')},
+    {field: 'prodCodBar', headerName: 'Código de barras'},
+    {field: 'prodDescripcion', headerName: 'Descripción'},
+    {field: 'motivo', headerName: 'Motivo'},
+    {field: 'estado', headerName: 'Estado'},
+    {field: 'solucion', headerName: 'Solución'},
+    {field: 'observaciones', headerName: 'Observaciones'},
   ];
+  
   rowData: any = []; //FILAS AG GRID
+  private gridApi!: GridApi;
+  private gridColumnApi: any;
+
 
   gridOptions = {
     defaultColDef:{
       resizable: true,
       sortable: true,
-      unSortIcon: true,
-      filter: true,
+      floatingFilter: true,
+      filter: 'agSetColumnFilter',
     }
   }
+ 
+//<------------------------------------------------------------------------------------------------------->  
   
-  constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private api: ApiService, private route: ActivatedRoute, private router: Router, public loaderService: LoaderService) { }
 
   ngOnInit(): void {
-    this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
+    this.loadingComponent = false
 
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
-    //SI EXISTE UN CLIENTE SE TOMAN LOS DATOS
-    this.api.cargarCliente(usuarioDoc).subscribe((data) => {
-      this.datos = data
+
+    //APIS
+    let cliente = this.api.cargarCliente(usuarioDoc)
+    let reclamos = this.api.listaReclamosCliente(usuarioDoc)
+
+    forkJoin([cliente, reclamos]).pipe(catchError((errors: HttpErrorResponse)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      this.loadingComponent = true
+      return throwError(errors);
+    })).subscribe( results => {
+      this.datos = results[0]
+      this.rowData = results[1]
+
+      //BAJAMOS LOS DATOS
       this.datos = this.datos[0]
+
+      this.loadingComponent = true
+    })
+  }
+
+//<------------------------------------------------------------------------------------------------------->  
+
+  //ON GRID READY
+  onGridReady(params: any){
+    this.gridApi = params.api
+    this.gridColumnApi = params.columnApi
+    this.autoSizeAll(false)
+  }
+
+  //AJUSTAR TAMAÑO AG GRID A PANTALLA
+  autoSizeAll(skipHeader: boolean) {
+    const allColumnIds: string[] = [];
+    this.gridColumnApi.getColumns()!.forEach((column: { getId: () => string; }) => {
+      allColumnIds.push(column.getId());
     });
-    //SI EXISTE UN CLIENTE, SE TOMAN LOS RECLAMOS PARA AG GRID
-    this.api.listaReclamosCliente(usuarioDoc).subscribe((data) => {
-      this.rowData = data
-    });
+    this.gridColumnApi.autoSizeColumns(allColumnIds, skipHeader);
   }
 
   //TOMAR EL NUMERO DE DOCUMENTO Y VA A LOS DATOS DEL CLIENTE, ES UN PASO POR SI HAY QUE ACTUALIZARLOS

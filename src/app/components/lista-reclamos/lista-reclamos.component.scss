@@ -1,7 +1,7 @@
 .containerForm {
-    width: 70%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 3%;
+    margin-left: 70px;
+    margin-right: 30px;    
     .formComponent {
         display: flex;
         justify-content: space-around;
@@ -12,27 +12,21 @@
           margin-right: 2%;
         }
     }
+    .alert {
+      text-align: center;
+    }
 }
 
 //SPINNER
-
 .loader-container {
-  position: absolute;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
   background: black;
   opacity: 0.8;
   z-index: 99;
-  mat-spinner{
-    top: 50%;
-    left: 50%
-  }
-}
-
-// CONFIGURACION STYLE DE AG GRID
-.ag-theme-balham {
-  --ag-header-column-separator-display: block;
-  --ag-header-column-separator-height: 100%;
-  --ag-header-column-separator-width: 2px;
-  --ag-header-column-separator-color: rgba(0, 0, 0, 0.692);
 }

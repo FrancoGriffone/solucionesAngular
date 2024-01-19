@@ -1,112 +1,119 @@
+<!-- SPINNER -->
+<div *ngIf="!loadingComponent" class="loader-container">
+    <h3>CARGANDO DATOS...</h3>
+    <mat-spinner></mat-spinner>
+</div>
+
 <!-- -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------RECLAMOS DE MERCADERIA---------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------- -->
 
-<div *ngIf="this.reclamoMercaderia == true" class="reclamo">
+<div *ngIf="reclamoMercaderia && loadingComponent" class="reclamo">
     <div>
         <h2 *ngIf="this.datos?.[0].docNro != null">{{this.datos?.[0].nombres}}, {{this.datos?.[0].apellidos}} - DNI: {{this.datos?.[0].docNro}}</h2>
         <h2 *ngIf="this.datos?.[0].docNro == null">Reclamo interno</h2>
         <h2>Reclamo: {{this.datos?.[0].reclamo}}</h2>
-        <h3 style="color: red;">Pendiente</h3> 
+        <h3 *ngIf="this.datos?.[0].cerrado == 'Sí'" style="color: green;">Resuelto</h3>
+        <h3 *ngIf="this.datos?.[0].cerrado == 'No'" style="color: red;">Pendiente</h3> 
     </div>
     <div class="codigoYDescripcion mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-tag"></i>
-            <input pInputText id="codbar" value={{this.datos?.[0].prodCodBar}}/>
+            <input pInputText id="codbar" value={{this.datos?.[0].prodCodBar}} readonly/>
             <label htmlFor="codbar">Código de barras</label>
         </span>
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-eye"></i>
-            <input pInputText id="descrip" value={{this.datos?.[0].prodDescripcion}} />
+            <input pInputText id="descrip" value={{this.datos?.[0].prodDescripcion}} readonly/>
             <label htmlFor="descrip">Descripción</label>
         </span>
     </div>
     <div class="fechaYSeccion mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-calendar"></i>
-            <input pInputText id="fecha" value={{this.fechaReclamo}} />
+            <input pInputText id="fecha" value={{this.fechaReclamo}} readonly/>
             <label htmlFor="fecha">Fecha</label>
         </span>
         <span *ngIf="this.datos?.[0].seccion != null" class="p-float-label p-input-icon-left">
             <i class="pi pi-marker"></i>
-            <input pInputText id="seccion" value={{this.datos?.[0].seccion}} />
+            <input pInputText id="seccion" value={{this.datos?.[0].seccion}} readonly/>
             <label htmlFor="seccion">Sección</label>
         </span>
     </div>
     <div *ngIf="this.datos?.[0].docNro != null" class="fechaCompraTicketYMonto mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-question-circle"></i>
-            <input pInputText id="fechaCompra" value={{this.fechaCompra}} />
+            <input pInputText id="fechaCompra" value={{this.fechaCompra}} readonly/>
             <label htmlFor="fechaCompra">Fecha de la compra</label>
         </span>
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-ticket"></i>
-            <input pInputText id="ticket" value={{this.ticket}} />
+            <input pInputText id="ticket" value={{this.ticket}} readonly/>
             <label htmlFor="ticket">Ticket</label>
         </span>
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-dollar"></i>
-            <input pInputText id="importe" value={{this.datos?.[0].importe}} />
+            <input pInputText id="importe" value={{this.datos?.[0].importe}} readonly/>
             <label htmlFor="importe">Importe</label>
         </span>
     </div>
     <div class="motivo mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-exclamation-circle"></i>
-            <input pInputText id="motivo" value={{this.datos?.[0].motivo}} />
+            <input pInputText id="motivo" value={{this.datos?.[0].motivo}} readonly/>
             <label htmlFor="motivo">Motivo</label>
         </span>
     </div>
     <div class="solucionOpcionYPrometidoDia mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-ellipsis-v"></i>
-            <input pInputText id="tipo" value={{this.datos?.[0].tipo}} />
+            <input pInputText id="tipo" value={{this.datos?.[0].tipo}} readonly/>
             <label htmlFor="tipo">Tipo</label>
         </span>
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-align-justify"></i>
-            <input pInputText id="idTipo" value={{this.opcion?.estado}} />
+            <input pInputText id="idTipo" value={{this.opcion?.estado}} readonly/>
             <label htmlFor="idTipo">Opción</label>
         </span>
         <span *ngIf="this.datos?.[0].ncred != '' && this.datos?.[0].ncred != null" class="p-float-label p-input-icon-left">
             <i class="pi pi-ellipsis-v"></i>
-            <input pInputText id="tipo" value={{this.datos?.[0].ncred}} />
+            <input pInputText id="tipo" value={{this.datos?.[0].ncred}} readonly/>
             <label htmlFor="tipo">NC</label>
         </span>
         <span class="p-float-label p-input-icon-left">
             <!-- DEJO ESTE COMENTARIO PARA EL FUTURO. LOS RECLAMOS INTERNOS VAN A DEJAR DE TENER FECHA PROMETIDO, SI ALGUN DIA SE ROMPE
             EL INPUT ES PORQUE LOS VIEJOS SI TIENEN PROMETIDO DIA PERO LOS NUEVOS YA NO VAN A TENER -->
             <i class="pi pi-calendar-plus"></i>
-            <input pInputText id="prometido" value={{this.prometidoDia}} />
+            <input pInputText id="prometido" value={{this.prometidoDia}} readonly/>
             <label htmlFor="prometido">Día prometido</label>
         </span>
     </div>
     <div class="tallerImporteYPagado mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-home"></i>
-            <input pInputText id="Taller" value={{this.datos?.[0].taller}}/>
+            <input pInputText id="Taller" value={{this.datos?.[0].taller}} readonly/>
             <label htmlFor="Taller">Taller</label>
         </span>
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-money-bill"></i>
-            <input pInputText id="costo" value={{this.datos?.[0].costo}} />
+            <input pInputText id="costo" value={{this.datos?.[0].costo}} readonly/>
             <label htmlFor="costo">Costo</label>
         </span>
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-check-circle"></i>
-            <input pInputText id="pagado" value={{this.datos?.[0].pagado}} />
+            <input pInputText id="pagado" value={{this.datos?.[0].pagado}} readonly/>
             <label htmlFor="pagado">Pagado</label>
         </span>
     </div>
     <div class="observacionesYResolucion mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-book"></i>
-            <input pInputText id="solucion" value={{this.datos?.[0].solucion}}/>
+            <input pInputText id="solucion" value={{this.datos?.[0].solucion}} readonly/>
             <label htmlFor="solucion">Solucion</label>
         </span>
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-history"></i>
-            <input pInputText id="observaciones" value={{this.datos?.[0].observaciones}} />
+            <input pInputText id="observaciones" value={{this.datos?.[0].observaciones}} readonly/>
             <label htmlFor="observaciones">Observaciones</label>
         </span>
     </div>
@@ -120,7 +127,7 @@
 ------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-<div *ngIf="this.reclamoMercaderia == false" class="reclamo">
+<div *ngIf="!reclamoMercaderia && loadingComponent" class="reclamo">
     <div>
         <h2 *ngIf="this.datos?.[0].docNro != null">{{this.datos?.[0].nombres}}, {{this.datos?.[0].apellidos}} - DNI: {{this.datos?.[0].docNro}}</h2>
         <h2 *ngIf="this.datos?.[0].docNro == null">Reclamo interno</h2>
@@ -131,38 +138,38 @@
     <div class="fechaYSeccion mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-calendar"></i>
-            <input pInputText id="fecha" value={{this.fechaReclamo}} />
+            <input pInputText id="fecha" value={{this.fechaReclamo}} readonly/>
             <label htmlFor="fecha">Fecha</label>
         </span>
     </div>
     <div class="motivo mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-exclamation-circle"></i>
-            <input pInputText id="motivo" value={{this.datos?.[0].motivo}} />
+            <input pInputText id="motivo" value={{this.datos?.[0].motivo}} readonly/>
             <label htmlFor="motivo">Motivo</label>
         </span>
     </div>
     <div class="solucionOpcionYPrometidoDia mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-ellipsis-v"></i>
-            <input pInputText id="tipo" value={{this.datos?.[0].tipo}} />
+            <input pInputText id="tipo" value={{this.datos?.[0].tipo}} readonly/>
             <label htmlFor="tipo">Tipo</label>
         </span>
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-align-justify"></i>
-            <input pInputText id="idTipo" value={{this.opcion?.estado}} />
+            <input pInputText id="idTipo" value={{this.opcion?.estado}} readonly/>
             <label htmlFor="idTipo">Opción</label>
         </span>
     </div>
     <div class="observacionesYResolucion mt-5 datos">
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-book"></i>
-            <input pInputText id="solucion" value={{this.datos?.[0].solucion}}/>
+            <input pInputText id="solucion" value={{this.datos?.[0].solucion}} readonly/>
             <label htmlFor="solucion">Solucion</label>
         </span>
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-history"></i>
-            <input pInputText id="observaciones" value={{this.datos?.[0].observaciones}} />
+            <input pInputText id="observaciones" value={{this.datos?.[0].observaciones}} readonly/>
             <label htmlFor="observaciones">Observaciones</label>
         </span>
     </div>

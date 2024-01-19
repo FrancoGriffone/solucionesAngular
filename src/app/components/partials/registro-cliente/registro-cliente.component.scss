@@ -1,7 +1,7 @@
 .containerForm {
-  width: 70%;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 3%;
+  margin-left: 70px;
+  margin-right: 30px; 
   form {
     .cambioDatos {
       display: flex;
@@ -18,34 +18,28 @@
       mat-form-field {
         width: 100%;
       }
-      .spacingComponents {
-        margin-right: 2%;
-      }
-      .form-check {
-        display: flex;
-        align-items: center;
-      }
-      .pagado {
-        display: flex;
-        label {
-          display: flex;
-          align-items: center;
-          margin-right: 10%;
-        }
-      }
-      .importe {
-        display: flex;
-      }
-    }
-    .motivo {
-      display: flex;
-      flex-direction: column;
     }
   }
 }
 
-@media screen and (max-width: 700px) {
-  .formComponent {
-    flex-wrap: wrap;
-  }
+.spacingComponents {
+  margin-right: 2%;
+}
+
+mat-form-field {
+  overflow: hidden;
+}
+
+//SPINNER
+.loader-container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.8;
+  z-index: 99;
 }

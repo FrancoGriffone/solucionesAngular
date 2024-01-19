@@ -23,13 +23,13 @@ export class AgGridReclamosComponent implements OnInit {
   }
 
   onDialog(){
-      setTimeout(() => {
-        const dialogRef = this.dialog.open(VistaReclamoComponent,{
-          data : this.value,
-          maxHeight: '90vh'
-        });
-        dialogRef.afterClosed().subscribe(result => {});
+    setTimeout(() => {
+      const dialogRef = this.dialog.open(VistaReclamoComponent,{
+        data : this.value,
+        maxHeight: '90vh'
       });
+      dialogRef.afterClosed().subscribe(result => {});
+    });
   }
 
 }

@@ -3,7 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { ToastrService } from 'ngx-toastr';
-import { forkJoin } from 'rxjs';
+import { catchError, forkJoin, throwError } from 'rxjs';
+import { LoaderService } from 'src/app/service/loader/loader.service';
+import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-registro-cliente',
@@ -11,6 +14,8 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./registro-cliente.component.scss'],
 })
 export class RegistroClienteComponent implements OnInit {
+
+  loadingComponent: boolean = true
 
   value: any
 
@@ -39,21 +44,30 @@ export class RegistroClienteComponent implements OnInit {
   constructor(private api: ApiService, 
     private route: ActivatedRoute, 
     private router: Router, 
-    private toastrSvc: ToastrService) {}
+    private toastrSvc: ToastrService,
+    public loaderService: LoaderService) {}
 
   ngOnInit(): void {
+    this.loadingComponent = false
+
     //TOMAMOS EL DNI PARA CARGAR LA DATA DEL CLIENTE SI FIGURA EN EL SISTEMA
     let usuarioDoc: string = this.route.snapshot.paramMap.get('doc') || ''
     this.nuevoDocNro = usuarioDoc //PASAMOS EL DOCUMENTO PARA VISUALIZARLO SI NO EXISTE EN EL SISTEMA
-
-    this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
 
     let obtenerCalles = this.api.calles()
     let obtenerLocalidades = this.api.localidades()
     let cargarCliente = this.api.cargarCliente(usuarioDoc)
     
-    forkJoin([obtenerCalles, obtenerLocalidades, cargarCliente])
-    .subscribe(results => {
+    forkJoin([obtenerCalles, obtenerLocalidades, cargarCliente]).pipe(catchError((errors: HttpErrorResponse)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      this.loadingComponent = true
+      return throwError(errors);
+    })).subscribe(results => {
       this.calles = results[0]
       this.localidades = results[1]
       this.datos = results[2]
@@ -67,6 +81,7 @@ export class RegistroClienteComponent implements OnInit {
         telefono: this.datos?.telefonos,
         observaciones: this.datos?.observaciones
       })
+      this.loadingComponent = true
     })
   }
 
@@ -87,15 +102,39 @@ export class RegistroClienteComponent implements OnInit {
     console.log(cliente)
     //SI NO ESTA REGISTRADO, SE PASA A LA API PARA NUEVOS CLIENTES
     if(this.datos == undefined){
-      this.toastrSvc.success('Nuevo cliente cargado con éxito')
-      this.api.nuevoCliente(cliente).subscribe((data) => {
-          console.log(data)
+      this.api.nuevoCliente(cliente).pipe(catchError((errors: HttpErrorResponse)=>{
+        Swal.fire({
+          title: '¡Error!',
+          text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+        return throwError(errors);
+      })).subscribe((data) => {
+        let i: any = data
+        if(i.ok == true){
+          this.toastrSvc.success('Nuevo cliente cargado con éxito')
+        } else {
+          this.toastrSvc.error(`Ocurrió un error. ${i.msg}`)
+        }
       })
     } else {
       //SI YA ESTA REGISTRADO, SE ACTUALIZA CON OTRA API
-      this.toastrSvc.info('Cliente actualizado con éxito')
-      this.api.actualizarCliente(cliente).subscribe((data) => {
-          console.log(data)
+      this.api.actualizarCliente(cliente).pipe(catchError((errors: HttpErrorResponse)=>{
+        Swal.fire({
+          title: '¡Error!',
+          text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+        return throwError(errors);
+      })).subscribe((data) => {
+        let i: any = data
+        if(i.ok == true){
+          this.toastrSvc.info('Cliente actualizado con éxito')
+        } else {
+          this.toastrSvc.error(`Ocurrió un error. ${i.msg}`)
+        }
       })
     }
 

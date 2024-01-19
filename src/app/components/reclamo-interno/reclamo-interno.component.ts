@@ -1,11 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import * as dayjs from 'dayjs';
 import { ToastrService } from 'ngx-toastr';
-import { forkJoin } from 'rxjs';
+import { catchError, forkJoin, throwError } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
 import { LoaderService } from 'src/app/service/loader/loader.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reclamo-interno',
@@ -13,6 +15,8 @@ import { LoaderService } from 'src/app/service/loader/loader.service';
   styleUrls: ['./reclamo-interno.component.scss'],
 })
 export class ReclamoInternoComponent implements OnInit {
+
+  loadingComponent: boolean = true
 
   idEmp: any
 
@@ -40,6 +44,7 @@ export class ReclamoInternoComponent implements OnInit {
     estado: new FormControl('', Validators.required),
     motivo: new FormControl('', Validators.required),
     observaciones: new FormControl(''),
+    solucion: new FormControl(''),
     taller: new FormControl('', Validators.required),
     importe: new FormControl(''),
     pagado: new FormControl(''),
@@ -53,6 +58,7 @@ export class ReclamoInternoComponent implements OnInit {
     private toastrSvc: ToastrService) {}
 
   ngOnInit(): void {
+    this.loadingComponent = false
     let local: string = this.route.snapshot.paramMap.get('local') || ''
     if (local == 'Tate') {
       this.idEmp = 'T'
@@ -70,16 +76,22 @@ export class ReclamoInternoComponent implements OnInit {
      //VERIFICA DATOS DEL RECLAMO
      let numReclamo: string = this.route.snapshot.paramMap.get('id') || ''
 
-     this.api.envioComponentes('SI') //ENVIA AL BUSCADOR OTRO STRING PARA HABILITARLO
-
      let listarReclamo = this.api.listarReclamoInd(numReclamo)
      let talleres = this.api.talleres()
      let tipoSolucion = this.api.opciones()
 
     //EL IF ESTE ES IMPORTANTISIMO, SINO BUSCA EL ULTIMO RECLAMO EN LA LISTA
     if (numReclamo != ''){
-    forkJoin([listarReclamo, talleres, tipoSolucion])
-    .subscribe( results => {
+    forkJoin([listarReclamo, talleres, tipoSolucion]).pipe(catchError((errors: HttpErrorResponse)=>{
+      Swal.fire({
+        title: '¡Error!',
+        text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      this.loadingComponent = true
+      return throwError(errors);
+    })).subscribe( results => {
       this.datosReclamo = results[0]
       this.talleres = results[1]
       this.opciones = results[2]
@@ -109,7 +121,8 @@ export class ReclamoInternoComponent implements OnInit {
           fecha: dayjs(this.datosReclamo[0].fecha).format('DD/MM/YYYY'),
           estado: opcion.id.toString(), //OPCIONES LAS LEE COMO STRING
           motivo: this.datosReclamo[0].motivo,
-          observaciones: this.datosReclamo[0].solucion,
+          observaciones: this.datosReclamo[0].observaciones,
+          solucion: this.datosReclamo[0].solucion,
           taller: taller.id.toString(), //OPCIONES LAS LEE COMO STRING
           importe: this.datosReclamo[0].costo,
           pagado: this.pagadoTaller,
@@ -118,9 +131,18 @@ export class ReclamoInternoComponent implements OnInit {
           reclamo: this.datosReclamo[0].reclamo
         })
     })
+      this.loadingComponent = true
     } else {
-      forkJoin([talleres, tipoSolucion])
-      .subscribe( results => {
+      forkJoin([talleres, tipoSolucion]).pipe(catchError((errors: HttpErrorResponse)=>{
+        Swal.fire({
+          title: '¡Error!',
+          text: 'La conexión a internet es muy débil o el servidor está experimentando problemas. Verifica el estado de tu red o ponte en contacto con quien está a cargo del servidor',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+        this.loadingComponent = true
+        return throwError(errors);
+      })).subscribe( results => {
         this.talleres = results[0]
         this.opciones = results[1]
 
@@ -130,13 +152,17 @@ export class ReclamoInternoComponent implements OnInit {
           }
         });
       })
+      this.loadingComponent = true
     }
   }
 
   //CAMBIAR DESCRIPCION DEL PRODUCTO
   onChange(){
     let codigo = this.profileForm.value.codigoBarras
-    this.api.cargarProducto(codigo).subscribe((data)=>{
+    this.api.cargarProducto(codigo).pipe(catchError((errors: HttpErrorResponse)=>{
+      this.toastrSvc.error('Hubo un error y no se pudo devolver la descripción del producto')
+      return throwError(errors);
+    })).subscribe((data)=>{
       this.producto = data
     })
   }
@@ -157,8 +183,8 @@ export class ReclamoInternoComponent implements OnInit {
       Fecha: this.profileForm.value.fecha,
       IdSolEstado: parseInt(this.profileForm.value.estado),
       Motivo: this.profileForm.value.motivo,
-      Solucion: this.profileForm.value.observaciones,
-      Observaciones: this.profileForm.value.solucion,
+      Solucion: this.profileForm.value.solucion,
+      Observaciones: this.profileForm.value.observaciones,
       IdTaller: parseInt(this.profileForm.value.taller),
       Costo: this.profileForm.value.importe,
       Pagado: this.profileForm.value.pagado,

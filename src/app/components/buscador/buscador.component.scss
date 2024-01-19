@@ -1,62 +1,24 @@
-// PANTALLAS GRANDES
-@media screen and (max-width: 1029px) {
-    .divForm {
-      display: flex;
-      justify-content: center;
-      width: 70%;
-    }
-    .inicioForm {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      button {
-        width: 100px;
-        height: 50px;
-      }
-      mat-form-field {
-        width: 30%;
-      }
-    }
+.divForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 70px;
+  margin-right: 30px;
+}
+
+.inicioForm {
+  display: flex;
+  justify-content: space-evenly;
+
+  button {
+    width: 100px;
+    height: 50px;
   }
-  
-  // PANTALLAS PEQUEÑAS
-  @media screen and (max-width: 700px) {
-    .divForm {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 70%;
-      }
-      .inicioForm {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: space-evenly;
-        button {
-          width: 100px;
-          height: 50px;
-        }
-        mat-form-field {
-          width: 30%;
-        }
-      }
-  }
-  
-//WIDTH POST 1030
-@media screen and (min-width: 1030px) {
-  .divForm {
-    position: fixed;
-    right: 0;
-    z-index: 1;
-    width: 150px;
-    margin-top: 75px;
-    .inicioForm {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-  .divForm:hover {
-    transition: 1.5s all;
-    width: 200px;
+  mat-form-field {
+    width: 100%;
+    overflow: hidden;
+    margin-right: 1%;
   }
 }
+
+  
